@@ -1,0 +1,25 @@
+x# ログイン情報・機密情報（絶対にGitHubにアップしない）
+.env
+output/session.json
+output/browser_profile/
+
+# Pythonキャッシュ
+__pycache__/
+*.pyc
+*.pyo
+
+# 出力ファイル
+output/
+
+# Next.js
+.next/
+out/
+
+# Node
+node_modules/
+
+# OS関連
+.DS_Store
+Thumbs.db
+.vercel
+.env*.local

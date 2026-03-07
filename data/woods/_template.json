@@ -1,0 +1,27 @@
+{
+  "_説明": "木材データのテンプレート。不要なフィールドは空文字や null にして残す（削除しない）。",
+
+  "wood_name": "例: チーク 瘤杢",
+  "catch_copy": "例: 時代を跨ぐ銘木",
+  "blog_url": "例: https://kinmokuseijp.blog/teak/",
+
+  "scientific_name": "例: Tectona grandis",
+  "classification": "広葉樹 または 針葉樹",
+  "family": "例: シソ科",
+  "hardness": "非常に硬い / 硬い / やや硬い / やや柔らかい / 柔らかい",
+  "origin": ["例: 東南アジア", "インド"],
+  "specific_gravity": 0.65,
+
+  "card_description": "銘木カード用の説明文。博物学・産地・歴史など。",
+
+  "base_description": "BASE出品用の商品説明文。card_descriptionと異なる場合あり。テンプレートの {wood_description} に使う。",
+
+  "_将来追加予定の例": {
+    "color_description": "色の特徴・見た目の説明",
+    "grain_description": "木目・杢目の特徴",
+    "scent_description": "香りの特徴（ある場合）",
+    "care_notes": "お手入れ・保管方法",
+    "tags": ["高級材", "耐久性", "経年変化"],
+    "notes": "自由メモ・作業メモ"
+  }
+}

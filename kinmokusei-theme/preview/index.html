@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>金杢犀 — プレビュー</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="main.css">
+</head>
+<body class="kinmokusei-body">
+<header class="k-header" id="k-header" role="banner">
+	<div class="k-header__inner">
+		<a class="k-header__logo" href="#">金杢犀</a>
+		<nav class="k-header__nav" aria-label="メインナビゲーション">
+			<a class="k-header__link k-header__link--shop" href="#shop">SHOP</a>
+		</nav>
+	</div>
+</header>
+<main class="k-main" id="k-main">
+
+<div class="k-loading" id="k-loading" aria-hidden="true">
+	<div class="k-loading__inner">
+		<div class="k-loading__animal" id="k-loading-animal" role="img" aria-label=""></div>
+	</div>
+</div>
+
+<div class="k-page-content" id="k-page-content">
+	<section class="k-hero" aria-label="メインビジュアル">
+		<div class="k-hero__inner">
+			<div class="k-hero__image-wrap">
+				<img class="k-hero__image k-scroll-reveal" src="https://picsum.photos/1920/1080?random=hero" alt="" width="1920" height="1080">
+			</div>
+			<div class="k-hero__text">
+				<h1 class="k-hero__title">金杢犀</h1>
+				<p class="k-hero__lead">木軸ペン工房。一点一点、銘木と向き合いながらつくっています。</p>
+				<a class="k-hero__cta k-button" href="#shop">ショップを見る</a>
+			</div>
+		</div>
+	</section>
+
+	<section class="k-section k-section--products" id="shop" aria-label="商品">
+		<div class="k-section__inner">
+			<h2 class="k-section__title">SHOP</h2>
+			<ul class="k-product-grid">
+				<li class="k-product-card">
+					<a class="k-product-card__link" href="#">
+						<span class="k-product-card__img-wrap k-scroll-reveal">
+							<img class="k-product-card__img" src="https://picsum.photos/600/750?random=1" alt="" loading="lazy">
+						</span>
+						<span class="k-product-card__title">銘木の木軸ペン — 花梨</span>
+					</a>
+				</li>
+				<li class="k-product-card">
+					<a class="k-product-card__link" href="#">
+						<span class="k-product-card__img-wrap k-scroll-reveal">
+							<img class="k-product-card__img" src="https://picsum.photos/600/750?random=2" alt="" loading="lazy">
+						</span>
+						<span class="k-product-card__title">銘木の木軸ペン — 黒柿</span>
+					</a>
+				</li>
+				<li class="k-product-card">
+					<a class="k-product-card__link" href="#">
+						<span class="k-product-card__img-wrap k-scroll-reveal">
+							<img class="k-product-card__img" src="https://picsum.photos/600/750?random=3" alt="" loading="lazy">
+						</span>
+						<span class="k-product-card__title">銘木の木軸ペン — 屋久杉</span>
+					</a>
+				</li>
+			</ul>
+			<p class="k-section__cta">
+				<a class="k-button" href="#shop">すべての商品を見る</a>
+			</p>
+		</div>
+	</section>
+</div>
+
+</main>
+<footer class="k-footer" role="contentinfo">
+	<div class="k-footer__inner">
+		<p class="k-footer__copy">金杢犀</p>
+		<a class="k-footer__shop" href="#shop">すべての商品を見る</a>
+	</div>
+</footer>
+<script src="svg-animals.js"></script>
+<script src="loading.js"></script>
+<script src="scroll-animation.js"></script>
+</body>
+</html>

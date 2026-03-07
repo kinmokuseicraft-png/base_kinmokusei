@@ -1,0 +1,39 @@
+{
+  "_note": "金木犀の会社情報。後日記入予定。各スクリプトやClaudeが参照する共通データ。",
+
+  "name": "木軸ペン工房 金木犀",
+  "name_reading": "きんもくせい",
+  "name_en": "Kinmokusei Wooden Pen Workshop",
+
+  "concept": "",
+  "brand_tone": "",
+  "tagline": "",
+
+  "owner": "",
+  "contact_email": "kinmokusei.craft@gmail.com",
+
+  "sales": {
+    "platform": "BASE",
+    "shop_url": "",
+    "sales_style": "抽選販売メイン",
+    "regular_sale_day": "毎週金曜 21時",
+    "price_range_min": null,
+    "price_range_max": null
+  },
+
+  "media": {
+    "blog": "https://kinmokuseijp.blog",
+    "instagram": "",
+    "twitter": ""
+  },
+
+  "product": {
+    "category": "木軸ボールペン・木軸シャープペンシル",
+    "materials": "天然銘木",
+    "finish": "天然成分100%カルナバ仕立て（標準）",
+    "size": "全長約136mm / 軸直径約12〜14mm",
+    "stock_per_item": 1
+  },
+
+  "brand_keywords": []
+}

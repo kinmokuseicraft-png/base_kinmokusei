@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(/c/Users/tsuba/Desktop/base_kinmokusei/scripts/_debug_timepicker.py:*)",
+      "Bash(python /c/Users/tsuba/Desktop/base_kinmokusei/scripts/_debug_timepicker.py)",
+      "Bash(python scripts/uploader.py --date 20260303_test --sample-both --yes)",
+      "Bash(python scripts/scrape_dogtag_items.py --pages 5 --yes)",
+      "Read(//c/Users/tsuba/.claude/projects/c--Users-tsuba-Desktop-base-kinmokusei/memory/**)",
+      "Bash(python scripts/uploader.py --sample-dogtag --yes)",
+      "Bash(python scripts/uploader.py --sample-dogtag --yes --dogtag-parts \"狼は白樫、月はアバロンシェルで仕立てました。\")"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\tsuba\\.claude\\projects\\c--Users-tsuba-Desktop-base-kinmokusei\\memory"
+    ]
+  }
+}

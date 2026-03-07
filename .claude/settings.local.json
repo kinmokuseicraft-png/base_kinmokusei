@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip install playwright)",
+      "Bash(python -:*)",
+      "Bash(python scripts/uploader.py --date 20260303_test --yes)",
+      "Bash(python scripts/_investigate_lottery.py)",
+      "Bash(/c/Users/tsuba/Desktop/base_kinmokusei/scripts/_debug_calendar.py:*)",
+      "Bash(python /c/Users/tsuba/Desktop/base_kinmokusei/scripts/_debug_calendar.py)",
+      "Bash(python -c \":*)",
+      "Bash(python scripts/uploader.py --sample-dogtag --dogtag-artwork \"木登りトカゲ\" --dogtag-wood \"ココボロ 縞杢\" --dogtag-price \"3800\" --yes)",
+      "Bash(python scripts/uploader.py --sample-dogtag --dogtag-artwork \"三月ウサギ\" --dogtag-wood \"キングウッド\" --dogtag-price \"4300\" --yes)",
+      "Bash(python scripts/uploader.py --sample-dogtag --dogtag-artwork \"十五夜きつね\" --dogtag-wood \"御蔵島産 金桑\" --dogtag-price \"4800\" --yes)",
+      "Bash(python scripts/uploader.py --sample-dogtag --dogtag-artwork \"木登りトカゲ\" --dogtag-wood \"ококобло 縞杢\" --dogtag-price \"3800\" --yes)",
+      "WebFetch(domain:www.hana-mura.com)",
+      "Bash(python scripts/_patch_template.py)",
+      "Bash(python scripts/apply_template.py)",
+      "Bash(python scripts/apply_template.py --preview-only)",
+      "Bash(python scripts/_patch_template_v3.py)",
+      "WebFetch(domain:online.ogata.com)"
+    ]
+  }
+}
