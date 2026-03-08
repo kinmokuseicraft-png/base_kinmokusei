@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import {
   XAxis,
   YAxis,
@@ -14,6 +15,8 @@ import {
   Pie,
   Cell,
 } from "recharts";
+
+type MessageStats = { total: number; incoming: number; outgoing: number; error?: string };
 
 const FRIEND_DATA = [
   { month: "1月", count: 42 },
@@ -44,14 +47,48 @@ const MESSAGE_DATA = [
 ];
 
 export default function AnalyticsPage() {
+  const [messageStats, setMessageStats] = useState<MessageStats | null>(null);
+
+  useEffect(() => {
+    fetch("/api/stats")
+      .then((res) => res.json())
+      .then((data: { messages?: { total: number; incoming: number; outgoing: number }; error?: string }) =>
+        setMessageStats(data.messages ?? null)
+      )
+      .catch(() => setMessageStats(null));
+  }, []);
+
   return (
     <div>
       <h1 style={{ fontSize: "1.5rem", marginBottom: "0.5rem" }}>
         分析
       </h1>
       <p style={{ color: "var(--color-text-muted)", marginBottom: "1.5rem" }}>
-        友だち追加数・メッセージ・人気木材の推移（モックデータ）
+        友だち追加数・メッセージ・人気木材の推移（メッセージ数はDB連携）
       </p>
+
+      {messageStats && (
+        <section
+          style={{
+            background: "var(--color-surface)",
+            borderRadius: "var(--radius)",
+            padding: "1rem 1.25rem",
+            marginBottom: "1.5rem",
+            boxShadow: "var(--shadow)",
+            border: "1px solid var(--color-border)",
+          }}
+        >
+          <h2 style={{ fontSize: "0.95rem", fontWeight: 600, marginBottom: "0.5rem" }}>
+            総メッセージ数（message_logs 反映）
+          </h2>
+          <p style={{ fontSize: "1.25rem", fontWeight: 700 }}>
+            {messageStats.total.toLocaleString()} 件
+            <span style={{ fontSize: "0.9rem", fontWeight: 400, color: "var(--color-text-muted)", marginLeft: "0.5rem" }}>
+              受信 {messageStats.incoming} / 送信 {messageStats.outgoing}
+            </span>
+          </p>
+        </section>
+      )}
 
       <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
         <section

@@ -111,19 +111,25 @@ function normalizeItem(raw: BaseApiItemRaw, shopItemBaseUrl?: string): BaseProdu
 
 /**
  * BASE API で商品一覧を取得する（サーバーサイド用）。
- * BASE_ACCESS_TOKEN が未設定の場合はモックデータを返す。
+ * @param options.forLine - true のときは LINE 返信用。トークン未設定ならエラーをスロー（モックは返さない）。
  * @param options.limit - 取得件数（デフォルト 50）
- * @param options.shopItemBaseUrl - 商品ページのベースURL（例: https://kinmokusei.thebase.in）
+ * @param options.shopItemBaseUrl - 商品ページのベースURL
  */
 export async function getBaseProducts(options?: {
   limit?: number;
   shopItemBaseUrl?: string;
+  forLine?: boolean;
 }): Promise<BaseProduct[]> {
   const token = process.env.BASE_ACCESS_TOKEN;
   const limit = options?.limit ?? 50;
   const shopItemBaseUrl = options?.shopItemBaseUrl ?? process.env.BASE_SHOP_ITEM_BASE_URL;
+  const forLine = options?.forLine === true;
 
   if (!token) {
+    if (forLine) {
+      console.error("[base_api] BASE_ACCESS_TOKEN が未設定です。LINE返信ではモックを使わずエラーにします。");
+      throw new Error("BASE_ACCESS_TOKEN is not set");
+    }
     return getMockBaseProducts(limit, shopItemBaseUrl);
   }
 
