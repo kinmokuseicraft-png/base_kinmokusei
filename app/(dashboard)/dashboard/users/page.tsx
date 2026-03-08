@@ -10,35 +10,8 @@ type Customer = {
   picture_url: string | null;
   status: string;
   created_at: string;
+  tags?: string[] | null;
 };
-
-/** モック：顧客一覧（実際は Supabase から取得） */
-const MOCK_CUSTOMERS: Customer[] = [
-  {
-    id: "1",
-    line_user_id: "Uxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-    display_name: "山田 太郎",
-    picture_url: null,
-    status: "active",
-    created_at: "2025-02-01T10:00:00Z",
-  },
-  {
-    id: "2",
-    line_user_id: "Uyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy",
-    display_name: "木軸ペン好き",
-    picture_url: null,
-    status: "active",
-    created_at: "2025-02-15T14:30:00Z",
-  },
-  {
-    id: "3",
-    line_user_id: "Uzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
-    display_name: null,
-    picture_url: null,
-    status: "active",
-    created_at: "2025-03-01T09:15:00Z",
-  },
-];
 
 function formatDate(iso: string): string {
   try {
@@ -58,12 +31,14 @@ export default function UsersPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // TODO: 後で実装 - Supabase から users テーブルを取得
-    const timer = setTimeout(() => {
-      setCustomers(MOCK_CUSTOMERS);
-      setLoading(false);
-    }, 300);
-    return () => clearTimeout(timer);
+    fetch("/api/users", { cache: "no-store" })
+      .then((res) => res.json())
+      .then((data: { users?: Customer[] }) => {
+        const list = Array.isArray(data?.users) ? data.users : [];
+        setCustomers(list);
+      })
+      .catch(() => setCustomers([]))
+      .finally(() => setLoading(false));
   }, []);
 
   if (loading) {
@@ -83,7 +58,7 @@ export default function UsersPage() {
         顧客一覧
       </h1>
       <p style={{ color: "var(--color-text-muted)", marginBottom: "1.5rem" }}>
-        LINE で友だち追加された顧客（モックデータ）
+        LINE でメッセージをやり取りした顧客（Supabase line_users から実データ取得）
       </p>
 
       <div

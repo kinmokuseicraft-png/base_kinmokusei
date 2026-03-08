@@ -9,7 +9,7 @@ export default async function ProductsPage() {
 
   return (
     <div>
-      <h1 style={{ fontSize: "1.5rem", marginBottom: "0.5rem" }}>
+      <h1 style={{ fontSize: "1.5rem", marginBottom: "0.5rem", color: "var(--color-text)", letterSpacing: "0.02em" }}>
         商品管理・BASE連携
       </h1>
       <p style={{ color: "var(--color-text-muted)", marginBottom: "1.5rem" }}>
@@ -32,6 +32,7 @@ export default async function ProductsPage() {
               boxShadow: "var(--shadow-md)",
               overflow: "hidden",
               border: "1px solid var(--color-border)",
+              borderTop: "3px solid var(--color-gold)",
             }}
           >
             <div
@@ -102,7 +103,7 @@ export default async function ProductsPage() {
                 style={{
                   fontSize: "1.1rem",
                   fontWeight: 700,
-                  color: "var(--color-primary)",
+                  color: "var(--color-gold)",
                   marginBottom: "0.25rem",
                 }}
               >
@@ -131,7 +132,7 @@ export default async function ProductsPage() {
                     display: "inline-block",
                     marginTop: "0.75rem",
                     fontSize: "0.85rem",
-                    color: "var(--color-primary)",
+                    color: "var(--color-gold)",
                     fontWeight: 500,
                   }}
                 >

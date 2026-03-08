@@ -3,12 +3,12 @@
  */
 export default function LineSetupPage() {
   return (
-    <div style={{ maxWidth: "640px", margin: "0 auto", padding: "1.5rem 2rem" }}>
-      <h1 style={{ fontSize: "1.5rem", marginBottom: "0.5rem" }}>
+    <div style={{ maxWidth: "640px", margin: "0 auto", padding: "0 0.5rem" }}>
+      <h1 style={{ fontSize: "1.5rem", marginBottom: "0.5rem", color: "var(--color-text)", letterSpacing: "0.02em" }}>
         LINE設定
       </h1>
       <p style={{ color: "var(--color-text-muted)", marginBottom: "1.5rem" }}>
-        公式アカウントの編集はLINE側（Manager / Developers）で行います。ここでは本番で使うURLを表示しています。
+        金杢犀の公式アカウント編集はLINE側（Manager / Developers）で行います。ここでは本番で使うURLを表示しています。
       </p>
 
       <section
@@ -17,11 +17,11 @@ export default function LineSetupPage() {
           borderRadius: "var(--radius)",
           padding: "1.25rem",
           marginBottom: "1.5rem",
-          boxShadow: "var(--shadow)",
+          boxShadow: "var(--shadow-md)",
           border: "1px solid var(--color-border)",
         }}
       >
-        <h2 style={{ fontSize: "1rem", fontWeight: 600, marginBottom: "0.75rem" }}>
+        <h2 style={{ fontSize: "1rem", fontWeight: 600, marginBottom: "0.75rem", color: "var(--color-gold)" }}>
           設定で使うURL
         </h2>
 
@@ -77,7 +77,7 @@ export default function LineSetupPage() {
           border: "1px solid var(--color-border)",
         }}
       >
-        <h2 style={{ fontSize: "1rem", fontWeight: 600, marginBottom: "0.75rem" }}>
+        <h2 style={{ fontSize: "1rem", fontWeight: 600, marginBottom: "0.75rem", color: "var(--color-gold)" }}>
           編集時のチェックリスト
         </h2>
         <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
@@ -99,7 +99,7 @@ export default function LineSetupPage() {
                 fontSize: "0.9rem",
               }}
             >
-              <span style={{ color: "var(--color-primary)" }}>✓</span>
+              <span style={{ color: "var(--color-gold)" }}>✓</span>
               {item}
             </li>
           ))}

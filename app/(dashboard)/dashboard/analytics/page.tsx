@@ -17,37 +17,34 @@ import {
 } from "recharts";
 
 type MessageStats = { total: number; incoming: number; outgoing: number; error?: string };
+type FriendTrend = { month: string; count: number }[];
+type WoodView = { name: string; count: number; color: string }[];
+type MessageByDay = { day: string; incoming: number; outgoing: number }[];
 
-const FRIEND_DATA = [
-  { month: "1月", count: 42 },
-  { month: "2月", count: 58 },
-  { month: "3月", count: 71 },
-  { month: "4月", count: 85 },
-  { month: "5月", count: 92 },
-  { month: "6月", count: 108 },
+const DEFAULT_FRIEND: FriendTrend = [
+  { month: "1月", count: 0 },
+  { month: "2月", count: 0 },
+  { month: "3月", count: 0 },
+  { month: "4月", count: 0 },
+  { month: "5月", count: 0 },
+  { month: "6月", count: 0 },
 ];
-
-const WOOD_VIEW_DATA = [
-  { name: "エボニー", count: 28, color: "#2d5016" },
-  { name: "金桑", count: 22, color: "#5a8c2a" },
-  { name: "キングウッド", count: 18, color: "#8b6914" },
-  { name: "ウォールナット", count: 15, color: "#4a3728" },
-  { name: "屋久杉", count: 12, color: "#6b5344" },
-  { name: "その他", count: 25, color: "#9ca3af" },
-];
-
-const MESSAGE_DATA = [
-  { day: "月", incoming: 12, outgoing: 14 },
-  { day: "火", incoming: 19, outgoing: 18 },
-  { day: "水", incoming: 8, outgoing: 9 },
-  { day: "木", incoming: 15, outgoing: 16 },
-  { day: "金", incoming: 22, outgoing: 21 },
-  { day: "土", incoming: 31, outgoing: 30 },
-  { day: "日", incoming: 25, outgoing: 24 },
+const DEFAULT_WOOD: WoodView = [{ name: "タグなし", count: 0, color: "#9ca3af" }];
+const DEFAULT_MSG: MessageByDay = [
+  { day: "日", incoming: 0, outgoing: 0 },
+  { day: "月", incoming: 0, outgoing: 0 },
+  { day: "火", incoming: 0, outgoing: 0 },
+  { day: "水", incoming: 0, outgoing: 0 },
+  { day: "木", incoming: 0, outgoing: 0 },
+  { day: "金", incoming: 0, outgoing: 0 },
+  { day: "土", incoming: 0, outgoing: 0 },
 ];
 
 export default function AnalyticsPage() {
   const [messageStats, setMessageStats] = useState<MessageStats | null>(null);
+  const [friendTrend, setFriendTrend] = useState<FriendTrend>(DEFAULT_FRIEND);
+  const [woodViewData, setWoodViewData] = useState<WoodView>(DEFAULT_WOOD);
+  const [messageData, setMessageData] = useState<MessageByDay>(DEFAULT_MSG);
 
   useEffect(() => {
     fetch("/api/stats")
@@ -56,6 +53,21 @@ export default function AnalyticsPage() {
         setMessageStats(data.messages ?? null)
       )
       .catch(() => setMessageStats(null));
+  }, []);
+
+  useEffect(() => {
+    fetch("/api/analytics")
+      .then((res) => res.json())
+      .then((data: { friendTrend?: FriendTrend; woodViewData?: WoodView; messageByDay?: MessageByDay }) => {
+        setFriendTrend(Array.isArray(data.friendTrend) && data.friendTrend.length ? data.friendTrend : DEFAULT_FRIEND);
+        setWoodViewData(Array.isArray(data.woodViewData) && data.woodViewData.length ? data.woodViewData : DEFAULT_WOOD);
+        setMessageData(Array.isArray(data.messageByDay) && data.messageByDay.length ? data.messageByDay : DEFAULT_MSG);
+      })
+      .catch(() => {
+        setFriendTrend(DEFAULT_FRIEND);
+        setWoodViewData(DEFAULT_WOOD);
+        setMessageData(DEFAULT_MSG);
+      });
   }, []);
 
   return (
@@ -101,11 +113,11 @@ export default function AnalyticsPage() {
           }}
         >
           <h2 style={{ fontSize: "1rem", fontWeight: 600, marginBottom: "1rem" }}>
-            友だち追加数の推移
+            友だち追加数の推移（users テーブル）
           </h2>
           <div style={{ width: "100%", height: 260 }}>
             <ResponsiveContainer>
-              <AreaChart data={FRIEND_DATA}>
+              <AreaChart data={friendTrend}>
                 <defs>
                   <linearGradient id="colorCount" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="var(--color-primary)" stopOpacity={0.3} />
@@ -145,13 +157,13 @@ export default function AnalyticsPage() {
           }}
         >
           <h2 style={{ fontSize: "1rem", fontWeight: 600, marginBottom: "1rem" }}>
-            よく見られている木材
+            よく見られている木材（タグ集計）
           </h2>
           <div style={{ width: "100%", height: 280 }}>
             <ResponsiveContainer>
               <PieChart>
                 <Pie
-                  data={WOOD_VIEW_DATA}
+                  data={woodViewData}
                   cx="50%"
                   cy="50%"
                   innerRadius={60}
@@ -161,7 +173,7 @@ export default function AnalyticsPage() {
                   nameKey="name"
                   label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
                 >
-                  {WOOD_VIEW_DATA.map((entry, i) => (
+                  {woodViewData.map((entry, i) => (
                     <Cell key={i} fill={entry.color} />
                   ))}
                 </Pie>
@@ -188,11 +200,11 @@ export default function AnalyticsPage() {
           }}
         >
           <h2 style={{ fontSize: "1rem", fontWeight: 600, marginBottom: "1rem" }}>
-            週間メッセージ数（受信 / 送信）
+            週間メッセージ数（message_logs 曜日別）
           </h2>
           <div style={{ width: "100%", height: 260 }}>
             <ResponsiveContainer>
-              <BarChart data={MESSAGE_DATA}>
+              <BarChart data={messageData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
                 <XAxis dataKey="day" tick={{ fontSize: 12 }} />
                 <YAxis tick={{ fontSize: 12 }} />

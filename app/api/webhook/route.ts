@@ -7,7 +7,7 @@ import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 import { getBaseProducts } from "@/lib/base_api";
 import { buildFlexMessageForReply } from "@/lib/line_flex_generator";
-import { saveMessageLog } from "@/lib/supabase_client";
+import { saveMessageLog, upsertLineUser, addUserTag } from "@/lib/supabase_client";
 
 const LINE_CHANNEL_SECRET = process.env.LINE_CHANNEL_SECRET ?? "";
 const LINE_CHANNEL_ACCESS_TOKEN = process.env.LINE_CHANNEL_ACCESS_TOKEN ?? "";
@@ -41,6 +41,20 @@ const PEN_TRIGGER_REGEX = /^(ペン|pen|ぺん)$/i;
 function isPenTrigger(text: string): boolean {
   const normalized = text.trim();
   return PEN_TRIGGER_REGEX.test(normalized);
+}
+
+/** キーワード → ユーザーに付与するタグ（LINE のメッセージと完全一致で付与） */
+const KEYWORD_TAGS: Record<string, string> = {
+  エボニー: "エボニー",
+  金桑: "金桑",
+  キングウッド: "キングウッド",
+  ウォールナット: "ウォールナット",
+  屋久杉: "屋久杉",
+};
+
+function getTagForKeyword(text: string): string | null {
+  const normalized = text.trim();
+  return KEYWORD_TAGS[normalized] ?? null;
 }
 
 /** LINE にテキストメッセージを返信（確実に 1 回だけ実行） */
@@ -134,6 +148,21 @@ export async function POST(request: NextRequest) {
 
       const text = event.message.text ?? "";
       console.log("[webhook] テキスト受信", { textPreview: text.slice(0, 50), isPenTrigger: isPenTrigger(text) });
+
+      try {
+        await upsertLineUser({ lineUserId: userId });
+      } catch (upsertErr) {
+        console.warn("[webhook] users upsert 失敗:", upsertErr);
+      }
+
+      const tag = getTagForKeyword(text);
+      if (tag) {
+        try {
+          const { error: tagErr } = await addUserTag(userId, tag);
+          if (tagErr) console.warn("[webhook] タグ付与失敗:", tagErr);
+          else console.log("[webhook] タグ付与", { tag, userId: userId.slice(0, 8) + "..." });
+        } catch (_) {}
+      }
 
       try {
         await saveMessageLog({

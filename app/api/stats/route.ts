@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase_client";
 
 /**
- * 金杢犀 ライン管理用 — ダッシュボード統計（Supabase の message_logs / users から集計）
+ * 金杢犀 ライン管理用 — ダッシュボード統計（Supabase の message_logs / line_users から集計）
  * 総友達数・総メッセージ数を一本のAPIで返す。
  */
 export async function GET() {
@@ -12,7 +12,7 @@ export async function GET() {
     let outgoing = 0;
 
     const { count: friendsCount, error: eFriends } = await supabase
-      .from("users")
+      .from("line_users")
       .select("id", { count: "exact", head: true });
 
     if (!eFriends && friendsCount != null) {

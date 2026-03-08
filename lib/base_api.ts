@@ -1,6 +1,6 @@
 /**
  * BASE API 連携クライアント（v1 想定）
- * 環境変数 BASE_ACCESS_TOKEN で認証。未設定時はモックデータを返す。
+ * 環境変数 BASE_ACCESS_TOKEN で認証。未設定時はダッシュボードでは空配列、LINE返信ではエラー。
  */
 
 const BASE_API_BASE = "https://api.thebase.in";
@@ -111,7 +111,7 @@ function normalizeItem(raw: BaseApiItemRaw, shopItemBaseUrl?: string): BaseProdu
 
 /**
  * BASE API で商品一覧を取得する（サーバーサイド用）。
- * @param options.forLine - true のときは LINE 返信用。トークン未設定ならエラーをスロー（モックは返さない）。
+ * @param options.forLine - true のときは LINE 返信用。トークン未設定ならエラーをスロー。
  * @param options.limit - 取得件数（デフォルト 50）
  * @param options.shopItemBaseUrl - 商品ページのベースURL
  */
@@ -127,10 +127,11 @@ export async function getBaseProducts(options?: {
 
   if (!token) {
     if (forLine) {
-      console.error("[base_api] BASE_ACCESS_TOKEN が未設定です。LINE返信ではモックを使わずエラーにします。");
+      console.error("[base_api] BASE_ACCESS_TOKEN が未設定です。LINE返信ではエラーにします。");
       throw new Error("BASE_ACCESS_TOKEN is not set");
     }
-    return getMockBaseProducts(limit, shopItemBaseUrl);
+    console.warn("[base_api] BASE_ACCESS_TOKEN 未設定のため商品一覧は空で返します。");
+    return [];
   }
 
   try {
@@ -147,64 +148,15 @@ export async function getBaseProducts(options?: {
     if (!res.ok) {
       const text = await res.text();
       console.warn("[base_api] BASE API error:", res.status, text);
-      return getMockBaseProducts(limit, shopItemBaseUrl);
+      return [];
     }
 
     const data = (await res.json()) as BaseApiItemsResponse;
     const items = Array.isArray(data?.items) ? data.items : [];
     return items.map((raw) => normalizeItem(raw, shopItemBaseUrl));
   } catch (e) {
-    console.warn("[base_api] fetch failed, using mock:", e);
-    return getMockBaseProducts(limit, shopItemBaseUrl);
+    console.warn("[base_api] fetch failed:", e);
+    return [];
   }
 }
 
-/** モック用ダミー商品データ（API仕様不明・トークン未設定時用） */
-function getMockBaseProducts(limit: number, shopItemBaseUrl?: string): BaseProduct[] {
-  const baseUrl = shopItemBaseUrl ?? "https://kinmokusei.thebase.in";
-  const mockItems: BaseProduct[] = [
-    {
-      item_id: 1001,
-      title: "受注生産・木軸ボールペン（エボニー）",
-      detail: "漆黒の王者。エボニーを使用した木軸ボールペンです。",
-      price: 15800,
-      proper_price: 17800,
-      stock: 0,
-      visible: 1,
-      list_order: 1,
-      identifier: null,
-      modified: Math.floor(Date.now() / 1000),
-      item_url: `${baseUrl}/items/1001`,
-      image_url: "https://baseec-img-mng.akamaized.net/images/item/origin/45fc036c772c8469fa40396b2ef0fb9b.jpg?imformat=generic&q=90&im=Resize,width=500,type=normal",
-    },
-    {
-      item_id: 1002,
-      title: "受注生産・木軸シャープペン（金桑）",
-      detail: "御蔵島産金桑の木軸シャープペン。",
-      price: 13200,
-      proper_price: null,
-      stock: 2,
-      visible: 1,
-      list_order: 2,
-      identifier: null,
-      modified: Math.floor(Date.now() / 1000),
-      item_url: `${baseUrl}/items/1002`,
-      image_url: "https://baseec-img-mng.akamaized.net/images/item/origin/2a4de4965fa23b7b89944199713a827e.jpg?imformat=generic&q=90&im=Resize,width=500,type=normal",
-    },
-    {
-      item_id: 1003,
-      title: "木軸万年筆（キングウッド）",
-      detail: "キングウッドを使用した木軸万年筆。",
-      price: 19800,
-      proper_price: null,
-      stock: 1,
-      visible: 1,
-      list_order: 3,
-      identifier: null,
-      modified: Math.floor(Date.now() / 1000),
-      item_url: `${baseUrl}/items/1003`,
-      image_url: "https://baseec-img-mng.akamaized.net/images/item/origin/45fc036c772c8469fa40396b2ef0fb9b.jpg?imformat=generic&q=90&im=Resize,width=500,type=normal",
-    },
-  ];
-  return mockItems.slice(0, Math.min(limit, mockItems.length));
-}

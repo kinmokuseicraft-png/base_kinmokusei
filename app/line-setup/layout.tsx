@@ -1,6 +1,7 @@
+import ConsoleSidebar from "@/components/ConsoleSidebar";
+
 /**
- * /line-setup はルートレイアウトのみ使用（ダッシュボードサイドバーは使わない）
- * 運用URL: https://kinmokusei-line.vercel.app/line-setup
+ * 金杢犀 — /line-setup はサイドバー付き共通レイアウト内で表示（Webhook URL は編集しない）
  */
 export default function LineSetupLayout({
   children,
@@ -8,8 +9,11 @@ export default function LineSetupLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div style={{ minHeight: "100vh", background: "var(--color-bg)" }}>
-      {children}
+    <div style={{ display: "flex", minHeight: "100vh", background: "var(--color-bg)" }}>
+      <ConsoleSidebar />
+      <main style={{ flex: 1, padding: "1.5rem 2rem", overflow: "auto", background: "var(--color-bg)" }}>
+        {children}
+      </main>
     </div>
   );
 }

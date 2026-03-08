@@ -5,16 +5,15 @@
 
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "https://placeholder.supabase.co";
-const supabaseKey =
-  process.env.SUPABASE_SERVICE_ROLE_KEY ?? process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "dummy-key";
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY ?? process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "";
 
 /** サーバー・API 用クライアント（サービスロール推奨） */
 export const supabase: SupabaseClient = createClient(supabaseUrl, supabaseKey);
 
 // --- 型定義（DB スキーマ想定） ---
 
-/** LINE 顧客（Users テーブル想定） */
+/** LINE 顧客（line_users テーブル） */
 export interface DbUser {
   id: string;
   line_user_id: string;
@@ -23,7 +22,8 @@ export interface DbUser {
   status: "active" | "blocked" | "unknown";
   created_at: string;
   updated_at: string;
-  // TODO: 後で実装 - その他カラム（メモ、タグなど）
+  /** 属性タグ（キーワード反応で自動付与。DB は JSONB 配列） */
+  tags?: string[] | null;
   [key: string]: unknown;
 }
 
@@ -73,7 +73,7 @@ export async function upsertLineUser(params: {
   // TODO: 後で実装 - 実際のテーブルに line_user_id の UNIQUE 制約が必要
   try {
     const { data, error } = await supabase
-      .from("users")
+      .from("line_users")
       .upsert(
         { ...row, created_at: now },
         { onConflict: "line_user_id", ignoreDuplicates: false }
@@ -83,6 +83,35 @@ export async function upsertLineUser(params: {
     return { data: data as DbUser | null, error };
   } catch (e) {
     return { data: null, error: e };
+  }
+}
+
+/**
+ * キーワードに応じてユーザーにタグを1件追加する（重複は付けない）。
+ * line_users テーブルに tags (JSONB) カラムがある前提。
+ */
+export async function addUserTag(lineUserId: string, tag: string): Promise<{ error: unknown }> {
+  try {
+    const { data: user, error: fetchErr } = await supabase
+      .from("line_users")
+      .select("id, tags")
+      .eq("line_user_id", lineUserId)
+      .maybeSingle();
+
+    if (fetchErr || !user) return { error: fetchErr ?? new Error("user not found") };
+
+    const current = (user.tags as string[] | null) ?? [];
+    if (current.includes(tag)) return { error: null };
+
+    const next = [...current, tag];
+    const { error: updateErr } = await supabase
+      .from("line_users")
+      .update({ tags: next, updated_at: new Date().toISOString() })
+      .eq("line_user_id", lineUserId);
+
+    return { error: updateErr };
+  } catch (e) {
+    return { error: e };
   }
 }
 
