@@ -1,6 +1,5 @@
 /**
- * LINE設定（運用パス: https://kinmokusei-line.vercel.app/line-setup）
- * Webhook / LIFF URL は本番ドメインのみハードコード。環境変数・動的取得は使用しない。
+ * LINE設定。表示URLはすべて固定文字列（変数・env・location 未使用）。
  */
 export default function LineSetupPage() {
   return (
@@ -23,7 +22,7 @@ export default function LineSetupPage() {
         }}
       >
         <h2 style={{ fontSize: "1rem", fontWeight: 600, marginBottom: "0.75rem" }}>
-          設定で使うURL（本番固定・プレビューURLは使用しません）
+          設定で使うURL
         </h2>
 
         <div style={{ marginBottom: "1rem" }}>
@@ -40,7 +39,7 @@ export default function LineSetupPage() {
               wordBreak: "break-all",
             }}
           >
-            https://kinmokusei-line.vercel.app/api/webhook
+            {"https://kinmokusei-line.vercel.app/api/webhook"}
           </code>
           <p style={{ fontSize: "0.8rem", color: "var(--color-text-muted)", marginTop: "0.25rem" }}>
             LINE Developers → Messaging API → Webhook URL に貼り付け
@@ -61,7 +60,7 @@ export default function LineSetupPage() {
               wordBreak: "break-all",
             }}
           >
-            https://kinmokusei-line.vercel.app
+            {"https://kinmokusei-line.vercel.app"}
           </code>
           <p style={{ fontSize: "0.8rem", color: "var(--color-text-muted)", marginTop: "0.25rem" }}>
             LINE Developers → LIFF → 該当アプリ → Endpoint URL
