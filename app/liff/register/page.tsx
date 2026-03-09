@@ -220,7 +220,7 @@ function LiffRegisterContent() {
         {/* プライバシー */}
         <div style={{ background: "#fffbf0", border: "1px solid #fce8a0", borderRadius: 8, padding: "0.75rem 1rem", marginBottom: "1.5rem", textAlign: "left" }}>
           <p style={{ fontSize: "0.78rem", color: "#886600", lineHeight: 1.7 }}>
-            🔒 取得したメールアドレスは発送・注文管理のみに使用します。セール案内などのマーケティングメールには使用しません。
+            🔒 取得したメールアドレスは木軸ペン工房 金杢犀のみが使用します。発送通知・注文確認・新商品のご案内などに利用し、第三者への提供は行いません。
           </p>
         </div>
 
