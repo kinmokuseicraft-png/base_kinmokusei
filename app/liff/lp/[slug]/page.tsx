@@ -1,9 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { use } from "react";
 import Image from "next/image";
-import Link from "next/link";
 
 type WoodData = {
   slug: string;
@@ -35,8 +33,8 @@ type Product = {
   detail?: string;
 };
 
-export default function WoodLpPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = use(params);
+export default function WoodLpPage({ params }: { params: { slug: string } }) {
+  const { slug } = params;
   const [wood, setWood] = useState<WoodData | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
