@@ -32,30 +32,24 @@ function LiffRegisterContent() {
         await liff.init({ liffId });
         if (cancelled) return;
 
-        if (!liff.isLoggedIn()) {
-          // email スコープを含めてログイン
-          liff.login({ redirectUri: window.location.href });
-          return;
-        }
+        // ログイン済みかつメールアドレス取得済み（ボタン押下後のコールバック）の場合のみ自動処理
+        if (liff.isLoggedIn()) {
+          const idToken = liff.getDecodedIDToken();
+          const resolvedEmail = idToken?.email ?? null;
 
-        const profile = await liff.getProfile();
-        if (!cancelled) setDisplayName(profile.displayName ?? null);
-
-        // IDトークンからメールアドレスを取得
-        const idToken = liff.getDecodedIDToken();
-        const resolvedEmail = idToken?.email ?? null;
-
-        if (resolvedEmail) {
-          // 既にメールアドレスが取得できている場合は登録処理へ
-          if (!cancelled) {
-            setEmail(resolvedEmail);
+          if (resolvedEmail) {
+            // コールバック後: メールを自動保存して完了画面へ
+            const profile = await liff.getProfile();
+            if (!cancelled) setDisplayName(profile.displayName ?? null);
+            if (!cancelled) setEmail(resolvedEmail);
             await saveEmail(profile.userId, resolvedEmail);
             if (!cancelled) setStep("done");
+            return;
           }
-        } else {
-          // メールアドレスが未取得 → intro画面を表示
-          if (!cancelled) setStep("intro");
         }
+
+        // 未ログイン または メール未取得 → 必ずintro画面を先に表示
+        if (!cancelled) setStep("intro");
       } catch (e) {
         if (!cancelled) {
           setErrorMsg(e instanceof Error ? e.message : "初期化に失敗しました");
