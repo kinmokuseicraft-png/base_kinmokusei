@@ -1,12 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 import liff from "@line/liff";
 
 type Step = "loading" | "intro" | "processing" | "done" | "already" | "error";
 
-export default function LiffRegisterPage() {
-  const [step, setStep] = useState<Step>("loading");
+function LiffRegisterContent() {
+  const searchParams = useSearchParams();
+  const isPreview = searchParams.get("preview") === "1";
+
+  const [step, setStep] = useState<Step>(isPreview ? "intro" : "loading");
   const [email, setEmail] = useState<string | null>(null);
   const [displayName, setDisplayName] = useState<string | null>(null);
   const [errorMsg, setErrorMsg] = useState("");
@@ -14,6 +19,7 @@ export default function LiffRegisterPage() {
   const liffId = process.env.NEXT_PUBLIC_LIFF_ID ?? "";
 
   useEffect(() => {
+    if (isPreview) return; // プレビューモードはLIFF初期化をスキップ
     let cancelled = false;
 
     async function init() {
@@ -234,6 +240,14 @@ export default function LiffRegisterPage() {
         </p>
       </div>
     </div>
+  );
+}
+
+export default function LiffRegisterPage() {
+  return (
+    <Suspense fallback={<div style={{ minHeight: "100vh", background: "#f0f0f0" }} />}>
+      <LiffRegisterContent />
+    </Suspense>
   );
 }
 
