@@ -3,81 +3,64 @@
  */
 export default function LineSetupPage() {
   return (
-    <div style={{ maxWidth: "640px", margin: "0 auto", padding: "0 0.5rem" }}>
-      <h1 style={{ fontSize: "1.5rem", marginBottom: "0.5rem", color: "var(--color-text)", letterSpacing: "0.02em" }}>
+    <div style={{ maxWidth: "640px", margin: "0 auto", padding: "0 var(--space-2)" }}>
+      <h1 style={{ fontSize: "1.5rem", marginBottom: "var(--space-2)", fontFamily: "var(--font-serif)", color: "var(--color-text)" }}>
         LINE設定
       </h1>
-      <p style={{ color: "var(--color-text-muted)", marginBottom: "1.5rem" }}>
+      <p style={{ color: "var(--color-text-muted)", marginBottom: "var(--space-4)" }}>
         金杢犀の公式アカウント編集はLINE側（Manager / Developers）で行います。ここでは本番で使うURLを表示しています。
       </p>
 
-      <section
-        style={{
-          background: "var(--color-surface)",
-          borderRadius: "var(--radius)",
-          padding: "1.25rem",
-          marginBottom: "1.5rem",
-          boxShadow: "var(--shadow-md)",
-          border: "1px solid var(--color-border)",
-        }}
-      >
-        <h2 style={{ fontSize: "1rem", fontWeight: 600, marginBottom: "0.75rem", color: "var(--color-gold)" }}>
+      <section style={{ background: "var(--color-surface)", padding: "var(--space-4)", marginBottom: "var(--space-4)", border: "1px solid var(--color-border)" }}>
+        <h2 style={{ fontSize: "0.95rem", fontFamily: "var(--font-serif)", fontWeight: 600, marginBottom: "var(--space-3)", color: "var(--color-text)" }}>
           設定で使うURL
         </h2>
 
-        <div style={{ marginBottom: "1rem" }}>
-          <div style={{ fontSize: "0.85rem", fontWeight: 600, marginBottom: "0.25rem" }}>
+        <div style={{ marginBottom: "var(--space-4)" }}>
+          <div style={{ fontSize: "0.8rem", fontWeight: 600, marginBottom: "var(--space-1)", color: "var(--color-text-muted)" }}>
             Webhook URL
           </div>
           <code
             style={{
               display: "block",
-              padding: "0.75rem",
-              background: "var(--color-bg)",
-              borderRadius: "var(--radius-sm)",
-              fontSize: "0.9rem",
+              padding: "var(--space-3)",
+              background: "var(--color-surface-alt)",
+              border: "1px solid var(--color-border)",
+              fontSize: "0.85rem",
               wordBreak: "break-all",
             }}
           >
             {"https://kinmokusei-line.vercel.app/api/webhook"}
           </code>
-          <p style={{ fontSize: "0.8rem", color: "var(--color-text-muted)", marginTop: "0.25rem" }}>
+          <p style={{ fontSize: "0.8rem", color: "var(--color-text-muted)", marginTop: "var(--space-1)" }}>
             LINE Developers → Messaging API → Webhook URL に貼り付け
           </p>
         </div>
 
         <div>
-          <div style={{ fontSize: "0.85rem", fontWeight: 600, marginBottom: "0.25rem" }}>
+          <div style={{ fontSize: "0.8rem", fontWeight: 600, marginBottom: "var(--space-1)", color: "var(--color-text-muted)" }}>
             LIFF Endpoint URL
           </div>
           <code
             style={{
               display: "block",
-              padding: "0.75rem",
-              background: "var(--color-bg)",
-              borderRadius: "var(--radius-sm)",
-              fontSize: "0.9rem",
+              padding: "var(--space-3)",
+              background: "var(--color-surface-alt)",
+              border: "1px solid var(--color-border)",
+              fontSize: "0.85rem",
               wordBreak: "break-all",
             }}
           >
             {"https://kinmokusei-line.vercel.app"}
           </code>
-          <p style={{ fontSize: "0.8rem", color: "var(--color-text-muted)", marginTop: "0.25rem" }}>
+          <p style={{ fontSize: "0.8rem", color: "var(--color-text-muted)", marginTop: "var(--space-1)" }}>
             LINE Developers → LIFF → 該当アプリ → Endpoint URL
           </p>
         </div>
       </section>
 
-      <section
-        style={{
-          background: "var(--color-surface)",
-          borderRadius: "var(--radius)",
-          padding: "1.25rem",
-          boxShadow: "var(--shadow)",
-          border: "1px solid var(--color-border)",
-        }}
-      >
-        <h2 style={{ fontSize: "1rem", fontWeight: 600, marginBottom: "0.75rem", color: "var(--color-gold)" }}>
+      <section style={{ background: "var(--color-surface)", padding: "var(--space-4)", border: "1px solid var(--color-border)" }}>
+        <h2 style={{ fontSize: "0.95rem", fontFamily: "var(--font-serif)", fontWeight: 600, marginBottom: "var(--space-3)", color: "var(--color-text)" }}>
           編集時のチェックリスト
         </h2>
         <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
@@ -99,7 +82,7 @@ export default function LineSetupPage() {
                 fontSize: "0.9rem",
               }}
             >
-              <span style={{ color: "var(--color-gold)" }}>✓</span>
+              <span style={{ color: "var(--color-line)", fontWeight: 600 }}>✓</span>
               {item}
             </li>
           ))}

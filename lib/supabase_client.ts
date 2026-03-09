@@ -24,6 +24,12 @@ export interface DbUser {
   updated_at: string;
   /** 属性タグ（キーワード反応で自動付与。DB は JSONB 配列） */
   tags?: string[] | null;
+  /** LINE ログインで取得したメールアドレス（BASE 注文との突合用・UNIQUE） */
+  email?: string | null;
+  /** BASE 側の顧客 ID（注文データ突合用） */
+  base_customer_id?: string | null;
+  /** メール/BASE 顧客の紐付けを行った日時 */
+  last_linked_at?: string | null;
   [key: string]: unknown;
 }
 

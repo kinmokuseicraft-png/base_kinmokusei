@@ -7,10 +7,33 @@
       "Bash(python scripts/scrape_dogtag_items.py --pages 5 --yes)",
       "Read(//c/Users/tsuba/.claude/projects/c--Users-tsuba-Desktop-base-kinmokusei/memory/**)",
       "Bash(python scripts/uploader.py --sample-dogtag --yes)",
-      "Bash(python scripts/uploader.py --sample-dogtag --yes --dogtag-parts \"狼は白樫、月はアバロンシェルで仕立てました。\")"
+      "Bash(python scripts/uploader.py --sample-dogtag --yes --dogtag-parts \"狼は白樫、月はアバロンシェルで仕立てました。\")",
+      "Bash(npm install @anthropic-ai/sdk --save)",
+      "Bash(node -e \"require\\(''@anthropic-ai/sdk''\\)\")",
+      "Bash(grep -l \"ANTHROPIC_API_KEY\" c:/Users/tsuba/Desktop/base_kinmokusei/.env*)",
+      "Bash(ls c:/Users/tsuba/Desktop/base_kinmokusei/app/'\\(dashboard\\)'/dashboard/chat/)",
+      "Bash(npx tsc --noEmit)",
+      "Bash(npx next build)",
+      "Bash(ls c:/Users/tsuba/Desktop/base_kinmokusei/app/\\\\\\(dashboard\\\\\\)/dashboard/)",
+      "Bash(ls c:/Users/tsuba/Desktop/base_kinmokusei/data/woods/*.json)",
+      "Bash(netstat -ano)",
+      "Bash(findstr :3001)",
+      "Bash(taskkill /PID 88624 /F)",
+      "Bash(cmd /c \"taskkill /PID 88624 /F\")",
+      "Bash(cmd /c \"taskkill /PID 88624 /F 2>&1\")",
+      "Bash(echo \"exit: $?\")",
+      "Bash(cmd /c \"taskkill /F /IM node.exe 2>&1\")",
+      "Bash(ls \"c:\\\\Users\\\\tsuba\\\\Desktop\\\\base_kinmokusei\\\\app\\\\\\(dashboard\\)\\\\dashboard\"\")",
+      "Bash(ls /c/Users/tsuba/Desktop/base_kinmokusei/app/\\\\\\(dashboard\\\\\\)/dashboard/)",
+      "Bash(ls /c/Users/tsuba/Desktop/kinmokusei-line/app/\\\\\\(admin\\\\\\)/)",
+      "Bash(ls /c/Users/tsuba/Desktop/kinmokusei-line/app/\\\\\\(admin\\\\\\)/dashboard/)",
+      "Bash(ls /c/Users/tsuba/Desktop/kinmokusei-line/app/\\\\\\(admin\\\\\\)/scenarios/)",
+      "Bash(ls /c/Users/tsuba/Desktop/kinmokusei-line/app/\\\\\\(admin\\\\\\)/broadcasts/)",
+      "Bash(ls /c/Users/tsuba/Desktop/kinmokusei-line/app/\\\\\\(admin\\\\\\)/broadcasts/new/)"
     ],
     "additionalDirectories": [
-      "c:\\Users\\tsuba\\.claude\\projects\\c--Users-tsuba-Desktop-base-kinmokusei\\memory"
+      "c:\\Users\\tsuba\\.claude\\projects\\c--Users-tsuba-Desktop-base-kinmokusei\\memory",
+      "c:\\Users\\tsuba\\Desktop\\base_kinmokusei\\app\\(dashboard)\\dashboard\\lp"
     ]
   }
 }

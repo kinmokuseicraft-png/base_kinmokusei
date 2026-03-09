@@ -72,10 +72,10 @@ export default function AnalyticsPage() {
 
   return (
     <div>
-      <h1 style={{ fontSize: "1.5rem", marginBottom: "0.5rem" }}>
+      <h1 style={{ fontSize: "1.5rem", marginBottom: "var(--space-2)", fontFamily: "var(--font-serif)", color: "var(--color-text)" }}>
         分析
       </h1>
-      <p style={{ color: "var(--color-text-muted)", marginBottom: "1.5rem" }}>
+      <p style={{ color: "var(--color-text-muted)", marginBottom: "var(--space-4)" }}>
         友だち追加数・メッセージ・人気木材の推移（メッセージ数はDB連携）
       </p>
 
@@ -83,14 +83,12 @@ export default function AnalyticsPage() {
         <section
           style={{
             background: "var(--color-surface)",
-            borderRadius: "var(--radius)",
-            padding: "1rem 1.25rem",
-            marginBottom: "1.5rem",
-            boxShadow: "var(--shadow)",
+            padding: "var(--space-4)",
+            marginBottom: "var(--space-4)",
             border: "1px solid var(--color-border)",
           }}
         >
-          <h2 style={{ fontSize: "0.95rem", fontWeight: 600, marginBottom: "0.5rem" }}>
+          <h2 style={{ fontSize: "0.95rem", fontFamily: "var(--font-serif)", fontWeight: 600, marginBottom: "var(--space-2)", color: "var(--color-text)" }}>
             総メッセージ数（message_logs 反映）
           </h2>
           <p style={{ fontSize: "1.25rem", fontWeight: 700 }}>
@@ -102,17 +100,9 @@ export default function AnalyticsPage() {
         </section>
       )}
 
-      <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
-        <section
-          style={{
-            background: "var(--color-surface)",
-            borderRadius: "var(--radius)",
-            padding: "1.25rem",
-            boxShadow: "var(--shadow)",
-            border: "1px solid var(--color-border)",
-          }}
-        >
-          <h2 style={{ fontSize: "1rem", fontWeight: 600, marginBottom: "1rem" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-5)" }}>
+        <section style={{ background: "var(--color-surface)", padding: "var(--space-4)", border: "1px solid var(--color-border)" }}>
+          <h2 style={{ fontSize: "0.95rem", fontFamily: "var(--font-serif)", fontWeight: 600, marginBottom: "var(--space-3)", color: "var(--color-text)" }}>
             友だち追加数の推移（users テーブル）
           </h2>
           <div style={{ width: "100%", height: 260 }}>
@@ -147,16 +137,8 @@ export default function AnalyticsPage() {
           </div>
         </section>
 
-        <section
-          style={{
-            background: "var(--color-surface)",
-            borderRadius: "var(--radius)",
-            padding: "1.25rem",
-            boxShadow: "var(--shadow)",
-            border: "1px solid var(--color-border)",
-          }}
-        >
-          <h2 style={{ fontSize: "1rem", fontWeight: 600, marginBottom: "1rem" }}>
+        <section style={{ background: "var(--color-surface)", padding: "var(--space-4)", border: "1px solid var(--color-border)" }}>
+          <h2 style={{ fontSize: "0.95rem", fontFamily: "var(--font-serif)", fontWeight: 600, marginBottom: "var(--space-3)", color: "var(--color-text)" }}>
             よく見られている木材（タグ集計）
           </h2>
           <div style={{ width: "100%", height: 280 }}>
@@ -190,16 +172,8 @@ export default function AnalyticsPage() {
           </div>
         </section>
 
-        <section
-          style={{
-            background: "var(--color-surface)",
-            borderRadius: "var(--radius)",
-            padding: "1.25rem",
-            boxShadow: "var(--shadow)",
-            border: "1px solid var(--color-border)",
-          }}
-        >
-          <h2 style={{ fontSize: "1rem", fontWeight: 600, marginBottom: "1rem" }}>
+        <section style={{ background: "var(--color-surface)", padding: "var(--space-4)", border: "1px solid var(--color-border)" }}>
+          <h2 style={{ fontSize: "0.95rem", fontFamily: "var(--font-serif)", fontWeight: 600, marginBottom: "var(--space-3)", color: "var(--color-text)" }}>
             週間メッセージ数（message_logs 曜日別）
           </h2>
           <div style={{ width: "100%", height: 260 }}>

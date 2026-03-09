@@ -1,26 +1,44 @@
-/* 金杢犀ブランド：パイン材背景・LINEグリーンアクセント・重厚サイドバー */
+/* 金杢犀：洗練されたミニマリズム — 白と墨のギャラリー */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@500;600;700&display=swap");
+
 :root {
-  --color-bg: #F5F2ED;
-  --color-surface: #ffffff;
-  --color-border: #e0ddd6;
-  --color-primary: #2d5016;
-  --color-primary-hover: #3d6b1f;
-  --color-text: #1a1a1a;
-  --color-text-muted: #5c5c5c;
-  --radius: 12px;
-  --radius-sm: 8px;
-  --shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
-  /* アクセント：LINEグリーン */
+  /* ベース：真っ白 */
+  --color-bg: #FFFFFF;
+  --color-surface: #FFFFFF;
+  --color-surface-alt: #FAFAFA;
+  --color-border: #EEEEEE;
+  --color-border-strong: #E0E0E0;
+  /* タイポグラフィ：深い墨色 */
+  --color-text: #1A1A1A;
+  --color-text-muted: #666666;
+  /* アクセント：重要なボタンのみ #06C755 */
   --color-line: #06C755;
   --color-line-hover: #05b34b;
-  /* ブランド：ダークサイドバー・重厚トーン */
-  --color-sidebar-bg: #1a1a1a;
-  --color-sidebar-border: #2d2d2d;
-  --color-sidebar-text: #e8e6e1;
-  --color-sidebar-muted: #9a958c;
-  --color-gold: #c9a227;
-  --color-gold-hover: #d4af37;
+  --color-primary: #06C755;
+  --color-primary-hover: #05b34b;
+  /* フラット：影・グラデーション排除 */
+  --radius: 8px;
+  --radius-sm: 6px;
+  --shadow: none;
+  --shadow-md: none;
+  /* サイドバー：極薄グレー・細い境界 */
+  --color-sidebar-bg: #FAFAFA;
+  --color-sidebar-border: #EEEEEE;
+  --color-sidebar-text: #1A1A1A;
+  --color-sidebar-muted: #666666;
+  /* 余白 1.5 倍の贅沢なホワイトスペース */
+  --space-1: 0.375rem;
+  --space-2: 0.75rem;
+  --space-3: 1.125rem;
+  --space-4: 1.6875rem;
+  --space-5: 2.25rem;
+  --space-6: 3rem;
+  /* チャット：フラットな白・薄グレー */
+  --color-chat-in: #FAFAFA;
+  --color-chat-out: #F5F5F5;
+  /* フォント */
+  --font-serif: "Noto Serif JP", serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Sans", "Noto Sans JP", sans-serif;
 }
 
 * {
@@ -35,14 +53,49 @@ body {
   min-height: 100vh;
   background: var(--color-bg);
   color: var(--color-text);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Sans", "Noto Sans JP", sans-serif;
+  font-family: var(--font-sans);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 600;
 }
 
 a {
-  color: var(--color-primary);
+  color: var(--color-text);
   text-decoration: none;
 }
 
 a:hover {
+  color: var(--color-primary);
   text-decoration: underline;
+}
+
+/* 入力・ボタン：境界をはっきり */
+button,
+input,
+textarea,
+select {
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+}
+
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+/* 顧客一覧テーブル：極細の行境界・ホバー時淡いグレー */
+.users-table-row {
+  transition: background 0.15s ease;
+}
+.users-table-row:hover {
+  background: #FAFAFA;
+}
+.users-table-row td {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid #F0F0F0;
 }

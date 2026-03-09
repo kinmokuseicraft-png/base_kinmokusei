@@ -5,34 +5,25 @@ export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export default async function ProductsPage() {
-  const products = await getBaseProducts({ limit: 50 });
+  const products = await getBaseProducts();
 
   return (
     <div>
-      <h1 style={{ fontSize: "1.5rem", marginBottom: "0.5rem", color: "var(--color-text)", letterSpacing: "0.02em" }}>
+      <h1 style={{ fontSize: "1.5rem", marginBottom: "var(--space-2)", fontFamily: "var(--font-serif)", color: "var(--color-text)" }}>
         商品管理・BASE連携
       </h1>
-      <p style={{ color: "var(--color-text-muted)", marginBottom: "1.5rem" }}>
+      <p style={{ color: "var(--color-text-muted)", marginBottom: "var(--space-4)" }}>
         BASEで取得した商品（木軸ペンなど）の一覧です。画像・価格・在庫を確認できます。
       </p>
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-          gap: "1.25rem",
-        }}
-      >
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "var(--space-4)" }}>
         {products.map((p) => (
           <article
             key={p.item_id}
             style={{
               background: "var(--color-surface)",
-              borderRadius: "var(--radius)",
-              boxShadow: "var(--shadow-md)",
               overflow: "hidden",
               border: "1px solid var(--color-border)",
-              borderTop: "3px solid var(--color-gold)",
             }}
           >
             <div
@@ -101,10 +92,10 @@ export default async function ProductsPage() {
               </h2>
               <p
                 style={{
-                  fontSize: "1.1rem",
-                  fontWeight: 700,
-                  color: "var(--color-gold)",
-                  marginBottom: "0.25rem",
+                  fontSize: "1rem",
+                  fontWeight: 600,
+                  color: "var(--color-text)",
+                  marginBottom: "var(--space-1)",
                 }}
               >
                 ¥{p.price.toLocaleString()}
@@ -132,7 +123,7 @@ export default async function ProductsPage() {
                     display: "inline-block",
                     marginTop: "0.75rem",
                     fontSize: "0.85rem",
-                    color: "var(--color-gold)",
+                    color: "var(--color-line)",
                     fontWeight: 500,
                   }}
                 >
