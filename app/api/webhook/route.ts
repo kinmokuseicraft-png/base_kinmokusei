@@ -7,7 +7,7 @@ import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 import { getBaseProducts } from "@/lib/base_api";
 import { buildFlexMessageForReply } from "@/lib/line_flex_generator";
-import { saveMessageLog, upsertLineUser, addUserTag } from "@/lib/supabase_client";
+import { supabase, upsertLineUser, addUserTag } from "@/lib/supabase_client";
 
 const LINE_CHANNEL_SECRET = process.env.LINE_CHANNEL_SECRET ?? "";
 const LINE_CHANNEL_ACCESS_TOKEN = process.env.LINE_CHANNEL_ACCESS_TOKEN ?? "";
@@ -55,6 +55,30 @@ const KEYWORD_TAGS: Record<string, string> = {
 function getTagForKeyword(text: string): string | null {
   const normalized = text.trim();
   return KEYWORD_TAGS[normalized] ?? null;
+}
+
+/** LINE プロフィール取得（displayName, pictureUrl） */
+async function getLineProfile(userId: string): Promise<{ displayName: string | null; pictureUrl: string | null }> {
+  if (!LINE_CHANNEL_ACCESS_TOKEN || !userId) {
+    return { displayName: null, pictureUrl: null };
+  }
+  try {
+    const res = await fetch(`https://api.line.me/v2/bot/profile/${encodeURIComponent(userId)}`, {
+      headers: { Authorization: `Bearer ${LINE_CHANNEL_ACCESS_TOKEN}` },
+    });
+    if (!res.ok) {
+      console.warn("[webhook] getProfile 失敗", res.status, await res.text());
+      return { displayName: null, pictureUrl: null };
+    }
+    const data = (await res.json()) as { displayName?: string; pictureUrl?: string };
+    return {
+      displayName: data.displayName ?? null,
+      pictureUrl: data.pictureUrl ?? null,
+    };
+  } catch (e) {
+    console.warn("[webhook] getProfile 例外", e);
+    return { displayName: null, pictureUrl: null };
+  }
 }
 
 /** LINE にテキストメッセージを返信（確実に 1 回だけ実行） */
@@ -144,16 +168,23 @@ export async function POST(request: NextRequest) {
 
       console.log("[webhook] イベント", { type: event.type, userId: userId ? `${userId.slice(0, 8)}...` : "", hasReplyToken: !!replyToken });
 
+      if (userId) {
+        try {
+          const profile = await getLineProfile(userId);
+          await upsertLineUser({
+            lineUserId: userId,
+            displayName: profile.displayName ?? undefined,
+            pictureUrl: profile.pictureUrl ?? undefined,
+          });
+        } catch (upsertErr) {
+          console.warn("[webhook] line_users upsert 失敗:", upsertErr);
+        }
+      }
+
       if (event.type !== "message" || event.message?.type !== "text") continue;
 
       const text = event.message.text ?? "";
       console.log("[webhook] テキスト受信", { textPreview: text.slice(0, 50), isPenTrigger: isPenTrigger(text) });
-
-      try {
-        await upsertLineUser({ lineUserId: userId });
-      } catch (upsertErr) {
-        console.warn("[webhook] users upsert 失敗:", upsertErr);
-      }
 
       const tag = getTagForKeyword(text);
       if (tag) {
@@ -165,14 +196,14 @@ export async function POST(request: NextRequest) {
       }
 
       try {
-        await saveMessageLog({
-          lineUserId: userId,
-          direction: "in",
-          messageType: "text",
-          payload: { text },
+        await supabase.from("messages").insert({
+          line_user_id: userId,
+          direction: "inbound",
+          message_type: "text",
+          content: text,
         });
       } catch (logErr) {
-        console.warn("[webhook] message_logs 保存失敗（受信）:", logErr);
+        console.warn("[webhook] messages 保存失敗（受信）:", logErr);
       }
 
       if (!replyToken) {
@@ -193,14 +224,14 @@ export async function POST(request: NextRequest) {
         if (!sent) continue;
 
         try {
-          await saveMessageLog({
-            lineUserId: userId,
-            direction: "out",
-            messageType: "flex",
-            payload: { altText: flexMessage.altText, productCount: products.length },
+          await supabase.from("messages").insert({
+            line_user_id: userId,
+            direction: "outbound",
+            message_type: "flex",
+            content: flexMessage.altText,
           });
         } catch (outLogErr) {
-          console.warn("[webhook] message_logs 保存失敗（送信）:", outLogErr);
+          console.warn("[webhook] messages 保存失敗（送信）:", outLogErr);
         }
       } catch (baseErr) {
         const msg = baseErr instanceof Error ? baseErr.message : String(baseErr);
