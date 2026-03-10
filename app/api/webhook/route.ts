@@ -8,6 +8,7 @@ import crypto from "crypto";
 import { getBaseProducts } from "@/lib/base_api";
 import { buildFlexMessageForReply } from "@/lib/line_flex_generator";
 import { supabase, upsertLineUser, addUserTag } from "@/lib/supabase_client";
+import { startScenario } from "@/lib/scenarios/engine";
 
 const LINE_CHANNEL_SECRET = process.env.LINE_CHANNEL_SECRET ?? "";
 const LINE_CHANNEL_ACCESS_TOKEN = process.env.LINE_CHANNEL_ACCESS_TOKEN ?? "";
@@ -181,6 +182,25 @@ export async function POST(request: NextRequest) {
         }
       }
 
+      // follow イベント: 友達追加シナリオを起動
+      if (event.type === "follow" && userId) {
+        try {
+          const { data: followScenario } = await supabase
+            .from("scenarios")
+            .select("id")
+            .eq("trigger_type", "follow")
+            .eq("is_active", true)
+            .maybeSingle();
+          if (followScenario) {
+            await startScenario(userId, followScenario.id);
+            console.log("[webhook] follow シナリオ起動", { scenarioId: followScenario.id });
+          }
+        } catch (e) {
+          console.warn("[webhook] follow シナリオ起動失敗:", e);
+        }
+        continue;
+      }
+
       if (event.type !== "message" || event.message?.type !== "text") continue;
 
       const text = event.message.text ?? "";
@@ -204,6 +224,23 @@ export async function POST(request: NextRequest) {
         });
       } catch (logErr) {
         console.warn("[webhook] messages 保存失敗（受信）:", logErr);
+      }
+
+      // キーワードシナリオ: テキストがシナリオの trigger_value と一致するか確認
+      try {
+        const { data: kwScenario } = await supabase
+          .from("scenarios")
+          .select("id")
+          .eq("trigger_type", "keyword")
+          .eq("trigger_value", text.trim())
+          .eq("is_active", true)
+          .maybeSingle();
+        if (kwScenario && userId) {
+          await startScenario(userId, kwScenario.id);
+          console.log("[webhook] キーワードシナリオ起動", { triggerValue: text.trim(), scenarioId: kwScenario.id });
+        }
+      } catch (e) {
+        console.warn("[webhook] キーワードシナリオ起動失敗:", e);
       }
 
       if (!replyToken) {

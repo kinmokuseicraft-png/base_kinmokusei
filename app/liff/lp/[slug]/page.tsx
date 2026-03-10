@@ -63,7 +63,7 @@ export default function WoodLpPage({ params }: { params: { slug: string } }) {
   if (notFound || !wood) return <div style={loadingStyle}>ページが見つかりません</div>;
 
   const displayCatchCopy = wood.custom_catch_copy || wood.catch_copy;
-  const baseShopUrl = `https://kinmokusei.base.shop`;
+  const baseShopUrl = `https://kinmokuseijp.base.shop`;
 
   return (
     <div style={{ background: "#0a0a0a", color: "#f0ebe3", minHeight: "100vh", fontFamily: "'Noto Serif JP', 'Hiragino Mincho ProN', serif" }}>

@@ -180,7 +180,7 @@ function ChatContent() {
   };
 
   const insertProduct = (p: BaseProduct) => {
-    const productUrl = `https://kinmokusei.base.shop/items/${p.item_id}`;
+    const productUrl = `https://kinmokuseijp.base.shop/items/${p.item_id}`;
     setInput(`【${p.title}】\n¥${p.price.toLocaleString()}\n${productUrl}`);
     setShowProductModal(false);
   };
