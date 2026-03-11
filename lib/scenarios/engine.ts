@@ -55,7 +55,7 @@ export async function startScenario(userId: string, scenarioId: string) {
     direction: 'outbound',
     message_type: step0.message_type,
     content: (step0.message_content as MessageContent).text ?? null,
-  }).catch(() => {})
+  })
 
   const step1 = steps[1]
   if (step1) {
@@ -126,7 +126,7 @@ export async function runScenarioEngine(): Promise<{ processed: number }> {
         direction: 'outbound',
         message_type: currentStep.message_type,
         content: (currentStep.message_content as MessageContent).text ?? null,
-      }).catch(() => {})
+      })
 
       const nextStepIndex = (user.scenario_step as number) + 1
       const nextStep = steps[nextStepIndex]

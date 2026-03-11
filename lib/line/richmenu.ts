@@ -100,12 +100,12 @@ export async function createRichMenu(token: string, def: RichMenuDef): Promise<s
 export async function uploadRichMenuImage(
   token: string,
   richMenuId: string,
-  imageBuffer: Buffer
+  imageBuffer: Buffer | Uint8Array
 ): Promise<void> {
   const res = await fetch(`${DATA_URL}/richmenu/${richMenuId}/content`, {
     method: 'POST',
     headers: { ...headers(token), 'Content-Type': 'image/png' },
-    body: imageBuffer,
+    body: new Uint8Array(imageBuffer),
   })
   if (!res.ok) throw new Error(`uploadImage: ${res.status} ${await res.text()}`)
 }

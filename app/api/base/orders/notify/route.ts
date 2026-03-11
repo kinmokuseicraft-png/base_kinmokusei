@@ -113,7 +113,7 @@ export async function POST(request: NextRequest) {
     message_type: 'text',
     content: { text },
     created_at: new Date().toISOString(),
-  }).catch(() => {})
+  })
 
   return NextResponse.json({ ok: true, line_user_id: lineUserId, unique_key })
 }

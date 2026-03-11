@@ -42,7 +42,7 @@ export default function LiffPage() {
 
         // 未ログインなら email スコープも含めてログイン
         if (!liff.isLoggedIn()) {
-          liff.login({ scope: 'profile openid email' });
+          liff.login();
           return;
         }
 

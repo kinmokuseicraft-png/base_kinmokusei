@@ -56,7 +56,7 @@ export async function POST() {
     sent_at: now,
     created_at: now,
     updated_at: now,
-  }).catch(() => {})
+  })
 
   return NextResponse.json({ ok: true, sent_at: now })
 }
