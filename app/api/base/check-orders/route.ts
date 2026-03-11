@@ -93,7 +93,7 @@ export async function GET(request: NextRequest) {
   if (!res.ok) {
     const t = await res.text()
     console.error('[check-orders] BASE API error', res.status, t)
-    return NextResponse.json({ error: `BASE API ${res.status}` }, { status: 502 })
+    return NextResponse.json({ error: `BASE API ${res.status}`, detail: t }, { status: 502 })
   }
 
   const data = await res.json() as { orders?: BaseOrder[] }
