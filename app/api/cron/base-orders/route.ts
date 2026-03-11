@@ -3,7 +3,7 @@
  * Vercel Cron Job で定期実行（10分おき）。
  * BASE の注文一覧をポーリングして、新規注文お礼・発送通知を LINE に自動送信する。
  *
- * vercel.json で cron: "*/10 * * * *" を設定すること。
+ * vercel.json で cron: "* /10 * * * *"（スラッシュ前にスペース）を設定すること。
  * CRON_SECRET 環境変数で不正アクセスを防止。
  */
 import { NextRequest, NextResponse } from 'next/server'
