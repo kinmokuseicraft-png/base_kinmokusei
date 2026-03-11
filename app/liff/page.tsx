@@ -39,14 +39,36 @@ export default function LiffPage() {
       try {
         await liff.init({ liffId });
         if (cancelled) return;
-        if (liff.isLoggedIn()) {
-          const p = await liff.getProfile();
-          setProfile({
-            displayName: p.displayName ?? "",
-            pictureUrl: p.pictureUrl,
-            userId: p.userId,
-          });
+
+        // 未ログインなら email スコープも含めてログイン
+        if (!liff.isLoggedIn()) {
+          liff.login({ scope: 'profile openid email' });
+          return;
         }
+
+        const p = await liff.getProfile();
+        const userId = p.userId;
+        setProfile({
+          displayName: p.displayName ?? "",
+          pictureUrl: p.pictureUrl,
+          userId,
+        });
+
+        // ID Token からメールアドレスを取得して line_users に保存
+        try {
+          const idToken = liff.getDecodedIDToken();
+          const email = idToken?.email as string | undefined;
+          if (email) {
+            await fetch('/api/users/link-email', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ line_user_id: userId, email }),
+            });
+          }
+        } catch {
+          // email 取得失敗は無視（未同意など）
+        }
+
         // 商品一覧取得（同一オリジンで API を叩く）
         const res = await fetch("/api/products");
         if (res.ok && !cancelled) {

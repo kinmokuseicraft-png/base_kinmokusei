@@ -15,6 +15,7 @@ import {
   GitBranch,
   FileText,
   LogOut,
+  Send,
 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
@@ -29,6 +30,7 @@ const NAV = [
   { key: "lp", href: "/dashboard/lp", label: "LP管理", Icon: FileText },
   { key: "products", href: "/dashboard/products", label: "商品管理", Icon: Package },
   { key: "base", href: "/dashboard/base", label: "BASE連携", Icon: ShoppingBag },
+  { key: "base/orders", href: "/dashboard/base/orders", label: "注文・発送通知", Icon: Send },
   { key: "analytics", href: "/dashboard/analytics", label: "分析", Icon: BarChart3 },
   { key: "line-setup", href: "/line-setup", label: "LINE設定", Icon: Settings },
 ] as const;

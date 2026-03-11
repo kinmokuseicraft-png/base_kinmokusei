@@ -15,8 +15,10 @@
     "@line/liff": "^2.23.0",
     "@supabase/ssr": "^0.9.0",
     "@supabase/supabase-js": "^2.45.0",
+    "dotenv": "^17.3.1",
     "lucide-react": "^0.577.0",
     "next": "14.2.18",
+    "puppeteer": "^24.38.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "recharts": "^2.13.0"
@@ -26,6 +28,7 @@
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "pg": "^8.20.0",
+    "sharp": "^0.34.5",
     "typescript": "^5.5.0"
   }
 }
