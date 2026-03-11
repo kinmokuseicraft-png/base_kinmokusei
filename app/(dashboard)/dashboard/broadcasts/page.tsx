@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { Mail } from "lucide-react";
 
 type Broadcast = {
   id: string;
@@ -17,6 +18,8 @@ export default function BroadcastsPage() {
   const [list, setList] = useState<Broadcast[]>([]);
   const [loading, setLoading] = useState(true);
   const [sendingId, setSendingId] = useState<string | null>(null);
+  const [liffInviteSending, setLiffInviteSending] = useState(false);
+  const [liffInviteResult, setLiffInviteResult] = useState<string | null>(null);
 
   useEffect(() => {
     fetch("/api/broadcasts", { cache: "no-store" })
@@ -41,6 +44,29 @@ export default function BroadcastsPage() {
       .finally(() => setSendingId(null));
   };
 
+  const handleLiffInvite = async () => {
+    if (!confirm("全友達にメール登録のお願いメッセージを送信しますか？")) return;
+    setLiffInviteSending(true);
+    setLiffInviteResult(null);
+    try {
+      const res = await fetch("/api/broadcasts/send-liff-invite", { method: "POST" });
+      const data = await res.json();
+      if (data.ok) {
+        setLiffInviteResult("送信完了しました");
+        // 一覧を再取得
+        fetch("/api/broadcasts", { cache: "no-store" })
+          .then((r) => r.json())
+          .then((d: { broadcasts?: Broadcast[] }) => setList(Array.isArray(d?.broadcasts) ? d.broadcasts : []));
+      } else {
+        setLiffInviteResult(`エラー: ${data.error ?? "送信失敗"}`);
+      }
+    } catch {
+      setLiffInviteResult("通信エラー");
+    } finally {
+      setLiffInviteSending(false);
+    }
+  };
+
   const statusLabel = (s: string) => (s === "draft" ? "下書き" : s === "scheduled" ? "予約" : s === "sent" ? "送信済" : s);
   const statusColor = (s: string) =>
     s === "sent" ? "var(--color-line)" : "var(--color-text-muted)";
@@ -63,7 +89,7 @@ export default function BroadcastsPage() {
         line_users の友だち全員にブロードキャスト送信します。下書き・予約・送信済を管理できます。
       </p>
 
-      <div style={{ marginBottom: "var(--space-4)" }}>
+      <div style={{ marginBottom: "var(--space-4)", display: "flex", gap: "var(--space-3)", flexWrap: "wrap", alignItems: "center" }}>
         <Link
           href="/dashboard/broadcasts/new"
           style={{
@@ -78,6 +104,33 @@ export default function BroadcastsPage() {
         >
           新規作成
         </Link>
+
+        {/* LIFF誘導ワンクリック送信 */}
+        <button
+          type="button"
+          onClick={handleLiffInvite}
+          disabled={liffInviteSending}
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "var(--space-1)",
+            padding: "var(--space-2) var(--space-4)",
+            border: "1px solid var(--color-border-strong)",
+            background: "var(--color-surface)",
+            color: "var(--color-text)",
+            fontWeight: 500,
+            fontSize: "0.9rem",
+            cursor: liffInviteSending ? "not-allowed" : "pointer",
+          }}
+        >
+          <Mail size={16} strokeWidth={1.5} />
+          {liffInviteSending ? "送信中…" : "メール登録のお願いを送る"}
+        </button>
+        {liffInviteResult && (
+          <span style={{ fontSize: "0.85rem", color: liffInviteResult.startsWith("エラー") ? "#c00" : "var(--color-line)" }}>
+            {liffInviteResult}
+          </span>
+        )}
       </div>
 
       <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-4)" }}>
