@@ -166,14 +166,20 @@ export async function POST(request: NextRequest) {
     }
 
     if (lineUserId) {
-      const trackingNumber = order.delivery_tracking_number as string | undefined
+      const trackingNumber = (order.delivery_tracking_number as string | undefined)?.trim() || null
+      const carrier = (order.delivery_service as string | undefined)?.trim()
+        || (order.delivery_company as string | undefined)?.trim()
+        || (order.delivery_method as string | undefined)?.trim()
+        || null
       const productLines = buildProductLines(products)
-      const trackingInfo = trackingNumber ? `\n\n追跡番号：${trackingNumber}` : ''
+      const carrierLine = carrier ? `\n配送業者：${carrier}` : ''
+      const trackingLine = trackingNumber ? `\n追跡番号：${trackingNumber}` : ''
+      const deliveryInfo = (carrierLine || trackingLine) ? `\n${carrierLine}${trackingLine}` : ''
       const text =
         `木軸ペン工房 金杢犀より、発送のお知らせです。\n\n` +
         `以下の商品を本日発送いたしました。\n\n` +
         `${productLines}` +
-        `${trackingInfo}\n\n` +
+        `${deliveryInfo}\n\n` +
         `到着まで今しばらくお待ちください。\n` +
         `引き続きどうぞよろしくお願いいたします。`
       await pushLine(lineUserId, text)
