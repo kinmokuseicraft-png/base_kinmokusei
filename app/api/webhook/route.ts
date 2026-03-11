@@ -44,6 +44,11 @@ function isPenTrigger(text: string): boolean {
   return PEN_TRIGGER_REGEX.test(normalized);
 }
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+function isEmail(text: string): boolean {
+  return EMAIL_REGEX.test(text.trim());
+}
+
 /** キーワード → ユーザーに付与するタグ（LINE のメッセージと完全一致で付与） */
 const KEYWORD_TAGS: Record<string, string> = {
   エボニー: "エボニー",
@@ -241,6 +246,23 @@ export async function POST(request: NextRequest) {
         }
       } catch (e) {
         console.warn("[webhook] キーワードシナリオ起動失敗:", e);
+      }
+
+      // メールアドレス検出: line_users.email に保存して確認返信
+      if (isEmail(text) && userId) {
+        try {
+          await supabase
+            .from("line_users")
+            .update({ email: text.trim() })
+            .eq("line_user_id", userId);
+          console.log("[webhook] メールアドレス登録", { userId: userId.slice(0, 8) + "..." });
+          if (replyToken) {
+            await replyWithText(replyToken, `メールアドレス（${text.trim()}）を登録しました。\n発送時にLINEでお知らせします。`);
+          }
+        } catch (e) {
+          console.warn("[webhook] メール保存失敗:", e);
+        }
+        continue;
       }
 
       if (!replyToken) {
