@@ -12,6 +12,7 @@ export async function GET(request: NextRequest) {
     }
   }
   const token = await getBaseAccessToken()
-  if (!token) return NextResponse.json({ token: null })
-  return NextResponse.json({ tokenFirst10: token.slice(0, 10), tokenLength: token.length })
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? 'not set'
+  if (!token) return NextResponse.json({ token: null, supabaseUrl })
+  return NextResponse.json({ tokenFirst10: token.slice(0, 10), tokenLength: token.length, supabaseUrl })
 }
