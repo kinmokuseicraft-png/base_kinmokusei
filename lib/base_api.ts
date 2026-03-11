@@ -8,8 +8,51 @@ import { supabase } from "@/lib/supabase_client";
 const BASE_API_BASE = "https://api.thebase.in";
 
 /**
+ * BASE OAuth2 リフレッシュトークンで新しいアクセストークンを取得して保存する。
+ */
+async function refreshBaseToken(refreshToken: string): Promise<string | null> {
+  const clientId = process.env.BASE_CLIENT_ID?.trim();
+  const clientSecret = process.env.BASE_CLIENT_SECRET?.trim();
+  if (!clientId || !clientSecret) return null;
+
+  const res = await fetch("https://api.thebase.in/1/oauth/token", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({
+      grant_type: "refresh_token",
+      client_id: clientId,
+      client_secret: clientSecret,
+      refresh_token: refreshToken,
+    }).toString(),
+  });
+
+  if (!res.ok) {
+    console.error("[base_api] token refresh failed", res.status, await res.text());
+    return null;
+  }
+
+  const data = await res.json() as { access_token?: string; refresh_token?: string; expires_in?: number };
+  if (!data.access_token) return null;
+
+  const expiresAt = new Date(Date.now() + (data.expires_in ?? 3600) * 1000).toISOString();
+  await supabase.from("base_settings").upsert(
+    {
+      id: 1,
+      access_token: data.access_token,
+      refresh_token: data.refresh_token ?? refreshToken,
+      expires_at: expiresAt,
+      updated_at: new Date().toISOString(),
+    },
+    { onConflict: "id" }
+  );
+  console.log("[base_api] token refreshed, expires:", expiresAt);
+  return data.access_token;
+}
+
+/**
  * BASE API 用アクセストークンを取得する。
  * 優先: BASE_ACCESS_TOKEN（.env）→ base_settings（Supabase id=1）の access_token。
+ * トークンが期限切れ（または5分以内に期限切れ）なら自動リフレッシュ。
  */
 export async function getBaseAccessToken(): Promise<string | null> {
   const envToken = process.env.BASE_ACCESS_TOKEN?.trim();
@@ -17,12 +60,23 @@ export async function getBaseAccessToken(): Promise<string | null> {
 
   const { data } = await supabase
     .from("base_settings")
-    .select("access_token")
+    .select("access_token, refresh_token, expires_at")
     .eq("id", 1)
     .maybeSingle();
 
-  const token = (data as { access_token?: string } | null)?.access_token?.trim();
-  return token ?? null;
+  const row = data as { access_token?: string; refresh_token?: string; expires_at?: string } | null;
+  const token = row?.access_token?.trim();
+  if (!token) return null;
+
+  // 5分前になったら自動リフレッシュ
+  const expiresAt = row?.expires_at ? new Date(row.expires_at) : null;
+  const shouldRefresh = expiresAt && expiresAt.getTime() - Date.now() < 5 * 60 * 1000;
+  if (shouldRefresh && row?.refresh_token) {
+    const newToken = await refreshBaseToken(row.refresh_token);
+    return newToken ?? token;
+  }
+
+  return token;
 }
 
 /** BASE API の商品画像（サイズ別URL） */
