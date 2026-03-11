@@ -187,8 +187,9 @@ export async function POST(request: NextRequest) {
         }
       }
 
-      // follow イベント: 友達追加シナリオを起動
+      // follow イベント: 友達追加シナリオを起動 + メール登録依頼
       if (event.type === "follow" && userId) {
+        // シナリオ起動
         try {
           const { data: followScenario } = await supabase
             .from("scenarios")
@@ -202,6 +203,13 @@ export async function POST(request: NextRequest) {
           }
         } catch (e) {
           console.warn("[webhook] follow シナリオ起動失敗:", e);
+        }
+        // メール登録依頼メッセージをpushで送信
+        if (replyToken) {
+          await replyWithText(
+            replyToken,
+            `木軸ペン工房 金杢犀の公式LINEへようこそ！\n\nご注文の発送時にLINEでお知らせするサービスをご用意しています。\n\nBASEにご登録のメールアドレスをこのトークに送信していただくだけで設定完了です。\n\n例）example@gmail.com\n\nご不要の場合はそのままお使いいただけます。`
+          );
         }
         continue;
       }

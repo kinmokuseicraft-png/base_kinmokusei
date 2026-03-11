@@ -15,6 +15,7 @@ type LineUser = {
   followed_at?: string | null;
   tags?: string[] | null;
   custom_fields?: Record<string, unknown> | null;
+  email?: string | null;
 };
 
 function formatDate(iso: string | null | undefined): string {
@@ -283,6 +284,11 @@ export default function UsersPage() {
                 <div style={{ fontSize: "0.68rem", color: "var(--color-text-muted)", fontFamily: "monospace", marginTop: 2, wordBreak: "break-all" }}>
                   {selected.line_user_id}
                 </div>
+                {selected.email && (
+                  <div style={{ fontSize: "0.72rem", color: "var(--color-text-muted)", marginTop: 2, wordBreak: "break-all" }}>
+                    📧 {selected.email}
+                  </div>
+                )}
               </div>
             </div>
 
