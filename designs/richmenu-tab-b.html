@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>金杢犀 リッチメニュー TabB — ご愛用の方 / 漆黒×金</title>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  width: 2500px;
+  height: 843px;
+  overflow: hidden;
+  font-family: 'Shippori Mincho B1', 'Hiragino Mincho ProN', 'Yu Mincho', 'MS Mincho', serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ────────────────────────
+   タブバー: 0〜95px
+   コンテンツ: 95〜793px
+   固定バー: 793〜843px
+──────────────────────── */
+.menu {
+  width: 2500px;
+  height: 843px;
+  display: flex;
+  flex-direction: column;
+  background: #1a0e08;
+}
+
+/* ── タブバー ── */
+.tabs {
+  display: flex;
+  align-items: stretch;
+  height: 95px;
+  background: #120a04;
+  border-bottom: 1px solid rgba(154,125,74,0.3);
+  flex-shrink: 0;
+}
+
+.tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+  letter-spacing: 0.16em;
+  position: relative;
+}
+
+.tab.active  { color: #e0cca0; background: #1e1208; }
+.tab.inactive{ color: rgba(224,204,160,0.38); background: transparent; }
+
+.tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 18%;
+  right: 18%;
+  height: 2px;
+  background: #9a7d4a;
+}
+
+.tab-sep {
+  width: 1px;
+  background: rgba(154,125,74,0.28);
+  align-self: stretch;
+}
+
+/* ── コンテンツ 3列 ── */
+.content {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 833px 834px 833px;
+  background: #1a0e08;
+  position: relative;
+}
+
+/* 左縦ライン装飾 */
+.content::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  top: 50px; bottom: 50px;
+  pointer-events: none;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 100px;
+  gap: 40px;
+  border-right: 1px solid rgba(154,125,74,0.22);
+  position: relative;
+}
+
+.col:last-child { border-right: none; }
+
+/* 各列上部の金ライン */
+.col::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 18%;
+  right: 18%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(154,125,74,0.5), transparent);
+}
+
+/* アイコン */
+.icon {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon svg {
+  width: 62px;
+  height: 62px;
+  fill: none;
+  stroke: #9a7d4a;
+  stroke-width: 1.1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* 縦書きラベル */
+.label {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-size: 32px;
+  letter-spacing: 0.28em;
+  line-height: 1;
+  color: #e0d4b8;
+  white-space: nowrap;
+  font-weight: 400;
+}
+
+/* ── 固定バー ── */
+.bottom {
+  height: 50px;
+  background: #2e1c10;
+  border-top: 1px solid rgba(154,125,74,0.28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.bottom-text {
+  font-size: 24px;
+  color: #e0cca0;
+  letter-spacing: 0.18em;
+}
+</style>
+</head>
+<body>
+<div class="menu">
+
+  <!-- タブバー (y: 0-95) -->
+  <div class="tabs">
+    <div class="tab inactive">はじめての方</div>
+    <div class="tab-sep"></div>
+    <div class="tab active">ご愛用の方</div>
+  </div>
+
+  <!-- コンテンツ 3列 (y: 95-793) -->
+  <div class="content">
+
+    <!-- Col 1 (x: 0-833): お手入れ -->
+    <div class="col">
+      <div class="icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <path d="M9 12l2 2 4-4"/>
+        </svg>
+      </div>
+      <div class="label">お手入れ</div>
+    </div>
+
+    <!-- Col 2 (x: 833-1667): 注文確認 -->
+    <div class="col">
+      <div class="icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/>
+          <path d="M16 3h-8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/>
+          <path d="M9 13h6M9 17h4"/>
+        </svg>
+      </div>
+      <div class="label">注文確認</div>
+    </div>
+
+    <!-- Col 3 (x: 1667-2500): 新作 -->
+    <div class="col">
+      <div class="icon">
+        <svg viewBox="0 0 24 24">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+        </svg>
+      </div>
+      <div class="label">新作</div>
+    </div>
+
+  </div>
+
+  <!-- 固定バー (y: 793-843) -->
+  <div class="bottom">
+    <span class="bottom-text">今日の言葉を、手で残す　▾</span>
+  </div>
+
+</div>
+</body>
+</html>

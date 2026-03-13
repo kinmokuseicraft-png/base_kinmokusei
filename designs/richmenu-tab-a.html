@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>金杢犀 リッチメニュー TabA — はじめての方 / 和紙×墨</title>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  width: 2500px;
+  height: 843px;
+  overflow: hidden;
+  font-family: 'Shippori Mincho B1', 'Hiragino Mincho ProN', 'Yu Mincho', 'MS Mincho', serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ────────────────────────
+   全体レイアウト
+   タブバー: 0〜95px
+   コンテンツ: 95〜793px
+   固定バー: 793〜843px
+──────────────────────── */
+.menu {
+  width: 2500px;
+  height: 843px;
+  display: flex;
+  flex-direction: column;
+  background: #f0ebe0;
+}
+
+/* ── タブバー (高さ 95px) ── */
+.tabs {
+  display: flex;
+  align-items: stretch;
+  height: 95px;
+  background: #e8e2d4;
+  border-bottom: 1px solid rgba(154,125,74,0.3);
+  flex-shrink: 0;
+}
+
+.tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+  letter-spacing: 0.16em;
+  position: relative;
+}
+
+.tab.active  { color: #9a7d4a; background: #ede7d8; }
+.tab.inactive{ color: #b0a898; background: transparent; }
+
+.tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 18%;
+  right: 18%;
+  height: 2px;
+  background: #9a7d4a;
+}
+
+.tab-sep {
+  width: 1px;
+  background: rgba(154,125,74,0.28);
+  align-self: stretch;
+}
+
+/* ── コンテンツ 5列 (高さ 698px) ── */
+.content {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(5, 500px);
+  background: #f0ebe0;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 100px;
+  gap: 40px;
+  border-right: 1px solid rgba(154,125,74,0.2);
+}
+
+.col:last-child { border-right: none; }
+
+/* アイコン */
+.icon {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon svg {
+  width: 62px;
+  height: 62px;
+  fill: none;
+  stroke: #9a7d4a;
+  stroke-width: 1.1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* 縦書きラベル */
+.label {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-size: 32px;
+  letter-spacing: 0.28em;
+  line-height: 1;
+  color: #1e1c16;
+  white-space: nowrap;
+  font-weight: 400;
+}
+
+/* ── 固定バー (高さ 50px) ── */
+.bottom {
+  height: 50px;
+  background: #d0c8b8;
+  border-top: 1px solid rgba(154,125,74,0.28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.bottom-text {
+  font-size: 24px;
+  color: #9a7d4a;
+  letter-spacing: 0.18em;
+}
+</style>
+</head>
+<body>
+<div class="menu">
+
+  <!-- タブバー (y: 0-95) -->
+  <div class="tabs">
+    <div class="tab active">はじめての方</div>
+    <div class="tab-sep"></div>
+    <div class="tab inactive">ご愛用の方</div>
+  </div>
+
+  <!-- コンテンツ 5列 (y: 95-793) -->
+  <div class="content">
+
+    <!-- Col 1 (x: 0-500): 金木犀の花言葉 -->
+    <div class="col">
+      <div class="icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 3a6 6 0 009 9 9 9 0 11-9-9z"/>
+        </svg>
+      </div>
+      <div class="label">金木犀の花言葉</div>
+    </div>
+
+    <!-- Col 2 (x: 500-1000): ギフト -->
+    <div class="col">
+      <div class="icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M20 12v10H4V12"/>
+          <path d="M22 7H2v5h20V7z"/>
+          <path d="M12 22V7"/>
+          <path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"/>
+          <path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/>
+        </svg>
+      </div>
+      <div class="label">ギフト</div>
+    </div>
+
+    <!-- Col 3 (x: 1000-1500): 銘木を知る -->
+    <div class="col">
+      <div class="icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/>
+          <path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>
+        </svg>
+      </div>
+      <div class="label">銘木を知る</div>
+    </div>
+
+    <!-- Col 4 (x: 1500-2000): 銘木診断 -->
+    <div class="col">
+      <div class="icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/>
+          <circle cx="12" cy="17" r="1.2" fill="#9a7d4a" stroke="none"/>
+          <circle cx="12" cy="12" r="10"/>
+        </svg>
+      </div>
+      <div class="label">銘木診断</div>
+    </div>
+
+    <!-- Col 5 (x: 2000-2500): 作品を見る -->
+    <div class="col">
+      <div class="icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M17 3a2.828 2.828 0 114 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>
+        </svg>
+      </div>
+      <div class="label">作品を見る</div>
+    </div>
+
+  </div>
+
+  <!-- 固定バー (y: 793-843) -->
+  <div class="bottom">
+    <span class="bottom-text">今日の言葉を、手で残す　▾</span>
+  </div>
+
+</div>
+</body>
+</html>

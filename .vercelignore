@@ -1,0 +1,13 @@
+# designs/ のPNGはリッチメニュー画像としてVercelで使用するため除外しない
+designs/*.html
+designs/*.js
+designs/icons/
+designs/variant-a/
+designs/variant-b/
+designs/variant-c/
+designs/variant-d/
+scripts/
+data/
+output/
+*.py
+*.sql
