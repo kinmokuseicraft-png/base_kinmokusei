@@ -75,7 +75,7 @@ export const KINMOKUSEI_MENU: RichMenuDef = {
 // ──────────────────────────────────────────────
 const TAB_H  = 95
 const CONT_Y = 95
-const CONT_H = 748
+const CONT_H = 1591
 
 export const ALIAS_A = 'kinmokusei-menu-a'
 export const ALIAS_B = 'kinmokusei-menu-b'
@@ -90,7 +90,7 @@ const BLOG_URL  = process.env.BLOG_URL       ?? 'https://kinmokuseijp.blog'
 export function buildMenuTabA(liffUrl?: string): RichMenuDef {
   const COL = 500
   return {
-    size: { width: 2500, height: 843 },
+    size: { width: 2500, height: 1686 },
     selected: true,
     name: '金杢犀 Tab A — はじめての方',
     chatBarText: '今日の言葉を、手で残す',
@@ -118,7 +118,7 @@ export function buildMenuTabB(): RichMenuDef {
   const C1 = 833
   const C2 = 834
   return {
-    size: { width: 2500, height: 843 },
+    size: { width: 2500, height: 1686 },
     selected: false,
     name: '金杢犀 Tab B — ご愛用の方',
     chatBarText: '今日の言葉を、手で残す',

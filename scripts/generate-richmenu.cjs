@@ -7,8 +7,8 @@
  *   node scripts/generate-richmenu.cjs
  *
  * 出力:
- *   designs/richmenu-tab-a.png  (2500×843 — Tab A: はじめての方)
- *   designs/richmenu-tab-b.png  (2500×843 — Tab B: ご愛用の方)
+ *   designs/richmenu-tab-a.png  (2500×1686 — Tab A: はじめての方)
+ *   designs/richmenu-tab-b.png  (2500×1686 — Tab B: ご愛用の方)
  */
 
 const puppeteer = require('puppeteer');
@@ -17,8 +17,8 @@ const path = require('path');
 const DESIGNS_DIR = path.resolve(__dirname, '..', 'designs');
 
 const TARGETS = [
-  { html: 'richmenu-tab-a.html', png: 'richmenu-tab-a.png', w: 2500, h: 843 },
-  { html: 'richmenu-tab-b.html', png: 'richmenu-tab-b.png', w: 2500, h: 843 },
+  { html: 'richmenu-tab-a.html', png: 'richmenu-tab-a.png', w: 2500, h: 1686 },
+  { html: 'richmenu-tab-b.html', png: 'richmenu-tab-b.png', w: 2500, h: 1686 },
 ];
 
 async function generate({ html, png, w, h }) {
