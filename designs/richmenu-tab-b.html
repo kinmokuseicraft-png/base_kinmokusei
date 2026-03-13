@@ -12,8 +12,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 .menu { width: 2500px; height: 843px; display: flex; flex-direction: column; background: #1a0e08; }
-
-/* ── タブバー (0〜95px) ── */
 .tabs {
   display: flex; align-items: stretch; height: 95px; flex-shrink: 0;
   background: #120a04; border-bottom: 1px solid rgba(154,125,74,0.3);
@@ -34,7 +32,6 @@ body {
 <body>
 <div class="menu">
 
-  <!-- タブバー (y: 0-95) -->
   <div class="tabs">
     <div class="tab inactive">はじめての方</div>
     <div class="tab-sep"></div>
@@ -42,24 +39,20 @@ body {
   </div>
 
   <!--
-    content_h = 843 - 95 = 748px
-    col widths: 833, 834, 833  → cx: 417, 1250, 2083
-    text_h = N×32 + (N-1)×9
-    total  = 62(icon) + 36(gap) + text_h
-    icon_cy = (748 - total)/2 + 31
-    text_cy = 423 (全列固定)
+    content_h=748, icon=80px, font-size=54, letter-spacing=16, gap=48
+    text_h = N×54 + (N-1)×16
+    total  = 80 + 48 + text_h
+    icon_cy = (748 - total)/2 + 40
+    text_cy = 438 (全列固定)
 
-    お手入れ (4ch): text_h=155, total=253, icon_cy=279
-    注文確認 (4ch): same, icon_cy=279
-    新作     (2ch): text_h=73,  total=171, icon_cy=320
+    お手入れ (4ch): text_h=264, total=392, icon_cy=218
+    注文確認 (4ch): same
+    新作     (2ch): text_h=124, total=252, icon_cy=288
   -->
   <svg width="2500" height="748" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
-    <!-- 背景 -->
     <rect width="2500" height="748" fill="#1a0e08"/>
-    <!-- 列区切り -->
     <line x1="833"  y1="0" x2="833"  y2="748" stroke="rgba(154,125,74,0.22)" stroke-width="1"/>
     <line x1="1667" y1="0" x2="1667" y2="748" stroke="rgba(154,125,74,0.22)" stroke-width="1"/>
-    <!-- 各列上部の金ライン -->
     <defs>
       <linearGradient id="gold-line" x1="0" y1="0" x2="1" y2="0">
         <stop offset="0%"   stop-color="rgba(154,125,74,0)"/>
@@ -71,41 +64,41 @@ body {
     <line x1="983"  y1="0" x2="1517" y2="0" stroke="url(#gold-line)" stroke-width="1"/>
     <line x1="1817" y1="0" x2="2350" y2="0" stroke="url(#gold-line)" stroke-width="1"/>
 
-    <!-- ── Col 1: お手入れ (cx=417, icon_cy=279) ── -->
-    <g transform="translate(417,279)">
-      <svg x="-31" y="-31" width="62" height="62" viewBox="0 0 24 24"
-           fill="none" stroke="#9a7d4a" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Col 1: お手入れ (cx=417, icon_cy=218) -->
+    <g transform="translate(417,218)">
+      <svg x="-40" y="-40" width="80" height="80" viewBox="0 0 24 24"
+           fill="none" stroke="#9a7d4a" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
         <path d="M9 12l2 2 4-4"/>
       </svg>
     </g>
-    <text x="417" y="423" writing-mode="vertical-rl" text-anchor="middle"
+    <text x="417" y="438" writing-mode="vertical-rl" text-anchor="middle"
           font-family="'Shippori Mincho B1','Hiragino Mincho ProN','Yu Mincho',serif"
-          font-size="32" letter-spacing="9" fill="#e0d4b8">お手入れ</text>
+          font-size="54" letter-spacing="16" fill="#e0d4b8">お手入れ</text>
 
-    <!-- ── Col 2: 注文確認 (cx=1250, icon_cy=279) ── -->
-    <g transform="translate(1250,279)">
-      <svg x="-31" y="-31" width="62" height="62" viewBox="0 0 24 24"
-           fill="none" stroke="#9a7d4a" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Col 2: 注文確認 (cx=1250, icon_cy=218) -->
+    <g transform="translate(1250,218)">
+      <svg x="-40" y="-40" width="80" height="80" viewBox="0 0 24 24"
+           fill="none" stroke="#9a7d4a" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
         <path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/>
         <path d="M16 3h-8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/>
         <path d="M9 13h6M9 17h4"/>
       </svg>
     </g>
-    <text x="1250" y="423" writing-mode="vertical-rl" text-anchor="middle"
+    <text x="1250" y="438" writing-mode="vertical-rl" text-anchor="middle"
           font-family="'Shippori Mincho B1','Hiragino Mincho ProN','Yu Mincho',serif"
-          font-size="32" letter-spacing="9" fill="#e0d4b8">注文確認</text>
+          font-size="54" letter-spacing="16" fill="#e0d4b8">注文確認</text>
 
-    <!-- ── Col 3: 新作 (cx=2083, icon_cy=320) ── -->
-    <g transform="translate(2083,320)">
-      <svg x="-31" y="-31" width="62" height="62" viewBox="0 0 24 24"
-           fill="none" stroke="#9a7d4a" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Col 3: 新作 (cx=2083, icon_cy=288) -->
+    <g transform="translate(2083,288)">
+      <svg x="-40" y="-40" width="80" height="80" viewBox="0 0 24 24"
+           fill="none" stroke="#9a7d4a" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
         <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
       </svg>
     </g>
-    <text x="2083" y="423" writing-mode="vertical-rl" text-anchor="middle"
+    <text x="2083" y="438" writing-mode="vertical-rl" text-anchor="middle"
           font-family="'Shippori Mincho B1','Hiragino Mincho ProN','Yu Mincho',serif"
-          font-size="32" letter-spacing="9" fill="#e0d4b8">新作</text>
+          font-size="54" letter-spacing="16" fill="#e0d4b8">新作</text>
   </svg>
 
 </div>
