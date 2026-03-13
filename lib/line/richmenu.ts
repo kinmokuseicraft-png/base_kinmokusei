@@ -75,9 +75,7 @@ export const KINMOKUSEI_MENU: RichMenuDef = {
 // ──────────────────────────────────────────────
 const TAB_H  = 95
 const CONT_Y = 95
-const CONT_H = 698
-const BOT_Y  = 793
-const BOT_H  = 50
+const CONT_H = 748
 
 export const ALIAS_A = 'kinmokusei-menu-a'
 export const ALIAS_B = 'kinmokusei-menu-b'
@@ -109,8 +107,6 @@ export function buildMenuTabA(liffUrl?: string): RichMenuDef {
       { bounds: { x: COL*3,  y: CONT_Y, width: COL, height: CONT_H }, action: liffUrl ? { type: 'uri', uri: liffUrl, label: '銘木診断' } : { type: 'message', text: '銘木診断', label: '銘木診断' } },
       // Col 5: 作品を見る
       { bounds: { x: COL*4,  y: CONT_Y, width: COL, height: CONT_H }, action: { type: 'uri', uri: BASE_SHOP, label: '作品を見る' } },
-      // 固定バー
-      { bounds: { x: 0, y: BOT_Y, width: 2500, height: BOT_H }, action: { type: 'postback', data: 'toggle_menu', displayText: 'メニュー' } },
     ],
   }
 }
@@ -135,8 +131,6 @@ export function buildMenuTabB(): RichMenuDef {
       { bounds: { x: C1,    y: CONT_Y, width: C2, height: CONT_H }, action: { type: 'message', text: '注文確認', label: '注文確認' } },
       // Col 3: 新作
       { bounds: { x: C1+C2, y: CONT_Y, width: C1, height: CONT_H }, action: { type: 'uri', uri: BASE_SHOP, label: '新作' } },
-      // 固定バー
-      { bounds: { x: 0, y: BOT_Y, width: 2500, height: BOT_H }, action: { type: 'postback', data: 'toggle_menu', displayText: 'メニュー' } },
     ],
   }
 }
