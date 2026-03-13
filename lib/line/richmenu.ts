@@ -73,9 +73,9 @@ export const KINMOKUSEI_MENU: RichMenuDef = {
 //   Tab A → "kinmokusei-menu-a"
 //   Tab B → "kinmokusei-menu-b"
 // ──────────────────────────────────────────────
-const TAB_H  = 140
-const CONT_Y = 140
-const CONT_H = 1546
+const TAB_H  = 200
+const CONT_Y = 200
+const CONT_H = 1486
 
 export const ALIAS_A = 'kinmokusei-menu-a'
 export const ALIAS_B = 'kinmokusei-menu-b'
