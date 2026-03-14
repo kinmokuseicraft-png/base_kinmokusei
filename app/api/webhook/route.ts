@@ -4,6 +4,7 @@
  * このルートは Supabase（message_logs）と連携。ペン反応・BASE 商品取得を実行。
  */
 import { NextRequest, NextResponse } from "next/server";
+import { waitUntil } from "@vercel/functions";
 import crypto from "crypto";
 import { getBaseProducts } from "@/lib/base_api";
 import { buildFlexMessageForReply } from "@/lib/line_flex_generator";
@@ -148,27 +149,9 @@ type WebhookEvent = {
   message?: { type: string; text?: string };
 };
 
-/** POST: LINE プラットフォームからの Webhook */
-export async function POST(request: NextRequest) {
-  const rawBody = await request.text();
-  const signature = request.headers.get("x-line-signature") ?? "";
-
-  console.log("[webhook] POST 受信", { bodyLength: rawBody.length, hasSignature: !!signature });
-
-  if (!validateSignature(rawBody, signature)) {
-    return NextResponse.json({ message: "Invalid signature" }, { status: 401 });
-  }
-
-  try {
-    const body = JSON.parse(rawBody) as { events?: WebhookEvent[] };
-    const events = body.events ?? [];
-
-    if (events.length === 0) {
-      console.log("[webhook] イベント 0 件のため 200 で終了");
-      return NextResponse.json({ ok: true });
-    }
-
-    for (const event of events) {
+/** イベント一覧を処理する（waitUntil でバックグラウンド実行） */
+async function processEvents(events: WebhookEvent[]) {
+  for (const event of events) {
       const userId = event.source?.userId ?? "";
       const replyToken = event.replyToken;
 
@@ -317,13 +300,35 @@ export async function POST(request: NextRequest) {
           "申し訳ありません。いま商品情報の取得に失敗しました。BASE連携エラーです。しばらくしてから再度お試しください。"
         );
       }
-    }
-
-    return NextResponse.json({ ok: true });
-  } catch (e) {
-    console.error("[webhook] 処理中に例外", e);
-    return NextResponse.json({ message: "Internal error" }, { status: 500 });
   }
+}
+
+/** POST: LINE プラットフォームからの Webhook */
+export async function POST(request: NextRequest) {
+  const rawBody = await request.text();
+  const signature = request.headers.get("x-line-signature") ?? "";
+
+  console.log("[webhook] POST 受信", { bodyLength: rawBody.length, hasSignature: !!signature });
+
+  if (!validateSignature(rawBody, signature)) {
+    return NextResponse.json({ message: "Invalid signature" }, { status: 401 });
+  }
+
+  let events: WebhookEvent[] = [];
+  try {
+    const body = JSON.parse(rawBody) as { events?: WebhookEvent[] };
+    events = body.events ?? [];
+  } catch (e) {
+    console.error("[webhook] JSON パース失敗", e);
+    return NextResponse.json({ message: "Invalid JSON" }, { status: 400 });
+  }
+
+  if (events.length > 0) {
+    // 200 を即返しつつ、処理をバックグラウンドで継続
+    waitUntil(processEvents(events).catch((e) => console.error("[webhook] processEvents 例外", e)));
+  }
+
+  return NextResponse.json({ ok: true });
 }
 
 /** GET: Webhook URL 検証用 */
