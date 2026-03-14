@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>金杢犀 リッチメニュー 案C2 — 余白×和アイコン</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400;700&family=Cormorant+Garamond:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  width: 2500px;
+  height: 1686px;
+  background: #111111;
+  overflow: hidden;
+  font-family: 'Noto Serif JP', 'Hiragino Mincho ProN', serif;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 833px 834px 833px;
+  grid-template-rows: 843px 843px;
+  width: 2500px;
+  height: 1686px;
+}
+
+.cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 60px;
+  border-right: 1px solid rgba(201,169,110,0.18);
+  border-bottom: 1px solid rgba(201,169,110,0.18);
+  position: relative;
+  overflow: hidden;
+  gap: 0;
+}
+
+.cell:nth-child(3n)  { border-right: none; }
+.cell:nth-child(n+4) { border-bottom: none; }
+
+/* 薄い背景番号 */
+.cell-num {
+  position: absolute;
+  bottom: 44px;
+  right: 52px;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 130px;
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(201,169,110,0.05);
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* 上部の金のアクセントライン */
+.cell::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent 10%, #C9A96E 30%, #C9A96E 70%, transparent 90%);
+  opacity: 0.35;
+}
+
+/* アイコン */
+.icon-wrap {
+  width: 260px;
+  height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 52px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* アイコン背景の円 */
+.icon-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(201,169,110,0.12);
+}
+
+.label-jp {
+  font-size: 60px;
+  font-weight: 400;
+  color: #F0EBE3;
+  letter-spacing: 0.15em;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.rule {
+  width: 60px;
+  height: 1px;
+  background: #C9A96E;
+  margin-bottom: 14px;
+  opacity: 0.45;
+}
+
+.label-en {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 24px;
+  font-weight: 300;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(201,169,110,0.5);
+  text-align: center;
+}
+
+.sub-desc { display: none; }
+</style>
+</head>
+<body>
+<div class="grid">
+
+  <!-- ① 銘木診断 — 年輪（木の断面） -->
+  <div class="cell">
+    <div class="cell-num">01</div>
+    <div class="icon-wrap">
+      <svg width="220" height="220" viewBox="0 0 100 100" fill="none">
+        <!-- 外側の樹皮 -->
+        <circle cx="50" cy="50" r="46" stroke="#C9A96E" stroke-width="1.8"/>
+        <!-- 年輪 5層 -->
+        <circle cx="50" cy="50" r="38" stroke="#C9A96E" stroke-width="1"   opacity="0.75"/>
+        <circle cx="50" cy="50" r="30" stroke="#C9A96E" stroke-width="1"   opacity="0.65"/>
+        <circle cx="50" cy="50" r="22" stroke="#C9A96E" stroke-width="1"   opacity="0.55"/>
+        <circle cx="50" cy="50" r="14" stroke="#C9A96E" stroke-width="1"   opacity="0.45"/>
+        <!-- 髄（中心） -->
+        <circle cx="50" cy="50" r="4.5" fill="#C9A96E" opacity="0.7"/>
+        <!-- 木目の流れ（不規則な節） -->
+        <path d="M50,4 Q60,22 66,42 Q70,56 65,70" stroke="#C9A96E" stroke-width="0.7" fill="none" opacity="0.25"/>
+        <path d="M50,4 Q42,20 40,38 Q38,54 42,68" stroke="#C9A96E" stroke-width="0.7" fill="none" opacity="0.2"/>
+        <!-- ダイヤモンドの診断マーク -->
+        <polygon points="50,12 56,18 50,24 44,18" fill="none" stroke="#C9A96E" stroke-width="1" opacity="0.5"/>
+      </svg>
+    </div>
+    <div class="label-jp">銘木診断</div>
+    <div class="rule"></div>
+    <div class="label-en">Wood Diagnosis</div>
+    <div class="sub-desc">あなたの木を見つける</div>
+  </div>
+
+  <!-- ② ショップ — 木軸ペン（万年筆シルエット） -->
+  <div class="cell">
+    <div class="cell-num">02</div>
+    <div class="icon-wrap">
+      <svg width="220" height="220" viewBox="0 0 100 100" fill="none">
+        <!-- ペン軸（木目入り） -->
+        <path d="M25,72 L30,67 L70,22 L76,16 L84,18 L82,26 L36,74 Z"
+              fill="none" stroke="#C9A96E" stroke-width="1.8" stroke-linejoin="round"/>
+        <!-- ペン先 -->
+        <path d="M20,78 L13,90 L25,84 Z" fill="#C9A96E" opacity="0.7"/>
+        <!-- ペン先の割れ -->
+        <line x1="16.5" y1="84" x2="22" y2="78" stroke="#111" stroke-width="0.8"/>
+        <!-- クリップ -->
+        <path d="M76,16 L80,10 L85,12 L84,18" fill="none" stroke="#C9A96E" stroke-width="1.2" opacity="0.6"/>
+        <!-- 木目（軸の縦線） -->
+        <path d="M42,68 Q54,52 64,36" stroke="#C9A96E" stroke-width="0.7" fill="none" opacity="0.3"/>
+        <path d="M46,72 Q58,56 68,40" stroke="#C9A96E" stroke-width="0.7" fill="none" opacity="0.22"/>
+        <!-- キャップ/胴体の境界線 -->
+        <line x1="58" y1="36" x2="63" y2="31" stroke="#C9A96E" stroke-width="1.2" opacity="0.5"/>
+        <!-- 光沢の線 -->
+        <path d="M32,68 Q44,52 54,36" stroke="#C9A96E" stroke-width="0.5" fill="none" opacity="0.15"/>
+      </svg>
+    </div>
+    <div class="label-jp">ショップ</div>
+    <div class="rule"></div>
+    <div class="label-en">Online Shop</div>
+    <div class="sub-desc">全ての作品を見る</div>
+  </div>
+
+  <!-- ③ 銘木図鑑 — 葉脈（植物細密画） -->
+  <div class="cell">
+    <div class="cell-num">03</div>
+    <div class="icon-wrap">
+      <svg width="220" height="220" viewBox="0 0 100 100" fill="none">
+        <!-- 葉の輪郭 -->
+        <path d="M50,92 Q14,68 14,36 Q14,8 50,8 Q86,8 86,36 Q86,68 50,92 Z"
+              stroke="#C9A96E" stroke-width="1.8" fill="none"/>
+        <!-- 主脈 -->
+        <line x1="50" y1="92" x2="50" y2="14" stroke="#C9A96E" stroke-width="1.2" opacity="0.55"/>
+        <!-- 側脈（左） -->
+        <path d="M50,70 Q37,62 30,52" stroke="#C9A96E" stroke-width="0.9" fill="none" opacity="0.45"/>
+        <path d="M50,58 Q39,52 33,43" stroke="#C9A96E" stroke-width="0.9" fill="none" opacity="0.4"/>
+        <path d="M50,46 Q40,41 36,33" stroke="#C9A96E" stroke-width="0.9" fill="none" opacity="0.35"/>
+        <path d="M50,34 Q42,30 39,23" stroke="#C9A96E" stroke-width="0.8" fill="none" opacity="0.3"/>
+        <!-- 側脈（右） -->
+        <path d="M50,70 Q63,62 70,52" stroke="#C9A96E" stroke-width="0.9" fill="none" opacity="0.45"/>
+        <path d="M50,58 Q61,52 67,43" stroke="#C9A96E" stroke-width="0.9" fill="none" opacity="0.4"/>
+        <path d="M50,46 Q60,41 64,33" stroke="#C9A96E" stroke-width="0.9" fill="none" opacity="0.35"/>
+        <path d="M50,34 Q58,30 61,23" stroke="#C9A96E" stroke-width="0.8" fill="none" opacity="0.3"/>
+        <!-- 細脈（ハーフトーン） -->
+        <path d="M30,52 Q28,56 27,60" stroke="#C9A96E" stroke-width="0.5" fill="none" opacity="0.2"/>
+        <path d="M33,43 Q31,47 30,51" stroke="#C9A96E" stroke-width="0.5" fill="none" opacity="0.2"/>
+        <path d="M70,52 Q72,56 73,60" stroke="#C9A96E" stroke-width="0.5" fill="none" opacity="0.2"/>
+        <path d="M67,43 Q69,47 70,51" stroke="#C9A96E" stroke-width="0.5" fill="none" opacity="0.2"/>
+        <!-- 葉柄 -->
+        <line x1="50" y1="92" x2="50" y2="100" stroke="#C9A96E" stroke-width="1.2" opacity="0.4"/>
+      </svg>
+    </div>
+    <div class="label-jp">銘木図鑑</div>
+    <div class="rule"></div>
+    <div class="label-en">Encyclopedia</div>
+    <div class="sub-desc">銘木を深く知る</div>
+  </div>
+
+  <!-- ④ 新作・入荷 — 桐箱（水引付き） -->
+  <div class="cell">
+    <div class="cell-num">04</div>
+    <div class="icon-wrap">
+      <svg width="220" height="220" viewBox="0 0 100 100" fill="none">
+        <!-- 箱の本体 -->
+        <rect x="14" y="48" width="72" height="44" stroke="#C9A96E" stroke-width="1.8" rx="1"/>
+        <!-- 箱の蓋（浮かせる） -->
+        <path d="M10,44 L90,44 L90,50 L10,50 Z" stroke="#C9A96E" stroke-width="1.8" fill="none"/>
+        <path d="M10,44 L16,32 L84,32 L90,44" stroke="#C9A96E" stroke-width="1.8" fill="none" stroke-linejoin="round"/>
+        <!-- 水引（梅結び） -->
+        <path d="M50,32 Q38,26 32,20 Q42,22 50,18 Q58,22 68,20 Q62,26 50,32"
+              stroke="#C9A96E" stroke-width="1.4" fill="none" opacity="0.8"/>
+        <!-- 水引の垂れ -->
+        <path d="M44,32 Q40,36 38,44" stroke="#C9A96E" stroke-width="1" fill="none" opacity="0.5"/>
+        <path d="M56,32 Q60,36 62,44" stroke="#C9A96E" stroke-width="1" fill="none" opacity="0.5"/>
+        <!-- 箱の木目線 -->
+        <line x1="14" y1="62" x2="86" y2="62" stroke="#C9A96E" stroke-width="0.7" opacity="0.25"/>
+        <line x1="14" y1="74" x2="86" y2="74" stroke="#C9A96E" stroke-width="0.7" opacity="0.25"/>
+        <!-- 光の演出（蓋の面） -->
+        <path d="M16,34 L30,34" stroke="#C9A96E" stroke-width="0.8" opacity="0.3"/>
+      </svg>
+    </div>
+    <div class="label-jp">新作・入荷</div>
+    <div class="rule"></div>
+    <div class="label-en">New Arrival</div>
+    <div class="sub-desc">最新作をいち早く</div>
+  </div>
+
+  <!-- ⑤ 職人に相談 — 鑿と木屑 -->
+  <div class="cell">
+    <div class="cell-num">05</div>
+    <div class="icon-wrap">
+      <svg width="220" height="220" viewBox="0 0 100 100" fill="none">
+        <!-- 鑿（のみ）の柄 -->
+        <rect x="40" y="8" width="20" height="46" rx="4" stroke="#C9A96E" stroke-width="1.8"/>
+        <!-- 柄の木目 -->
+        <line x1="44" y1="16" x2="56" y2="16" stroke="#C9A96E" stroke-width="0.7" opacity="0.3"/>
+        <line x1="44" y1="24" x2="56" y2="24" stroke="#C9A96E" stroke-width="0.7" opacity="0.3"/>
+        <line x1="44" y1="32" x2="56" y2="32" stroke="#C9A96E" stroke-width="0.7" opacity="0.3"/>
+        <line x1="44" y1="40" x2="56" y2="40" stroke="#C9A96E" stroke-width="0.7" opacity="0.3"/>
+        <!-- 鑿の刃（台形） -->
+        <path d="M36,54 L64,54 L70,72 L30,72 Z" stroke="#C9A96E" stroke-width="1.8" fill="none" stroke-linejoin="round"/>
+        <!-- 刃先 -->
+        <path d="M30,72 L50,82 L70,72" stroke="#C9A96E" stroke-width="1.8" fill="none" stroke-linejoin="round"/>
+        <!-- 木屑（カール） -->
+        <path d="M18,60 Q14,54 18,48 Q22,44 20,56 Q24,50 22,44"
+              stroke="#C9A96E" stroke-width="1.1" fill="none" opacity="0.55"/>
+        <path d="M76,64 Q80,58 76,52 Q72,48 74,60 Q70,54 72,48"
+              stroke="#C9A96E" stroke-width="1.1" fill="none" opacity="0.55"/>
+        <!-- 小さな木屑 -->
+        <path d="M12,72 Q10,68 14,66" stroke="#C9A96E" stroke-width="0.9" fill="none" opacity="0.4"/>
+        <path d="M84,68 Q88,64 84,62" stroke="#C9A96E" stroke-width="0.9" fill="none" opacity="0.4"/>
+      </svg>
+    </div>
+    <div class="label-jp">職人に相談</div>
+    <div class="rule"></div>
+    <div class="label-en">Consultation</div>
+    <div class="sub-desc">贈り物・用途をご提案</div>
+  </div>
+
+  <!-- ⑥ 注文状況 — 風呂敷包み -->
+  <div class="cell">
+    <div class="cell-num">06</div>
+    <div class="icon-wrap">
+      <svg width="220" height="220" viewBox="0 0 100 100" fill="none">
+        <!-- 風呂敷の包み（丸みのある胴体） -->
+        <path d="M18,58 Q16,82 50,88 Q84,82 82,58 Q80,42 50,44 Q20,42 18,58 Z"
+              stroke="#C9A96E" stroke-width="1.8" fill="none"/>
+        <!-- 結び目（下部が絞られて上で結ぶ） -->
+        <path d="M34,44 Q42,34 50,30 Q58,34 66,44" stroke="#C9A96E" stroke-width="1.5" fill="none" opacity="0.8"/>
+        <!-- 蝶結びの左 -->
+        <path d="M50,30 Q36,20 28,14 Q36,18 42,26 Q46,20 50,16"
+              stroke="#C9A96E" stroke-width="1.4" fill="none" opacity="0.8"/>
+        <!-- 蝶結びの右 -->
+        <path d="M50,30 Q64,20 72,14 Q64,18 58,26 Q54,20 50,16"
+              stroke="#C9A96E" stroke-width="1.4" fill="none" opacity="0.8"/>
+        <!-- 蝶結びの中心 -->
+        <circle cx="50" cy="28" r="3" fill="none" stroke="#C9A96E" stroke-width="1" opacity="0.7"/>
+        <!-- 布の折り目 -->
+        <path d="M20,62 Q35,72 50,74 Q65,72 80,62" stroke="#C9A96E" stroke-width="0.8" fill="none" opacity="0.3"/>
+        <path d="M22,72 Q36,80 50,82 Q64,80 78,72" stroke="#C9A96E" stroke-width="0.8" fill="none" opacity="0.25"/>
+        <!-- 絞りのライン -->
+        <path d="M34,44 Q32,50 30,56" stroke="#C9A96E" stroke-width="0.7" fill="none" opacity="0.35"/>
+        <path d="M66,44 Q68,50 70,56" stroke="#C9A96E" stroke-width="0.7" fill="none" opacity="0.35"/>
+      </svg>
+    </div>
+    <div class="label-jp">注文状況</div>
+    <div class="rule"></div>
+    <div class="label-en">Order Status</div>
+    <div class="sub-desc">ご注文の確認</div>
+  </div>
+
+</div>
+</body>
+</html>

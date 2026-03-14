@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>金杢犀 リッチメニュー 案F — AI生成アイコン × 和紙×紫</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400;600&family=Cormorant+Garamond:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  width: 2500px;
+  height: 1686px;
+  overflow: hidden;
+  font-family: 'Noto Serif JP', 'Hiragino Mincho ProN', serif;
+  background: #16120E;
+}
+
+/* ── 和紙テクスチャレイヤー ── */
+.washi-layer {
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      17deg,
+      transparent 0px, transparent 3px,
+      rgba(240,230,210,0.022) 3px, rgba(240,230,210,0.022) 4px,
+      transparent 4px, transparent 18px
+    ),
+    repeating-linear-gradient(
+      103deg,
+      transparent 0px, transparent 5px,
+      rgba(240,230,210,0.018) 5px, rgba(240,230,210,0.018) 6px,
+      transparent 6px, transparent 28px
+    ),
+    repeating-linear-gradient(
+      61deg,
+      transparent 0px, transparent 8px,
+      rgba(240,230,210,0.012) 8px, rgba(240,230,210,0.012) 9px,
+      transparent 9px, transparent 40px
+    );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── グリッド ── */
+.grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 833px 834px 833px;
+  grid-template-rows: 843px 843px;
+  width: 2500px;
+  height: 1686px;
+}
+
+/* ── セル ── */
+.cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 50px 70px;
+  border-right: 1px solid rgba(180,160,210,0.14);
+  border-bottom: 1px solid rgba(180,160,210,0.14);
+  position: relative;
+  overflow: hidden;
+  gap: 0;
+  background: radial-gradient(
+    ellipse 70% 70% at 50% 42%,
+    rgba(155,142,192,0.04) 0%,
+    transparent 100%
+  );
+}
+.cell:nth-child(3n)  { border-right: none; }
+.cell:nth-child(n+4) { border-bottom: none; }
+
+/* セルの上辺：紫の細ライン */
+.cell::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 15%; right: 15%;
+  height: 1.5px;
+  background: linear-gradient(to right,
+    transparent,
+    rgba(155,142,192,0.55) 30%,
+    rgba(201,169,110,0.4) 50%,
+    rgba(155,142,192,0.55) 70%,
+    transparent
+  );
+}
+
+/* ── アイコン枠 ── */
+.icon-wrap {
+  width: 320px;
+  height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 44px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* 正八角形の細枠（家紋風） */
+.icon-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(
+    29% 0%, 71% 0%,
+    100% 29%, 100% 71%,
+    71% 100%, 29% 100%,
+    0% 71%, 0% 29%
+  );
+  border: 1px solid rgba(155,142,192,0.22);
+  pointer-events: none;
+}
+
+/* AI生成アイコン本体 */
+.icon-wrap img {
+  width: 280px;
+  height: 280px;
+  object-fit: cover;
+  clip-path: polygon(
+    29% 0%, 71% 0%,
+    100% 29%, 100% 71%,
+    71% 100%, 29% 100%,
+    0% 71%, 0% 29%
+  );
+  display: block;
+}
+
+/* ── テキスト ── */
+.label-jp {
+  font-size: 62px;
+  font-weight: 300;
+  color: #EDE8DF;
+  letter-spacing: 0.2em;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.label-sep {
+  width: 40px;
+  height: 1px;
+  background: rgba(155,142,192,0.5);
+  margin: 0 auto 16px;
+}
+
+.label-en {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 26px;
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(155,142,192,0.65);
+  letter-spacing: 0.25em;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+
+<div class="washi-layer"></div>
+
+<div class="grid">
+
+  <!-- ① 銘木診断 -->
+  <div class="cell">
+    <div class="icon-wrap">
+      <img src="icons/icon1_diagnosis.png" alt="銘木診断">
+    </div>
+    <div class="label-jp">銘木診断</div>
+    <div class="label-sep"></div>
+    <div class="label-en">Wood Diagnosis</div>
+  </div>
+
+  <!-- ② ショップ -->
+  <div class="cell">
+    <div class="icon-wrap">
+      <img src="icons/icon2_shop.png" alt="ショップ">
+    </div>
+    <div class="label-jp">ショップ</div>
+    <div class="label-sep"></div>
+    <div class="label-en">Online Shop</div>
+  </div>
+
+  <!-- ③ 銘木図鑑 -->
+  <div class="cell">
+    <div class="icon-wrap">
+      <img src="icons/icon3_encyclopedia.png" alt="銘木図鑑">
+    </div>
+    <div class="label-jp">銘木図鑑</div>
+    <div class="label-sep"></div>
+    <div class="label-en">Encyclopedia</div>
+  </div>
+
+  <!-- ④ 新作・入荷 -->
+  <div class="cell">
+    <div class="icon-wrap">
+      <img src="icons/icon4_new.png" alt="新作・入荷">
+    </div>
+    <div class="label-jp">新作・入荷</div>
+    <div class="label-sep"></div>
+    <div class="label-en">New Arrival</div>
+  </div>
+
+  <!-- ⑤ 職人に相談 -->
+  <div class="cell">
+    <div class="icon-wrap">
+      <img src="icons/icon5_consult.png" alt="職人に相談">
+    </div>
+    <div class="label-jp">職人に相談</div>
+    <div class="label-sep"></div>
+    <div class="label-en">Consultation</div>
+  </div>
+
+  <!-- ⑥ 注文状況 -->
+  <div class="cell">
+    <div class="icon-wrap">
+      <img src="icons/icon6_order.png" alt="注文状況">
+    </div>
+    <div class="label-jp">注文状況</div>
+    <div class="label-sep"></div>
+    <div class="label-en">Order Status</div>
+  </div>
+
+</div>
+</body>
+</html>

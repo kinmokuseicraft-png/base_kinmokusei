@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>金杢犀 リッチメニュー TabA — はじめての方 / 和紙×墨</title>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 2500px; height: 843px; overflow: hidden;
+  font-family: 'Shippori Mincho B1', 'Hiragino Mincho ProN', 'Yu Mincho', 'MS Mincho', serif;
+  -webkit-font-smoothing: antialiased;
+}
+.menu { width: 2500px; height: 843px; display: flex; flex-direction: column; background: #f0ebe0; }
+
+/* ── タブバー (0〜95px) ── */
+.tabs {
+  display: flex; align-items: stretch; height: 95px; flex-shrink: 0;
+  background: #e8e2d4; border-bottom: 1px solid rgba(154,125,74,0.3);
+}
+.tab {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  font-size: 34px; letter-spacing: 0.16em; position: relative;
+}
+.tab.active   { color: #9a7d4a; background: #ede7d8; }
+.tab.inactive { color: #b0a898; background: transparent; }
+.tab.active::after {
+  content: ''; position: absolute; bottom: 0; left: 18%; right: 18%;
+  height: 2px; background: #9a7d4a;
+}
+.tab-sep { width: 1px; background: rgba(154,125,74,0.28); align-self: stretch; }
+
+/* ── 固定バー (793〜843px) ── */
+.bottom {
+  height: 50px; flex-shrink: 0; background: #d0c8b8;
+  border-top: 1px solid rgba(154,125,74,0.28);
+  display: flex; align-items: center; justify-content: center;
+}
+.bottom-text { font-size: 24px; color: #9a7d4a; letter-spacing: 0.18em; }
+</style>
+</head>
+<body>
+<div class="menu">
+
+  <!-- タブバー (y: 0-95) -->
+  <div class="tabs">
+    <div class="tab active">はじめての方</div>
+    <div class="tab-sep"></div>
+    <div class="tab inactive">ご愛用の方</div>
+  </div>
+
+  <!-- コンテンツ 5列 (y: 95-793): SVGで確実に中央配置 -->
+  <!-- 計算: gap=36, font-size=32, letter-spacing=9
+       text_cy = 398 (全列共通)
+       icon_cy = 380 - total_h/2
+       col1: 7ch→label_h=278, total=376, icon_cy=192
+       col2: 3ch→label_h=114, total=212, icon_cy=274
+       col3: 5ch→label_h=196, total=294, icon_cy=233
+       col4: 4ch→label_h=155, total=253, icon_cy=254
+       col5: 5ch→label_h=196, total=294, icon_cy=233  -->
+  <svg width="2500" height="698" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
+    <!-- 背景 -->
+    <rect width="2500" height="698" fill="#f0ebe0"/>
+    <!-- DEBUG lines -->
+  <line x1='250' y1='0' x2='250' y2='698' stroke='red' stroke-width='3'/>
+  <line x1='0' y1='192' x2='2500' y2='192' stroke='blue' stroke-width='3'/>
+  <line x1='0' y1='349' x2='2500' y2='349' stroke='green' stroke-width='3'/>
+  <!-- 列区切り -->
+    <line x1="500"  y1="0" x2="500"  y2="698" stroke="rgba(154,125,74,0.2)" stroke-width="1"/>
+    <line x1="1000" y1="0" x2="1000" y2="698" stroke="rgba(154,125,74,0.2)" stroke-width="1"/>
+    <line x1="1500" y1="0" x2="1500" y2="698" stroke="rgba(154,125,74,0.2)" stroke-width="1"/>
+    <line x1="2000" y1="0" x2="2000" y2="698" stroke="rgba(154,125,74,0.2)" stroke-width="1"/>
+
+    <!-- ── Col 1: 金木犀の花言葉 (cx=250, icon_cy=192) ── -->
+    <g transform="translate(250,192)">
+      <svg x="-31" y="-31" width="62" height="62" viewBox="0 0 24 24"
+           fill="none" stroke="#9a7d4a" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 3a6 6 0 009 9 9 9 0 11-9-9z"/>
+      </svg>
+    </g>
+    <text x="250" y="398" writing-mode="vertical-rl" text-anchor="middle"
+          font-family="'Shippori Mincho B1','Hiragino Mincho ProN','Yu Mincho',serif"
+          font-size="32" letter-spacing="9" fill="#1e1c16">金木犀の花言葉</text>
+
+    <!-- ── Col 2: ギフト (cx=750, icon_cy=274) ── -->
+    <g transform="translate(750,274)">
+      <svg x="-31" y="-31" width="62" height="62" viewBox="0 0 24 24"
+           fill="none" stroke="#9a7d4a" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 12v10H4V12"/>
+        <path d="M22 7H2v5h20V7z"/>
+        <path d="M12 22V7"/>
+        <path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"/>
+        <path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/>
+      </svg>
+    </g>
+    <text x="750" y="398" writing-mode="vertical-rl" text-anchor="middle"
+          font-family="'Shippori Mincho B1','Hiragino Mincho ProN','Yu Mincho',serif"
+          font-size="32" letter-spacing="9" fill="#1e1c16">ギフト</text>
+
+    <!-- ── Col 3: 銘木を知る (cx=1250, icon_cy=233) ── -->
+    <g transform="translate(1250,233)">
+      <svg x="-31" y="-31" width="62" height="62" viewBox="0 0 24 24"
+           fill="none" stroke="#9a7d4a" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/>
+        <path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>
+      </svg>
+    </g>
+    <text x="1250" y="398" writing-mode="vertical-rl" text-anchor="middle"
+          font-family="'Shippori Mincho B1','Hiragino Mincho ProN','Yu Mincho',serif"
+          font-size="32" letter-spacing="9" fill="#1e1c16">銘木を知る</text>
+
+    <!-- ── Col 4: 銘木診断 (cx=1750, icon_cy=254) ── -->
+    <g transform="translate(1750,254)">
+      <svg x="-31" y="-31" width="62" height="62" viewBox="0 0 24 24"
+           fill="none" stroke="#9a7d4a" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/>
+        <circle cx="12" cy="17" r="1.2" fill="#9a7d4a" stroke="none"/>
+        <circle cx="12" cy="12" r="10"/>
+      </svg>
+    </g>
+    <text x="1750" y="398" writing-mode="vertical-rl" text-anchor="middle"
+          font-family="'Shippori Mincho B1','Hiragino Mincho ProN','Yu Mincho',serif"
+          font-size="32" letter-spacing="9" fill="#1e1c16">銘木診断</text>
+
+    <!-- ── Col 5: 作品を見る (cx=2250, icon_cy=233) ── -->
+    <g transform="translate(2250,233)">
+      <svg x="-31" y="-31" width="62" height="62" viewBox="0 0 24 24"
+           fill="none" stroke="#9a7d4a" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 3a2.828 2.828 0 114 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>
+      </svg>
+    </g>
+    <text x="2250" y="398" writing-mode="vertical-rl" text-anchor="middle"
+          font-family="'Shippori Mincho B1','Hiragino Mincho ProN','Yu Mincho',serif"
+          font-size="32" letter-spacing="9" fill="#1e1c16">作品を見る</text>
+  </svg>
+
+  <!-- 固定バー (y: 793-843) -->
+  <div class="bottom">
+    <span class="bottom-text">今日の言葉を、手で残す　▾</span>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>金杢犀 リッチメニュー 案A — 漆黒×金線</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=EB+Garamond:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  width: 2500px;
+  height: 1686px;
+  background: #0D0D0D;
+  overflow: hidden;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 833px 834px 833px;
+  grid-template-rows: 843px 843px;
+  width: 2500px;
+  height: 1686px;
+}
+
+.cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-right: 2px solid #C9A96E;
+  border-bottom: 2px solid #C9A96E;
+  padding: 50px 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 角装飾 */
+.cell::before {
+  content: '';
+  position: absolute;
+  top: 28px; left: 28px;
+  width: 30px; height: 30px;
+  border-top: 1.5px solid rgba(201,169,110,0.4);
+  border-left: 1.5px solid rgba(201,169,110,0.4);
+}
+.cell::after {
+  content: '';
+  position: absolute;
+  bottom: 28px; right: 28px;
+  width: 30px; height: 30px;
+  border-bottom: 1.5px solid rgba(201,169,110,0.4);
+  border-right: 1.5px solid rgba(201,169,110,0.4);
+}
+
+.cell:nth-child(3n)   { border-right: none; }
+.cell:nth-child(n+4)  { border-bottom: none; }
+
+.icon { margin-bottom: 44px; }
+
+.label-jp {
+  font-family: 'Noto Serif JP', 'Hiragino Mincho ProN', serif;
+  font-size: 90px;
+  font-weight: 700;
+  color: #F0EBE3;
+  letter-spacing: 0.12em;
+  margin-bottom: 32px;
+  text-shadow: 0 0 60px rgba(201,169,110,0.15);
+}
+
+.rule {
+  width: 180px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #C9A96E, transparent);
+  margin-bottom: 28px;
+}
+
+.label-en {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 32px;
+  font-weight: 400;
+  color: #C9A96E;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+}
+
+.sub-desc {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 38px;
+  font-weight: 300;
+  color: rgba(240, 235, 227, 0.38);
+  letter-spacing: 0.08em;
+}
+
+/* 背景微グロー */
+.cell-1 { background: radial-gradient(ellipse at center, rgba(201,169,110,0.04) 0%, transparent 70%); }
+.cell-2 { background: radial-gradient(ellipse at center, rgba(201,169,110,0.03) 0%, transparent 70%); }
+</style>
+</head>
+<body>
+<div class="grid">
+
+  <!-- ① 銘木診断 -->
+  <div class="cell cell-1">
+    <div class="icon">
+      <svg width="110" height="110" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="50,6 94,50 50,94 6,50" stroke="#C9A96E" stroke-width="2"/>
+        <polygon points="50,20 80,50 50,80 20,50" stroke="#C9A96E" stroke-width="1" opacity="0.35"/>
+        <circle cx="50" cy="50" r="3.5" fill="#C9A96E"/>
+        <line x1="50" y1="6"  x2="50" y2="20" stroke="#C9A96E" stroke-width="1" opacity="0.5"/>
+        <line x1="50" y1="80" x2="50" y2="94" stroke="#C9A96E" stroke-width="1" opacity="0.5"/>
+        <line x1="6"  y1="50" x2="20" y2="50" stroke="#C9A96E" stroke-width="1" opacity="0.5"/>
+        <line x1="80" y1="50" x2="94" y2="50" stroke="#C9A96E" stroke-width="1" opacity="0.5"/>
+      </svg>
+    </div>
+    <div class="label-jp">銘木診断</div>
+    <div class="rule"></div>
+    <div class="label-en">MOKUZAN SHINDAN</div>
+    <div class="sub-desc">あなたの木を見つける</div>
+  </div>
+
+  <!-- ② オンラインショップ -->
+  <div class="cell">
+    <div class="icon">
+      <svg width="110" height="110" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="36" width="80" height="56" rx="2" stroke="#C9A96E" stroke-width="2"/>
+        <path d="M30,36 Q30,12 50,12 Q70,12 70,36" stroke="#C9A96E" stroke-width="2" stroke-linecap="round"/>
+        <line x1="34" y1="60" x2="66" y2="60" stroke="#C9A96E" stroke-width="1.5" opacity="0.45"/>
+      </svg>
+    </div>
+    <div class="label-jp">ショップ</div>
+    <div class="rule"></div>
+    <div class="label-en">ONLINE SHOP</div>
+    <div class="sub-desc">全ての作品を見る</div>
+  </div>
+
+  <!-- ③ 銘木図鑑 -->
+  <div class="cell">
+    <div class="icon">
+      <svg width="110" height="110" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12,14 L12,86 Q50,75 50,75 Q50,75 88,86 L88,14 Q50,25 50,25 Q50,25 12,14 Z" stroke="#C9A96E" stroke-width="2"/>
+        <line x1="50" y1="25" x2="50" y2="75" stroke="#C9A96E" stroke-width="1.5" opacity="0.45"/>
+        <line x1="22" y1="38" x2="46" y2="41" stroke="#C9A96E" stroke-width="1" opacity="0.3"/>
+        <line x1="22" y1="52" x2="46" y2="55" stroke="#C9A96E" stroke-width="1" opacity="0.3"/>
+        <line x1="54" y1="41" x2="78" y2="38" stroke="#C9A96E" stroke-width="1" opacity="0.3"/>
+        <line x1="54" y1="55" x2="78" y2="52" stroke="#C9A96E" stroke-width="1" opacity="0.3"/>
+      </svg>
+    </div>
+    <div class="label-jp">銘木図鑑</div>
+    <div class="rule"></div>
+    <div class="label-en">ENCYCLOPEDIA</div>
+    <div class="sub-desc">銘木を深く知る</div>
+  </div>
+
+  <!-- ④ 新作・入荷 -->
+  <div class="cell">
+    <div class="icon">
+      <svg width="110" height="110" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50,90 Q16,68 16,36 Q16,8 50,8 Q84,8 84,36 Q84,68 50,90 Z" stroke="#C9A96E" stroke-width="2"/>
+        <line x1="50" y1="90" x2="50" y2="20" stroke="#C9A96E" stroke-width="1.5" opacity="0.4"/>
+        <path d="M50,62 Q33,50 29,36" stroke="#C9A96E" stroke-width="1.2" opacity="0.38"/>
+        <path d="M50,52 Q67,40 71,26" stroke="#C9A96E" stroke-width="1.2" opacity="0.38"/>
+      </svg>
+    </div>
+    <div class="label-jp">新作・入荷</div>
+    <div class="rule"></div>
+    <div class="label-en">NEW ARRIVAL</div>
+    <div class="sub-desc">最新作をいち早く</div>
+  </div>
+
+  <!-- ⑤ 職人に相談 -->
+  <div class="cell">
+    <div class="icon">
+      <svg width="110" height="110" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M14,14 Q14,7 21,7 L79,7 Q86,7 86,14 L86,62 Q86,69 79,69 L38,69 L14,90 L14,69 Z" stroke="#C9A96E" stroke-width="2" stroke-linejoin="round"/>
+        <line x1="28" y1="30" x2="72" y2="30" stroke="#C9A96E" stroke-width="1.5" opacity="0.45"/>
+        <line x1="28" y1="46" x2="58" y2="46" stroke="#C9A96E" stroke-width="1.5" opacity="0.45"/>
+      </svg>
+    </div>
+    <div class="label-jp">職人に相談</div>
+    <div class="rule"></div>
+    <div class="label-en">CONSULTATION</div>
+    <div class="sub-desc">贈り物・用途をご提案</div>
+  </div>
+
+  <!-- ⑥ 注文状況 -->
+  <div class="cell">
+    <div class="icon">
+      <svg width="110" height="110" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="34" width="80" height="60" stroke="#C9A96E" stroke-width="2"/>
+        <polyline points="10,34 50,16 90,34" stroke="#C9A96E" stroke-width="2" stroke-linejoin="round"/>
+        <line x1="50" y1="16" x2="50" y2="34" stroke="#C9A96E" stroke-width="2"/>
+        <line x1="28" y1="56" x2="72" y2="56" stroke="#C9A96E" stroke-width="1.5" opacity="0.45"/>
+        <line x1="38" y1="68" x2="62" y2="68" stroke="#C9A96E" stroke-width="1" opacity="0.3"/>
+      </svg>
+    </div>
+    <div class="label-jp">注文状況</div>
+    <div class="rule"></div>
+    <div class="label-en">ORDER STATUS</div>
+    <div class="sub-desc">ご注文の確認</div>
+  </div>
+
+</div>
+</body>
+</html>

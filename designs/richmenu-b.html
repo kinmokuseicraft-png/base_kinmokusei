@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>金杢犀 リッチメニュー 案B — 木目×和紙</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  width: 2500px;
+  height: 1686px;
+  overflow: hidden;
+  background: #1E0F06;
+}
+
+/* 木目テクスチャ模倣 */
+.wood-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      88deg,
+      transparent 0px,
+      rgba(255,200,100,0.018) 1px,
+      transparent 2px,
+      transparent 18px
+    ),
+    repeating-linear-gradient(
+      92deg,
+      transparent 0px,
+      rgba(100,50,10,0.08) 1px,
+      transparent 3px,
+      transparent 40px
+    ),
+    linear-gradient(
+      180deg,
+      #2C1608 0%,
+      #1E0F06 30%,
+      #231208 60%,
+      #1A0D05 100%
+    );
+}
+
+.grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 833px 834px 833px;
+  grid-template-rows: 843px 843px;
+  width: 2500px;
+  height: 1686px;
+}
+
+/* 行間の和紙帯 */
+.divider-h {
+  position: absolute;
+  z-index: 2;
+  top: 843px;
+  left: 0;
+  width: 2500px;
+  height: 2px;
+  background: linear-gradient(to right,
+    transparent 0%,
+    rgba(245,238,220,0.6) 5%,
+    rgba(245,238,220,0.8) 50%,
+    rgba(245,238,220,0.6) 95%,
+    transparent 100%
+  );
+}
+
+.cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 50px;
+  border-right: 1.5px solid rgba(180,140,80,0.4);
+  border-bottom: 1.5px solid rgba(180,140,80,0.4);
+  position: relative;
+}
+
+.cell:nth-child(3n)  { border-right: none; }
+.cell:nth-child(n+4) { border-bottom: none; }
+
+/* 各セルに木目アクセント */
+.cell::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  right: 0; bottom: 0;
+  background: radial-gradient(ellipse at center top,
+    rgba(180,130,60,0.06) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+.bracket-label {
+  font-family: 'Noto Serif JP', 'Hiragino Mincho ProN', serif;
+  font-size: 36px;
+  font-weight: 300;
+  color: rgba(210,185,130,0.7);
+  letter-spacing: 0.15em;
+  margin-bottom: 36px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.bracket-label span {
+  font-size: 40px;
+  color: rgba(210,185,130,0.5);
+}
+
+.icon {
+  margin-bottom: 36px;
+}
+
+.label-jp {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 88px;
+  font-weight: 700;
+  color: #F5EDDA;
+  letter-spacing: 0.1em;
+  margin-bottom: 24px;
+}
+
+.sub-line {
+  width: 140px;
+  height: 1px;
+  background: rgba(210,185,130,0.5);
+  margin-bottom: 24px;
+}
+
+.sub-desc {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 40px;
+  font-weight: 300;
+  color: rgba(245,237,218,0.45);
+  letter-spacing: 0.08em;
+  text-align: center;
+  line-height: 1.6;
+}
+</style>
+</head>
+<body>
+
+<div class="wood-bg"></div>
+<div class="divider-h"></div>
+
+<div class="grid">
+
+  <!-- ① 銘木診断 -->
+  <div class="cell">
+    <div class="bracket-label"><span>【</span>銘木診断<span>】</span></div>
+    <div class="icon">
+      <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+        <!-- 八角形の家紋風 -->
+        <polygon points="50,8 68,15 82,29 89,47 82,65 68,79 50,86 32,79 18,65 11,47 18,29 32,15" stroke="#C9A96E" stroke-width="2"/>
+        <polygon points="50,22 62,27 72,37 77,49 72,61 62,71 50,76 38,71 28,61 23,49 28,37 38,27" stroke="#C9A96E" stroke-width="1" opacity="0.4"/>
+        <circle cx="50" cy="49" r="5" fill="#C9A96E" opacity="0.8"/>
+      </svg>
+    </div>
+    <div class="label-jp">銘木診断</div>
+    <div class="sub-line"></div>
+    <div class="sub-desc">あなたに合う木を見つける</div>
+  </div>
+
+  <!-- ② ショップ -->
+  <div class="cell">
+    <div class="bracket-label"><span>【</span>ショップ<span>】</span></div>
+    <div class="icon">
+      <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+        <rect x="10" y="36" width="80" height="56" rx="3" stroke="#C9A96E" stroke-width="2"/>
+        <path d="M30,36 Q30,14 50,14 Q70,14 70,36" stroke="#C9A96E" stroke-width="2" stroke-linecap="round"/>
+        <line x1="34" y1="59" x2="66" y2="59" stroke="#C9A96E" stroke-width="1.5" opacity="0.5"/>
+      </svg>
+    </div>
+    <div class="label-jp">ショップ</div>
+    <div class="sub-line"></div>
+    <div class="sub-desc">作品をすべて見る</div>
+  </div>
+
+  <!-- ③ 銘木図鑑 -->
+  <div class="cell">
+    <div class="bracket-label"><span>【</span>銘木図鑑<span>】</span></div>
+    <div class="icon">
+      <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+        <path d="M12,14 L12,86 Q50,74 50,74 Q50,74 88,86 L88,14 Q50,26 50,26 Q50,25 12,14 Z" stroke="#C9A96E" stroke-width="2"/>
+        <line x1="50" y1="26" x2="50" y2="74" stroke="#C9A96E" stroke-width="1.5" opacity="0.5"/>
+        <line x1="20" y1="40" x2="46" y2="43" stroke="#C9A96E" stroke-width="1" opacity="0.35"/>
+        <line x1="20" y1="55" x2="46" y2="58" stroke="#C9A96E" stroke-width="1" opacity="0.35"/>
+        <line x1="54" y1="43" x2="80" y2="40" stroke="#C9A96E" stroke-width="1" opacity="0.35"/>
+        <line x1="54" y1="58" x2="80" y2="55" stroke="#C9A96E" stroke-width="1" opacity="0.35"/>
+      </svg>
+    </div>
+    <div class="label-jp">銘木図鑑</div>
+    <div class="sub-line"></div>
+    <div class="sub-desc">銘木を深く知る</div>
+  </div>
+
+  <!-- ④ 新作・入荷 -->
+  <div class="cell">
+    <div class="bracket-label"><span>【</span>新作・入荷<span>】</span></div>
+    <div class="icon">
+      <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+        <!-- 桜の花びら風 -->
+        <ellipse cx="50" cy="22" rx="10" ry="16" stroke="#C9A96E" stroke-width="1.8" opacity="0.9"/>
+        <ellipse cx="50" cy="22" rx="10" ry="16" stroke="#C9A96E" stroke-width="1.8" opacity="0.9" transform="rotate(72 50 50)"/>
+        <ellipse cx="50" cy="22" rx="10" ry="16" stroke="#C9A96E" stroke-width="1.8" opacity="0.9" transform="rotate(144 50 50)"/>
+        <ellipse cx="50" cy="22" rx="10" ry="16" stroke="#C9A96E" stroke-width="1.8" opacity="0.9" transform="rotate(216 50 50)"/>
+        <ellipse cx="50" cy="22" rx="10" ry="16" stroke="#C9A96E" stroke-width="1.8" opacity="0.9" transform="rotate(288 50 50)"/>
+        <circle cx="50" cy="50" r="7" fill="none" stroke="#C9A96E" stroke-width="1.5"/>
+      </svg>
+    </div>
+    <div class="label-jp">新作・入荷</div>
+    <div class="sub-line"></div>
+    <div class="sub-desc">最新作をいち早く</div>
+  </div>
+
+  <!-- ⑤ 職人に相談 -->
+  <div class="cell">
+    <div class="bracket-label"><span>【</span>職人に相談<span>】</span></div>
+    <div class="icon">
+      <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+        <path d="M14,14 Q14,7 21,7 L79,7 Q86,7 86,14 L86,62 Q86,69 79,69 L38,69 L14,90 L14,69 Z" stroke="#C9A96E" stroke-width="2" stroke-linejoin="round"/>
+        <line x1="28" y1="30" x2="72" y2="30" stroke="#C9A96E" stroke-width="1.5" opacity="0.5"/>
+        <line x1="28" y1="46" x2="55" y2="46" stroke="#C9A96E" stroke-width="1.5" opacity="0.5"/>
+      </svg>
+    </div>
+    <div class="label-jp">職人に相談</div>
+    <div class="sub-line"></div>
+    <div class="sub-desc">用途・贈り物のご提案</div>
+  </div>
+
+  <!-- ⑥ 注文状況 -->
+  <div class="cell">
+    <div class="bracket-label"><span>【</span>注文状況<span>】</span></div>
+    <div class="icon">
+      <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+        <rect x="10" y="34" width="80" height="60" stroke="#C9A96E" stroke-width="2"/>
+        <polyline points="10,34 50,16 90,34" stroke="#C9A96E" stroke-width="2" stroke-linejoin="round"/>
+        <line x1="50" y1="16" x2="50" y2="34" stroke="#C9A96E" stroke-width="2"/>
+        <line x1="28" y1="56" x2="72" y2="56" stroke="#C9A96E" stroke-width="1.5" opacity="0.5"/>
+        <line x1="38" y1="68" x2="62" y2="68" stroke="#C9A96E" stroke-width="1" opacity="0.35"/>
+      </svg>
+    </div>
+    <div class="label-jp">注文状況</div>
+    <div class="sub-line"></div>
+    <div class="sub-desc">ご注文の確認</div>
+  </div>
+
+</div>
+</body>
+</html>

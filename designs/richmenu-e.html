@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>金杢犀 リッチメニュー 案E — 和紙×紫煙×クリーンアイコン</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400;600&family=Cormorant+Garamond:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+
+<!-- 和紙テクスチャ SVG フィルター -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <filter id="washi" x="0%" y="0%" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.72 0.68" numOctaves="4" seed="2" stitchTiles="stitch" result="noise"/>
+      <feColorMatrix type="saturate" values="0" in="noise" result="grayNoise"/>
+      <feBlend in="SourceGraphic" in2="grayNoise" mode="multiply" result="blend"/>
+      <feComposite in="blend" in2="SourceGraphic" operator="in"/>
+    </filter>
+  </defs>
+</svg>
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  width: 2500px;
+  height: 1686px;
+  overflow: hidden;
+  font-family: 'Noto Serif JP', 'Hiragino Mincho ProN', serif;
+  background: #16120E;
+}
+
+/* ── 和紙レイヤー ── */
+.washi-layer {
+  position: absolute;
+  inset: 0;
+  /* 繊維感：細かい乱線 */
+  background-image:
+    repeating-linear-gradient(
+      17deg,
+      transparent 0px, transparent 3px,
+      rgba(240,230,210,0.022) 3px, rgba(240,230,210,0.022) 4px,
+      transparent 4px, transparent 18px
+    ),
+    repeating-linear-gradient(
+      103deg,
+      transparent 0px, transparent 5px,
+      rgba(240,230,210,0.018) 5px, rgba(240,230,210,0.018) 6px,
+      transparent 6px, transparent 28px
+    ),
+    repeating-linear-gradient(
+      61deg,
+      transparent 0px, transparent 8px,
+      rgba(240,230,210,0.012) 8px, rgba(240,230,210,0.012) 9px,
+      transparent 9px, transparent 40px
+    );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── グリッド ── */
+.grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 833px 834px 833px;
+  grid-template-rows: 843px 843px;
+  width: 2500px;
+  height: 1686px;
+}
+
+/* ── セル ── */
+.cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 56px 50px 64px;
+  border-right: 1px solid rgba(180,160,210,0.14);
+  border-bottom: 1px solid rgba(180,160,210,0.14);
+  position: relative;
+  overflow: hidden;
+  gap: 0;
+  /* 和紙の微グラデーション */
+  background: radial-gradient(
+    ellipse 70% 70% at 50% 42%,
+    rgba(155,142,192,0.05) 0%,
+    transparent 100%
+  );
+}
+.cell:nth-child(3n)  { border-right: none; }
+.cell:nth-child(n+4) { border-bottom: none; }
+
+/* セルの上辺：紫の細ライン */
+.cell::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 15%; right: 15%;
+  height: 1.5px;
+  background: linear-gradient(to right,
+    transparent,
+    rgba(155,142,192,0.55) 30%,
+    rgba(201,169,110,0.4) 50%,
+    rgba(155,142,192,0.55) 70%,
+    transparent
+  );
+}
+
+/* ── アイコン枠 ── */
+.icon-wrap {
+  width: 280px;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 48px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* 正八角形の細枠（家紋風） */
+.icon-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 12px;
+  clip-path: polygon(
+    29% 0%, 71% 0%,
+    100% 29%, 100% 71%,
+    71% 100%, 29% 100%,
+    0% 71%, 0% 29%
+  );
+  border: 1.5px solid rgba(155,142,192,0.18);
+  pointer-events: none;
+}
+
+/* ── テキスト ── */
+.label-jp {
+  font-size: 62px;
+  font-weight: 300;
+  color: #EDE8DF;
+  letter-spacing: 0.2em;
+  margin-bottom: 14px;
+  text-align: center;
+}
+
+.label-sep {
+  width: 40px;
+  height: 1px;
+  background: rgba(155,142,192,0.5);
+  margin: 0 auto 14px;
+}
+
+.label-en {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 26px;
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(155,142,192,0.65);
+  letter-spacing: 0.25em;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+
+<div class="washi-layer"></div>
+
+<div class="grid">
+
+  <!-- ① 銘木診断 — 木の断面（年輪）クリーン版 -->
+  <div class="cell">
+    <div class="icon-wrap">
+      <svg width="210" height="210" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- 外側：樹皮 粗め -->
+        <circle cx="50" cy="50" r="46" stroke="#9A8EC0" stroke-width="2.2"/>
+        <!-- 年輪 各層：少しずつオフセットして自然な年輪に -->
+        <ellipse cx="51" cy="49" rx="37" ry="36" stroke="#9A8EC0" stroke-width="1.3" opacity="0.7"/>
+        <ellipse cx="49" cy="51" rx="28" ry="27" stroke="#9A8EC0" stroke-width="1.1" opacity="0.6"/>
+        <ellipse cx="50" cy="48" rx="19" ry="20" stroke="#9A8EC0" stroke-width="1"   opacity="0.5"/>
+        <ellipse cx="51" cy="50" rx="11" ry="12" stroke="#9A8EC0" stroke-width="1"   opacity="0.4"/>
+        <!-- 髄（中心点） -->
+        <circle cx="50" cy="50" r="3" fill="#C9A96E" opacity="0.85"/>
+        <!-- 木目の流れ（年輪をまたぐ線） -->
+        <path d="M50,4  Q60,18 64,38 Q66,54 60,70" stroke="#C9A96E" stroke-width="0.8" fill="none" opacity="0.3"/>
+        <path d="M50,4  Q42,16 38,36 Q36,52 40,70" stroke="#C9A96E" stroke-width="0.8" fill="none" opacity="0.22"/>
+        <!-- 断面の診断マーク：中央上に小さなひし形 -->
+        <polygon points="50,8 53.5,11.5 50,15 46.5,11.5" fill="none" stroke="#C9A96E" stroke-width="1" opacity="0.6"/>
+      </svg>
+    </div>
+    <div class="label-jp">銘木診断</div>
+    <div class="label-sep"></div>
+    <div class="label-en">Wood Diagnosis</div>
+  </div>
+
+  <!-- ② ショップ — 木軸万年筆 明快シルエット -->
+  <div class="cell">
+    <div class="icon-wrap">
+      <svg width="210" height="210" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- ペン本体：胴体（細長い台形） -->
+        <path d="M22,74 L26,70 L72,18 L78,14" stroke="#9A8EC0" stroke-width="2.4" stroke-linecap="round"/>
+        <path d="M26,70 L72,18" stroke="#9A8EC0" stroke-width="7" stroke-linecap="butt" opacity="0.12"/>
+        <!-- キャップとの境界線 -->
+        <line x1="58" y1="34" x2="63" y2="29" stroke="#9A8EC0" stroke-width="1.5" opacity="0.6"/>
+        <!-- 軸のメイン輪郭 -->
+        <path d="M22,74 L27,68 L64,29 L78,14 L86,16 L84,24 L38,74 Z"
+              stroke="#9A8EC0" stroke-width="1.6" fill="rgba(155,142,192,0.06)" stroke-linejoin="round"/>
+        <!-- クリップ -->
+        <path d="M78,14 L82,8 L88,10 L86,18" stroke="#9A8EC0" stroke-width="1.3" fill="none" stroke-linejoin="round" opacity="0.55"/>
+        <!-- ペン先（ニブ） -->
+        <path d="M18,80 L12,92 L24,86 Z" fill="#C9A96E" opacity="0.75"/>
+        <line x1="15.5" y1="86" x2="20.5" y2="81" stroke="#16120E" stroke-width="1"/>
+        <!-- 木目ライン（軸） -->
+        <path d="M38,68 Q50,52 62,36" stroke="#C9A96E" stroke-width="0.9" fill="none" opacity="0.28"/>
+        <path d="M43,73 Q55,57 67,41" stroke="#C9A96E" stroke-width="0.7" fill="none" opacity="0.18"/>
+        <!-- キャップ：やや明るく -->
+        <path d="M64,29 L78,14 L86,16 L84,24 L70,38 Z" fill="rgba(155,142,192,0.08)" stroke="none"/>
+      </svg>
+    </div>
+    <div class="label-jp">ショップ</div>
+    <div class="label-sep"></div>
+    <div class="label-en">Online Shop</div>
+  </div>
+
+  <!-- ③ 銘木図鑑 — 開いた本＋葉 -->
+  <div class="cell">
+    <div class="icon-wrap">
+      <svg width="210" height="210" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- 開いた本の見開き -->
+        <path d="M10,18 L10,80 Q50,68 50,68 Q50,68 90,80 L90,18 Q50,30 50,30 Q50,30 10,18 Z"
+              stroke="#9A8EC0" stroke-width="1.8" fill="rgba(155,142,192,0.05)"/>
+        <!-- 背表紙の中央線 -->
+        <line x1="50" y1="30" x2="50" y2="68" stroke="#9A8EC0" stroke-width="1.4" opacity="0.4"/>
+        <!-- 左ページの行線 -->
+        <line x1="18" y1="40" x2="46" y2="43" stroke="#9A8EC0" stroke-width="1" opacity="0.28"/>
+        <line x1="18" y1="50" x2="46" y2="53" stroke="#9A8EC0" stroke-width="1" opacity="0.25"/>
+        <line x1="18" y1="60" x2="46" y2="63" stroke="#9A8EC0" stroke-width="1" opacity="0.22"/>
+        <!-- 右ページ：葉のイラスト -->
+        <path d="M70,68 Q54,56 54,40 Q54,28 66,28 Q78,28 78,40 Q78,56 62,68 Z"
+              stroke="#C9A96E" stroke-width="1.5" fill="none" opacity="0.85"/>
+        <line x1="66" y1="68" x2="66" y2="32" stroke="#C9A96E" stroke-width="0.9" opacity="0.5"/>
+        <path d="M66,58 Q60,53 57,46" stroke="#C9A96E" stroke-width="0.7" fill="none" opacity="0.4"/>
+        <path d="M66,48 Q72,43 75,36" stroke="#C9A96E" stroke-width="0.7" fill="none" opacity="0.4"/>
+        <!-- ページの厚み（本の下部） -->
+        <path d="M10,80 L14,84 L86,84 L90,80" stroke="#9A8EC0" stroke-width="1.2" fill="none" opacity="0.3"/>
+      </svg>
+    </div>
+    <div class="label-jp">銘木図鑑</div>
+    <div class="label-sep"></div>
+    <div class="label-en">Encyclopedia</div>
+  </div>
+
+  <!-- ④ 新作・入荷 — 風呂敷×星 -->
+  <div class="cell">
+    <div class="icon-wrap">
+      <svg width="210" height="210" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- 風呂敷の胴 -->
+        <path d="M20,56 Q18,82 50,88 Q82,82 80,56 Q78,38 50,42 Q22,38 20,56 Z"
+              stroke="#9A8EC0" stroke-width="1.8" fill="rgba(155,142,192,0.06)"/>
+        <!-- 絞り部分（首） -->
+        <path d="M36,42 Q44,32 50,28 Q56,32 64,42" stroke="#9A8EC0" stroke-width="1.5" fill="none" opacity="0.7"/>
+        <!-- 蝶結び左 -->
+        <path d="M50,28 Q34,16 26,10 Q36,14 44,24"
+              stroke="#9A8EC0" stroke-width="1.6" fill="none" stroke-linecap="round" opacity="0.85"/>
+        <!-- 蝶結び右 -->
+        <path d="M50,28 Q66,16 74,10 Q64,14 56,24"
+              stroke="#9A8EC0" stroke-width="1.6" fill="none" stroke-linecap="round" opacity="0.85"/>
+        <!-- 結び目 -->
+        <ellipse cx="50" cy="28" rx="5" ry="4" stroke="#9A8EC0" stroke-width="1.2" fill="rgba(155,142,192,0.15)"/>
+        <!-- 布の影のライン -->
+        <path d="M22,62 Q36,72 50,74 Q64,72 78,62" stroke="#9A8EC0" stroke-width="0.8" fill="none" opacity="0.25"/>
+        <!-- NEW 星マーク -->
+        <path d="M72,18 L74,22 L78,22 L75,25 L76,29 L72,27 L68,29 L69,25 L66,22 L70,22 Z"
+              fill="#C9A96E" opacity="0.8"/>
+      </svg>
+    </div>
+    <div class="label-jp">新作・入荷</div>
+    <div class="label-sep"></div>
+    <div class="label-en">New Arrival</div>
+  </div>
+
+  <!-- ⑤ 職人に相談 — 吹き出し＋鑿 -->
+  <div class="cell">
+    <div class="icon-wrap">
+      <svg width="210" height="210" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- 吹き出し（主） -->
+        <path d="M12,12 Q12,6 18,6 L82,6 Q88,6 88,12 L88,56 Q88,62 82,62 L40,62 L12,80 L12,62 Z"
+              stroke="#9A8EC0" stroke-width="1.8" fill="rgba(155,142,192,0.07)" stroke-linejoin="round"/>
+        <!-- 吹き出し内：鑿アイコン -->
+        <!-- 柄 -->
+        <rect x="44" y="14" width="12" height="28" rx="3" stroke="#C9A96E" stroke-width="1.4" fill="rgba(201,169,110,0.05)"/>
+        <!-- 柄の木目 -->
+        <line x1="47" y1="19" x2="53" y2="19" stroke="#C9A96E" stroke-width="0.8" opacity="0.35"/>
+        <line x1="47" y1="25" x2="53" y2="25" stroke="#C9A96E" stroke-width="0.8" opacity="0.3"/>
+        <line x1="47" y1="31" x2="53" y2="31" stroke="#C9A96E" stroke-width="0.8" opacity="0.25"/>
+        <!-- 刃 -->
+        <path d="M41,42 L59,42 L63,54 L37,54 Z" stroke="#C9A96E" stroke-width="1.3" fill="rgba(201,169,110,0.07)" stroke-linejoin="round"/>
+        <!-- 刃先ライン -->
+        <line x1="37" y1="54" x2="50" y2="60" stroke="#C9A96E" stroke-width="1.2" opacity="0.7"/>
+        <line x1="63" y1="54" x2="50" y2="60" stroke="#C9A96E" stroke-width="1.2" opacity="0.7"/>
+        <!-- 木屑（小） -->
+        <path d="M26,48 Q22,44 26,40" stroke="#9A8EC0" stroke-width="1" fill="none" opacity="0.45"/>
+        <path d="M74,44 Q78,40 74,36" stroke="#9A8EC0" stroke-width="1" fill="none" opacity="0.45"/>
+      </svg>
+    </div>
+    <div class="label-jp">職人に相談</div>
+    <div class="label-sep"></div>
+    <div class="label-en">Consultation</div>
+  </div>
+
+  <!-- ⑥ 注文状況 — 印鑑×配送 -->
+  <div class="cell">
+    <div class="icon-wrap">
+      <svg width="210" height="210" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- 外枠の箱 -->
+        <rect x="12" y="36" width="76" height="56" rx="2" stroke="#9A8EC0" stroke-width="1.8" fill="rgba(155,142,192,0.05)"/>
+        <!-- 箱の蓋（屋根） -->
+        <polyline points="12,36 50,18 88,36" stroke="#9A8EC0" stroke-width="1.8" stroke-linejoin="round"/>
+        <line x1="50" y1="18" x2="50" y2="36" stroke="#9A8EC0" stroke-width="1.8"/>
+        <!-- テープ（梱包線）横 -->
+        <line x1="12" y1="64" x2="88" y2="64" stroke="#9A8EC0" stroke-width="1.2" opacity="0.3"/>
+        <!-- テープ縦 -->
+        <line x1="50" y1="36" x2="50" y2="92" stroke="#9A8EC0" stroke-width="1.2" opacity="0.3"/>
+        <!-- 進捗チェック（右下に印） -->
+        <circle cx="72" cy="76" r="12" fill="#16120E" stroke="#C9A96E" stroke-width="1.4"/>
+        <!-- チェックマーク（✓） -->
+        <polyline points="66,76 70,81 78,70" stroke="#C9A96E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- 屋根の線（面感） -->
+        <path d="M12,36 L26,28 L50,18 L74,28 L88,36" stroke="#9A8EC0" stroke-width="0" fill="rgba(155,142,192,0.04)"/>
+        <!-- 小さな配送マーク -->
+        <path d="M18,48 L30,48" stroke="#9A8EC0" stroke-width="1" opacity="0.35"/>
+        <path d="M18,54 L26,54" stroke="#9A8EC0" stroke-width="1" opacity="0.28"/>
+      </svg>
+    </div>
+    <div class="label-jp">注文状況</div>
+    <div class="label-sep"></div>
+    <div class="label-en">Order Status</div>
+  </div>
+
+</div>
+</body>
+</html>

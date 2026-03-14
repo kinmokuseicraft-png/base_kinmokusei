@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>金杢犀 リッチメニュー 案C — 余白×活版</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  width: 2500px;
+  height: 1686px;
+  background: #111111;
+  overflow: hidden;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 833px 834px 833px;
+  grid-template-rows: 843px 843px;
+  width: 2500px;
+  height: 1686px;
+}
+
+.cell {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 60px 72px 72px;
+  border-right: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.cell:nth-child(3n)  { border-right: none; }
+.cell:nth-child(n+4) { border-bottom: none; }
+
+/* 大きな番号（背景装飾） */
+.cell-num {
+  position: absolute;
+  top: 40px;
+  right: 60px;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 180px;
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(201,169,110,0.06);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  user-select: none;
+}
+
+/* 細い上線 */
+.top-rule {
+  position: absolute;
+  top: 0; left: 72px; right: 72px;
+  height: 1px;
+  background: linear-gradient(to right, #C9A96E 40px, transparent 40px);
+}
+
+.label-en {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 30px;
+  font-weight: 300;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: #C9A96E;
+  margin-bottom: 20px;
+}
+
+.label-jp {
+  font-family: 'Noto Serif JP', 'Hiragino Mincho ProN', serif;
+  font-size: 82px;
+  font-weight: 700;
+  color: #F0EBE3;
+  letter-spacing: 0.1em;
+  margin-bottom: 28px;
+  line-height: 1.1;
+}
+
+.arrow-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.arrow-line {
+  width: 60px;
+  height: 1px;
+  background: #C9A96E;
+}
+
+.arrow-head {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 28px;
+  color: rgba(201,169,110,0.7);
+  letter-spacing: 0;
+}
+
+.sub-desc {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 36px;
+  font-weight: 200;
+  color: rgba(240,235,227,0.4);
+  letter-spacing: 0.08em;
+}
+
+/* 上部の点装飾 */
+.dot-row {
+  position: absolute;
+  top: 52px;
+  left: 72px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(201,169,110,0.5);
+}
+.dot-line {
+  width: 24px;
+  height: 1px;
+  background: rgba(201,169,110,0.3);
+}
+</style>
+</head>
+<body>
+<div class="grid">
+
+  <!-- ① 銘木診断 -->
+  <div class="cell">
+    <div class="top-rule"></div>
+    <div class="dot-row">
+      <div class="dot"></div><div class="dot-line"></div><div class="dot"></div>
+    </div>
+    <div class="cell-num">01</div>
+    <div class="label-en">Mokuzan Shindan</div>
+    <div class="label-jp">銘木診断</div>
+    <div class="arrow-row">
+      <div class="arrow-line"></div>
+      <div class="sub-desc">あなたの木を見つける</div>
+    </div>
+  </div>
+
+  <!-- ② ショップ -->
+  <div class="cell">
+    <div class="top-rule"></div>
+    <div class="dot-row">
+      <div class="dot"></div><div class="dot-line"></div><div class="dot"></div>
+    </div>
+    <div class="cell-num">02</div>
+    <div class="label-en">Online Shop</div>
+    <div class="label-jp">ショップ</div>
+    <div class="arrow-row">
+      <div class="arrow-line"></div>
+      <div class="sub-desc">全ての作品を見る</div>
+    </div>
+  </div>
+
+  <!-- ③ 銘木図鑑 -->
+  <div class="cell">
+    <div class="top-rule"></div>
+    <div class="dot-row">
+      <div class="dot"></div><div class="dot-line"></div><div class="dot"></div>
+    </div>
+    <div class="cell-num">03</div>
+    <div class="label-en">Encyclopedia</div>
+    <div class="label-jp">銘木図鑑</div>
+    <div class="arrow-row">
+      <div class="arrow-line"></div>
+      <div class="sub-desc">銘木を深く知る</div>
+    </div>
+  </div>
+
+  <!-- ④ 新作・入荷 -->
+  <div class="cell">
+    <div class="top-rule"></div>
+    <div class="dot-row">
+      <div class="dot"></div><div class="dot-line"></div><div class="dot"></div>
+    </div>
+    <div class="cell-num">04</div>
+    <div class="label-en">New Arrival</div>
+    <div class="label-jp">新作・入荷</div>
+    <div class="arrow-row">
+      <div class="arrow-line"></div>
+      <div class="sub-desc">最新作をいち早く</div>
+    </div>
+  </div>
+
+  <!-- ⑤ 職人に相談 -->
+  <div class="cell">
+    <div class="top-rule"></div>
+    <div class="dot-row">
+      <div class="dot"></div><div class="dot-line"></div><div class="dot"></div>
+    </div>
+    <div class="cell-num">05</div>
+    <div class="label-en">Consultation</div>
+    <div class="label-jp">職人に相談</div>
+    <div class="arrow-row">
+      <div class="arrow-line"></div>
+      <div class="sub-desc">贈り物・用途をご提案</div>
+    </div>
+  </div>
+
+  <!-- ⑥ 注文状況 -->
+  <div class="cell">
+    <div class="top-rule"></div>
+    <div class="dot-row">
+      <div class="dot"></div><div class="dot-line"></div><div class="dot"></div>
+    </div>
+    <div class="cell-num">06</div>
+    <div class="label-en">Order Status</div>
+    <div class="label-jp">注文状況</div>
+    <div class="arrow-row">
+      <div class="arrow-line"></div>
+      <div class="sub-desc">ご注文の確認</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
