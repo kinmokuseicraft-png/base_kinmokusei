@@ -176,12 +176,20 @@ export async function POST(request: NextRequest) {
 
       if (userId) {
         try {
-          const profile = await getLineProfile(userId);
-          await upsertLineUser({
-            lineUserId: userId,
-            displayName: profile.displayName ?? undefined,
-            pictureUrl: profile.pictureUrl ?? undefined,
-          });
+          // 既存ユーザーは LINE API プロフィール取得をスキップ（新規のみ）
+          const { data: existingUser } = await supabase
+            .from("line_users")
+            .select("line_user_id")
+            .eq("line_user_id", userId)
+            .maybeSingle();
+          if (!existingUser) {
+            const profile = await getLineProfile(userId);
+            await upsertLineUser({
+              lineUserId: userId,
+              displayName: profile.displayName ?? undefined,
+              pictureUrl: profile.pictureUrl ?? undefined,
+            });
+          }
         } catch (upsertErr) {
           console.warn("[webhook] line_users upsert 失敗:", upsertErr);
         }
@@ -228,32 +236,33 @@ export async function POST(request: NextRequest) {
         } catch (_) {}
       }
 
-      try {
-        await supabase.from("messages").insert({
+      // messages 保存 と キーワードシナリオ検索 を並列実行
+      const [, kwScenarioResult] = await Promise.allSettled([
+        supabase.from("messages").insert({
           line_user_id: userId,
           direction: "inbound",
           message_type: "text",
           content: text,
-        });
-      } catch (logErr) {
-        console.warn("[webhook] messages 保存失敗（受信）:", logErr);
-      }
-
-      // キーワードシナリオ: テキストがシナリオの trigger_value と一致するか確認
-      try {
-        const { data: kwScenario } = await supabase
+        }),
+        supabase
           .from("scenarios")
           .select("id")
           .eq("trigger_type", "keyword")
           .eq("trigger_value", text.trim())
           .eq("is_active", true)
-          .maybeSingle();
+          .maybeSingle(),
+      ]);
+
+      if (kwScenarioResult.status === "fulfilled") {
+        const kwScenario = kwScenarioResult.value.data;
         if (kwScenario && userId) {
-          await startScenario(userId, kwScenario.id);
-          console.log("[webhook] キーワードシナリオ起動", { triggerValue: text.trim(), scenarioId: kwScenario.id });
+          try {
+            await startScenario(userId, kwScenario.id);
+            console.log("[webhook] キーワードシナリオ起動", { triggerValue: text.trim(), scenarioId: kwScenario.id });
+          } catch (e) {
+            console.warn("[webhook] キーワードシナリオ起動失敗:", e);
+          }
         }
-      } catch (e) {
-        console.warn("[webhook] キーワードシナリオ起動失敗:", e);
       }
 
       // メールアドレス検出: line_users.email に保存して確認返信
