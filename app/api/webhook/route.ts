@@ -167,6 +167,9 @@ export async function POST(request: NextRequest) {
   }
 
   for (const event of events) {
+      // richmenuswitch（タブ切り替え）は何もせずスキップ
+      if (event.type === "postback") continue;
+
       const userId = event.source?.userId ?? "";
       const replyToken = event.replyToken;
 
