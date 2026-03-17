@@ -1,5 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import './animations.css'
+import TsubaAnimations from './TsubaAnimations'
 
 export const metadata = {
   title: '齋藤翼のものがたり — 木軸ペン工房 金杢犀',
@@ -11,21 +13,21 @@ const episodes = [
     title: <>子どものころから、<br />物を作ることが好きだった。</>,
     body: `絵を描くこと、生き物を調べること、何かを自分の手で作ること—— どれも夢中だった。家は母子家庭で、弟とよく二人で過ごした。そのころから「自分の手で何かを作る」ことがいちばん自分らしかった。`,
     img: '/liff/craftsman/tsuba/ep1.jpg',
-    reverse: false,
+    delay: '',
   },
   {
     ch: 'Episode 02',
     title: <>タンスを壊しながら、<br />思った。</>,
     body: `ふと帰省したとき、母が言った。「もう使わないから、処分しちゃおう」嫁入り道具として共に過ごしてきたタンス。ノコギリを挽いて、ハンマーを叩き、どんどんと小さくなるその姿が、母の背中と重なった。「形を変えて、残せないか」—— 気づけば貯金を崩し、工具を買い、一人手探りでペンを作っていた。`,
     img: '/liff/craftsman/tsuba/ep2.jpg',
-    reverse: true,
+    delay: 'd1',
   },
   {
     ch: 'Episode 03',
     title: <>作るたびに、<br />楽しくなっていった。</>,
     body: `失敗して、また試す。少しずつ手が慣れてくる。木が思い通りの形になった瞬間の、あの感覚が忘れられなかった。「もっと良いものが作りたい」—— その一心で工具を揃え、気づけば一日中工房にいた。失敗した時にどうやったらうまくいくか、その試行錯誤の過程そのものを楽しんでいた。`,
     img: '/liff/craftsman/tsuba/ep3.jpg',
-    reverse: false,
+    delay: 'd2',
   },
 ]
 
@@ -40,9 +42,13 @@ const timeline = [
   { year: 'これから', title: '伝統を踏まえて、新しいものを作る。', desc: '木象嵌、漆、沈金—— 先人たちが磨き上げてきた技術を、ただ守るのではなく、自分なりの解釈で新しい形に生かしていきたい。伝統は出発点であり、制約ではない。' },
 ]
 
+const marqueeItems = ['大切なものは、形を変えて生き続ける', '失敗した時にどうやったらうまくいくか', '小さな行動が、面白い結果を生む', '木象嵌の魅力を、次の世代へ']
+
 export default function TsubaPage() {
   return (
     <main style={{ fontFamily: "'Noto Serif JP', serif", background: '#faf8f4', color: '#2a2018', overflowX: 'hidden' }}>
+      <TsubaAnimations />
+
       {/* ── ナビ ── */}
       <nav style={{
         position: 'sticky', top: 0, zIndex: 100,
@@ -67,25 +73,30 @@ export default function TsubaPage() {
           position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column',
           justifyContent: 'flex-end', padding: '0 28px 48px',
         }}>
-          <span style={{ fontSize: 10, letterSpacing: '0.25em', color: '#b8860b', marginBottom: 12, fontStyle: 'italic', fontFamily: 'serif' }}>The Craftsman</span>
-          <h1 style={{ fontSize: 32, fontWeight: 700, color: '#faf8f4', lineHeight: 1.5, letterSpacing: '0.05em', marginBottom: 16 }}>
+          <span className="hero-eyebrow" style={{ fontSize: 10, letterSpacing: '0.25em', color: '#b8860b', marginBottom: 8, fontStyle: 'italic', fontFamily: 'serif' }}>The Craftsman</span>
+          <span className="hero-vline" />
+          <h1 className="hero-title" style={{ fontSize: 32, fontWeight: 700, color: '#faf8f4', lineHeight: 1.5, letterSpacing: '0.05em', marginBottom: 16 }}>
             木と、<br />家族と、<br />ペンと。
           </h1>
-          <p style={{ fontSize: 13, color: 'rgba(250,248,244,0.7)', lineHeight: 2, letterSpacing: '0.1em' }}>
+          <p className="hero-sub" style={{ fontSize: 13, color: 'rgba(250,248,244,0.7)', lineHeight: 2, letterSpacing: '0.1em' }}>
             代表・齋藤翼が<br />歩んできた道と、<br />その先にある夢。
           </p>
         </div>
       </section>
 
       {/* ── カウントアップ ── */}
-      <section style={{ background: '#2a1f14', padding: '48px 20px', display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', gap: 24 }}>
+      <section id="count-section" style={{ background: '#2a1f14', padding: '48px 20px', display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', gap: 24 }}>
         {[
-          { num: '727%', unit: '達成率', desc: 'Creema SPRINGS\nクラウドファンディング' },
-          { num: '3000+', unit: '作品以上', desc: 'これまでに\n手がけた作品数' },
-          { num: '100+', unit: '種類以上', desc: '取り扱う\n世界の銘木' },
+          { num: 727, suffix: '%', unit: '達成率', desc: 'Creema SPRINGS\nクラウドファンディング' },
+          { num: 3000, suffix: '+', unit: '作品以上', desc: 'これまでに\n手がけた作品数' },
+          { num: 100, suffix: '+', unit: '種類以上', desc: '取り扱う\n世界の銘木' },
         ].map(c => (
           <div key={c.unit} style={{ textAlign: 'center', color: '#faf8f4' }}>
-            <div style={{ fontSize: 36, fontWeight: 700, color: '#b8860b', letterSpacing: '-0.02em' }}>{c.num}</div>
+            <div
+              data-target={c.num}
+              data-suffix={c.suffix}
+              style={{ fontSize: 36, fontWeight: 700, color: '#b8860b', letterSpacing: '-0.02em' }}
+            >0</div>
             <div style={{ fontSize: 12, letterSpacing: '0.15em', marginTop: 4 }}>{c.unit}</div>
             <div style={{ fontSize: 10, color: 'rgba(250,248,244,0.5)', marginTop: 6, whiteSpace: 'pre-line', lineHeight: 1.7 }}>{c.desc}</div>
           </div>
@@ -93,17 +104,13 @@ export default function TsubaPage() {
       </section>
 
       {/* ── マーキー ── */}
-      <div style={{ background: '#b8860b', padding: '10px 0', overflow: 'hidden', whiteSpace: 'nowrap' }}>
-        <span style={{ display: 'inline-block', animation: 'marquee 20s linear infinite', fontSize: 11, letterSpacing: '0.2em', color: '#faf8f4' }}>
-          {['大切なものは、形を変えて生き続ける', '失敗した時にどうやったらうまくいくか', '小さな行動が、面白い結果を生む', '木象嵌の魅力を、次の世代へ'].map((t, i) => (
+      <div style={{ background: '#b8860b', padding: '10px 0', overflow: 'hidden' }}>
+        <div className="marquee-track" style={{ display: 'inline-block', fontSize: 11, letterSpacing: '0.2em', color: '#faf8f4' }}>
+          {[...marqueeItems, ...marqueeItems].map((t, i) => (
             <span key={i}>&ensp;{t}&ensp;—</span>
           ))}
-          {['大切なものは、形を変えて生き続ける', '失敗した時にどうやったらうまくいくか', '小さな行動が、面白い結果を生む', '木象嵌の魅力を、次の世代へ'].map((t, i) => (
-            <span key={'b'+i}>&ensp;{t}&ensp;—</span>
-          ))}
-        </span>
+        </div>
       </div>
-      <style>{`@keyframes marquee { from { transform: translateX(0) } to { transform: translateX(-50%) } }`}</style>
 
       {/* ── はじまりの話 ── */}
       <section style={{ padding: '64px 0' }}>
@@ -113,8 +120,8 @@ export default function TsubaPage() {
         </div>
 
         {episodes.map((ep) => (
-          <div key={ep.ch} style={{ marginBottom: 64, display: 'flex', flexDirection: 'column' }}>
-            <div style={{ position: 'relative', width: '100%', aspectRatio: '4/3', maxHeight: 300 }}>
+          <div key={ep.ch} className={`ep ${ep.delay}`} style={{ marginBottom: 64, display: 'flex', flexDirection: 'column' }}>
+            <div className="ep-photo" style={{ position: 'relative', width: '100%', aspectRatio: '4/3', maxHeight: 300, overflow: 'hidden' }}>
               <Image src={ep.img} alt={ep.ch} fill style={{ objectFit: 'cover' }} />
               <div style={{
                 position: 'absolute', inset: 0,
@@ -139,22 +146,27 @@ export default function TsubaPage() {
 
         <div style={{ position: 'relative', paddingLeft: 28 }}>
           <div style={{ position: 'absolute', left: 8, top: 8, bottom: 0, width: 1, background: 'rgba(184,134,11,0.3)' }} />
+
           {timeline.map((tl, i) => (
-            <div key={i} style={{ position: 'relative', marginBottom: 40 }}>
-              <div style={{
-                position: 'absolute', left: -24, top: 4,
-                width: 10, height: 10, borderRadius: '50%',
-                background: '#b8860b', border: '2px solid #faf8f4',
-              }} />
-              <span style={{ fontSize: 10, color: '#b8860b', letterSpacing: '0.2em', display: 'block', marginBottom: 4 }}>{tl.year}</span>
-              <p style={{ fontSize: 13, fontWeight: 700, marginBottom: 6, letterSpacing: '0.05em' }}>{tl.title}</p>
-              <p style={{ fontSize: 12, lineHeight: 2, color: '#7a6a58' }}>{tl.desc}</p>
+            <div key={i} className="tl-item" style={{ position: 'relative', marginBottom: 40 }}>
+              <div style={{ position: 'absolute', left: -24, top: 0, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <div className="tl-dot" style={{
+                  width: 10, height: 10, borderRadius: '50%',
+                  background: '#b8860b', border: '2px solid #f2ede5', flexShrink: 0,
+                }} />
+                {i < timeline.length - 1 && (
+                  <div className="tl-line" style={{ width: 1, height: 60, background: 'rgba(184,134,11,0.3)', marginTop: 4 }} />
+                )}
+              </div>
+              <span className="tl-year" style={{ fontSize: 10, color: '#b8860b', letterSpacing: '0.2em', display: 'block', marginBottom: 4 }}>{tl.year}</span>
+              <p className="tl-title" style={{ fontSize: 13, fontWeight: 700, marginBottom: 6, letterSpacing: '0.05em' }}>{tl.title}</p>
+              <p className="tl-desc" style={{ fontSize: 12, lineHeight: 2, color: '#7a6a58' }}>{tl.desc}</p>
             </div>
           ))}
         </div>
 
         {/* 万年筆画像 */}
-        <div style={{ marginTop: 32, position: 'relative', width: '100%', aspectRatio: '4/3' }}>
+        <div className="tl-future-img" style={{ marginTop: 32, position: 'relative', width: '100%', aspectRatio: '4/3' }}>
           <Image src="/liff/craftsman/tsuba/future.jpg" alt="これからの一本" fill style={{ objectFit: 'cover', borderRadius: 4 }} />
         </div>
       </section>
