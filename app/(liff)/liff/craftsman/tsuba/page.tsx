@@ -76,7 +76,7 @@ export default function TsubaPage() {
           <span className="hero-eyebrow" style={{ fontSize: 10, letterSpacing: '0.25em', color: '#b8860b', marginBottom: 20, fontStyle: 'italic', fontFamily: 'serif' }}>The Craftsman</span>
           <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', gap: '0.7em' }}>
             {/* タイトル3列 */}
-            {['木と、', '家族と、', 'ペンと。'].map((col, i) => (
+            {['ペンと。', '家族と、', '木と、'].map((col, i) => (
               <span key={col} className="hero-title" style={{
                 writingMode: 'vertical-rl', textOrientation: 'mixed',
                 fontSize: 32, fontWeight: 700, color: '#faf8f4',
@@ -87,7 +87,7 @@ export default function TsubaPage() {
             {/* 区切り線 */}
             <span className="hero-vline" style={{ margin: '0 10px' }} />
             {/* サブ3列 */}
-            {['代表・齋藤翼が', '歩んできた道と、', 'その先にある夢。'].map((col, i) => (
+            {['その先にある夢。', '歩んできた道と、', '代表・齋藤翼が'].map((col, i) => (
               <span key={col} className="hero-sub" style={{
                 writingMode: 'vertical-rl', textOrientation: 'mixed',
                 fontSize: 9, color: 'rgba(250,248,244,0.5)', lineHeight: 1.8,
