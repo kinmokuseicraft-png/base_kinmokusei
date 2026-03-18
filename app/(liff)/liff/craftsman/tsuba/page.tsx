@@ -101,24 +101,22 @@ export default function TsubaPage() {
 
       {/* ── カウントアップ ── */}
       <section id="count-section" style={{ background: '#f2ede5', padding: '64px 24px 56px', borderBottom: '0.5px solid rgba(61,43,26,0.1)' }}>
-        <span style={{ fontFamily: 'serif', fontStyle: 'italic', fontSize: 10, letterSpacing: '0.24em', color: '#b8860b', display: 'block', marginBottom: 40 }}>Numbers</span>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+        <span style={{ fontFamily: 'serif', fontStyle: 'italic', fontSize: 10, letterSpacing: '0.24em', color: '#b8860b', display: 'block', marginBottom: 40, textAlign: 'center' }}>Numbers</span>
+        <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'flex-start', gap: 0 }}>
           {[
-            { num: 727, suffix: '%', unit: '達成率', desc: 'Creema SPRINGS　クラウドファンディング' },
-            { num: 3000, suffix: '+', unit: '作品以上', desc: 'これまでに手がけた作品数' },
-            { num: 100, suffix: '+', unit: '種類以上', desc: '取り扱う世界の銘木' },
+            { num: 727, suffix: '%', unit: '達成率', desc: 'Creema SPRINGS\nクラウドファンディング' },
+            { num: 3000, suffix: '+', unit: '作品以上', desc: 'これまでに手がけた\n作品数' },
+            { num: 100, suffix: '+', unit: '種類以上', desc: '取り扱う\n世界の銘木' },
           ].map((c, i) => (
-            <div key={c.unit}>
-              {i > 0 && <div style={{ height: '0.5px', background: 'rgba(61,43,26,0.12)', margin: '0 0 32px' }} />}
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: 16, marginBottom: 6 }}>
-                <div
-                  data-target={c.num}
-                  data-suffix={c.suffix}
-                  style={{ fontFamily: 'serif', fontStyle: 'italic', fontWeight: 400, fontSize: 48, lineHeight: 1, letterSpacing: '0.02em', color: '#2a2018' }}
-                >0</div>
-                <div style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 300, fontSize: 9, letterSpacing: '0.18em', color: '#b8860b' }}>{c.unit}</div>
-              </div>
-              <div style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 200, fontSize: 10, color: '#7a6a58', lineHeight: 2, letterSpacing: '0.1em', marginBottom: 32 }}>{c.desc}</div>
+            <div key={c.unit} style={{ flex: 1, textAlign: 'center', position: 'relative', padding: '0 8px' }}>
+              {i > 0 && <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '0.5px', background: 'rgba(61,43,26,0.12)' }} />}
+              <div
+                data-target={c.num}
+                data-suffix={c.suffix}
+                style={{ fontFamily: 'serif', fontStyle: 'italic', fontWeight: 400, fontSize: 44, lineHeight: 1, letterSpacing: '0.02em', color: '#2a2018', marginBottom: 8 }}
+              >0</div>
+              <div style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 300, fontSize: 9, letterSpacing: '0.18em', color: '#b8860b', marginBottom: 10 }}>{c.unit}</div>
+              <div style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 200, fontSize: 10, color: '#7a6a58', lineHeight: 1.9, letterSpacing: '0.06em', whiteSpace: 'pre-line' }}>{c.desc}</div>
             </div>
           ))}
         </div>
