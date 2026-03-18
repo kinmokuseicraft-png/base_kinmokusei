@@ -75,7 +75,7 @@ export default function TsubaPage() {
         }}>
           <span className="hero-eyebrow" style={{ fontSize: 10, letterSpacing: '0.25em', color: '#b8860b', marginBottom: 8, fontStyle: 'italic', fontFamily: 'serif' }}>The Craftsman</span>
           <span className="hero-vline" />
-          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', gap: '1.2em', marginBottom: 20 }}>
+          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-end', gap: '1.2em', marginBottom: 20 }}>
             {['木と、', '家族と、', 'ペンと。'].map((col, i) => (
               <span key={col} className="hero-title" style={{
                 writingMode: 'vertical-rl', textOrientation: 'mixed',
@@ -86,8 +86,8 @@ export default function TsubaPage() {
             ))}
             <p className="hero-sub" style={{
               writingMode: 'vertical-rl', textOrientation: 'mixed',
-              fontSize: 11, color: 'rgba(250,248,244,0.65)', lineHeight: 1.9,
-              letterSpacing: '0.12em', margin: '4px 0 0 8px',
+              fontSize: 9, color: 'rgba(250,248,244,0.5)', lineHeight: 1.8,
+              letterSpacing: '0.1em', margin: '0 0 4px 12px',
             }}>
               代表・齋藤翼が歩んできた道と、その先にある夢。
             </p>
