@@ -114,13 +114,12 @@ export default function TsubaPage() {
 
       {/* ── カウントアップ ── */}
       <section id="count-section" style={{
-        background: '#f2ede5',
+        background: '#2a1f14',
         padding: '56px 20px 52px',
-        borderBottom: '0.5px solid rgba(61,43,26,0.1)',
       }}>
         <p style={{
           fontFamily: 'serif', fontStyle: 'italic', fontSize: 10,
-          letterSpacing: '0.24em', color: '#b8860b',
+          letterSpacing: '0.24em', color: 'rgba(232,212,154,0.5)',
           textAlign: 'center', margin: '0 0 36px',
         }}>Numbers</p>
 
@@ -130,9 +129,9 @@ export default function TsubaPage() {
             <div key={c.unit} style={{
               textAlign: 'center',
               padding: '0 6px',
-              borderLeft: i > 0 ? '0.5px solid rgba(61,43,26,0.12)' : 'none',
+              borderLeft: i > 0 ? '0.5px solid rgba(232,212,154,0.12)' : 'none',
             }}>
-              {/* 数字 — whiteSpace:nowrap で折り返し防止、高さ固定でレイアウトシフトを防ぐ */}
+              {/* 数字 */}
               <div style={{ height: 36, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 8 }}>
                 <span
                   data-target={c.num}
@@ -140,20 +139,20 @@ export default function TsubaPage() {
                   style={{
                     fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 400,
                     fontSize: 34, lineHeight: 1, letterSpacing: '0.02em',
-                    color: '#2a2018', whiteSpace: 'nowrap',
+                    color: '#b8860b', whiteSpace: 'nowrap',
                   }}
                 >0</span>
               </div>
               {/* 単位 */}
               <div style={{
                 fontFamily: "'Noto Serif JP', serif", fontWeight: 300,
-                fontSize: 9, letterSpacing: '0.16em', color: '#b8860b',
+                fontSize: 9, letterSpacing: '0.16em', color: 'rgba(232,212,154,0.7)',
                 marginBottom: 10,
               }}>{c.unit}</div>
               {/* 説明 */}
               <div style={{
                 fontFamily: "'Noto Serif JP', serif", fontWeight: 200,
-                fontSize: 10, color: '#7a6a58',
+                fontSize: 10, color: 'rgba(232,212,154,0.45)',
                 lineHeight: 1.9, letterSpacing: '0.06em',
                 whiteSpace: 'pre-line',
               }}>{c.desc}</div>
