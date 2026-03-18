@@ -27,7 +27,7 @@
   flex: 0 0 48%;
   overflow: hidden;
   position: relative;
-  height: 440px;
+  aspect-ratio: 3/4;
 }
 .ep-photo img {
   width: 100%;
@@ -53,10 +53,7 @@
     padding: 24px 20px;
   }
   .ep-photo {
-    height: 56vw;
-  }
-  .ep-photo img {
-    height: 100%;
+    aspect-ratio: 4/3;
   }
 }
 

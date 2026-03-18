@@ -34,8 +34,9 @@ const episodes = [
 const timeline = [
   { year: '幼少期', title: '物作りへの目覚め', desc: '図工の時間が大好きだった。母子家庭の中で、弟と二人で過ごした日々。自分の手で何かを生み出すことが、いちばん自分らしかった。' },
   { year: '学生時代', title: '食物調理科で、素材と刃物を学ぶ', desc: '高校では食物調理科へ。素材の組み合わせ、順序、安全性—— そして包丁の扱い。刃物への敬意と正しい使い方を、徹底的に叩き込まれた。この感覚は、旋盤や工作機械を扱う今にもそのまま生きている。' },
+  { year: '会社員', title: 'デザインと言葉を、ここで学んだ', desc: '営業の現場で、写真・文章・広報の力を知る。「その人にほんとうに合うものを届ける」という感覚が、今の物作りの根底に流れている。' },
   { year: '転機', title: 'タンスとの別れ、ペンの始まり', desc: '母の嫁入り道具を解体する場面に立ち会う。「形を変えて残せないか」という問いが生まれる。記念の時計を売り、機材を買い、独学でペン作りを開始。' },
-  { year: '創業', title: '木軸ペン工房 金杢犀、誕生', desc: '千葉市の小さな部屋から、家族と共に始動。1月1日の初回販売でスタートダッシュを切る。約1年で会社員時代と変わらない水準へ。' },
+  { year: '創業', title: '木軸ペン工房 金杢犀、誕生', desc: '千葉市の小さな部屋から、家族と共に始動。1月1日の初回販売でスタートダッシュを切る。' },
   { year: '2023', title: 'Creema SPRINGS — 目標の727%達成', desc: '木象嵌の魅力を伝えたいという想いでスタート。200,000円の目標に対し、1,454,460円が集まった。同年、母の思い出の場所・日本橋三越本店で催事。' },
   { year: '2025', title: '株式会社化、新しいフェーズへ', desc: 'ずっと一人でやるつもりだったが、法人化。スタッフを迎えることで、一人では生み出せなかった新しい価値が生まれ始めている。' },
   { year: 'これから', title: '伝統を踏まえて、新しいものを作る。', desc: '木象嵌、漆、沈金—— 先人たちが磨き上げてきた技術を、ただ守るのではなく、自分なりの解釈で新しい形に生かしていきたい。伝統は出発点であり、制約ではない。' },
@@ -167,7 +168,7 @@ export default function TsubaPage() {
         </div>
 
         {/* 万年筆画像 */}
-        <div className="tl-future-img" style={{ marginTop: 48, padding: '0 32px' }}>
+        <div className="tl-future-img" style={{ marginTop: 48, padding: '0 8px' }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/liff/craftsman/tsuba/future.jpg"
@@ -179,13 +180,15 @@ export default function TsubaPage() {
 
       {/* ── 締めの一文 ── */}
       <section style={{ padding: '80px 24px', background: '#2a1f14', textAlign: 'center' }}>
-        <p style={{
-          writingMode: 'vertical-rl', textOrientation: 'mixed',
-          fontSize: 24, lineHeight: 2.2, color: '#e8d49a', letterSpacing: '0.15em',
-          display: 'inline-block', marginBottom: 32, height: '8em',
-        }}>
-          大切なものは、<br />形を変えて<br />生き続ける。
-        </p>
+        <div style={{ display: 'flex', flexDirection: 'row-reverse', justifyContent: 'center', alignItems: 'flex-start', gap: '2em', marginBottom: 32 }}>
+          {['大切なものは、', '形を変えて', '生き続ける。'].map((col) => (
+            <span key={col} style={{
+              writingMode: 'vertical-rl', textOrientation: 'mixed',
+              fontSize: 18, lineHeight: 2.0, color: '#e8d49a', letterSpacing: '0.18em',
+              display: 'block',
+            }}>{col}</span>
+          ))}
+        </div>
         <p style={{ fontSize: 12, color: 'rgba(232,212,154,0.6)', lineHeight: 2.2, letterSpacing: '0.1em' }}>
           千葉の小さな部屋で始まった物語は、<br />今も続いています。
         </p>
