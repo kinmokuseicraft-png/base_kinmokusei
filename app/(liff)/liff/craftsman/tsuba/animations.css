@@ -8,11 +8,57 @@
   transform: translateY(20px);
   transition: opacity 1s cubic-bezier(0.16,1,0.3,1),
               transform 1s cubic-bezier(0.16,1,0.3,1);
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  margin-bottom: 160px;
+  padding: 0 20px;
 }
 .ep.visible { opacity: 1; transform: translateY(0); }
 .ep.d1 { transition-delay: 0.1s; }
 .ep.d2 { transition-delay: 0.2s; }
 .ep.d3 { transition-delay: 0.3s; }
+
+.ep:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+.ep-photo {
+  flex: 0 0 48%;
+  overflow: hidden;
+  position: relative;
+  height: 440px;
+}
+.ep-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.ep-text {
+  flex: 1;
+  padding: 32px 28px;
+}
+
+@media (max-width: 768px) {
+  .ep {
+    flex-direction: column !important;
+    gap: 0;
+    margin-bottom: 96px;
+    padding: 0 16px;
+  }
+  .ep-text {
+    padding: 24px 20px;
+  }
+  .ep-photo {
+    height: 56vw;
+  }
+  .ep-photo img {
+    height: 100%;
+  }
+}
 
 /* ── PATH アイテム ── */
 .path-item {

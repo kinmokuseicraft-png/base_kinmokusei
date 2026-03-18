@@ -34,9 +34,8 @@ const episodes = [
 const timeline = [
   { year: '幼少期', title: '物作りへの目覚め', desc: '図工の時間が大好きだった。母子家庭の中で、弟と二人で過ごした日々。自分の手で何かを生み出すことが、いちばん自分らしかった。' },
   { year: '学生時代', title: '食物調理科で、素材と刃物を学ぶ', desc: '高校では食物調理科へ。素材の組み合わせ、順序、安全性—— そして包丁の扱い。刃物への敬意と正しい使い方を、徹底的に叩き込まれた。この感覚は、旋盤や工作機械を扱う今にもそのまま生きている。' },
-  { year: '会社員', title: '営業で覚えた、「ぴったりな提案」', desc: '様々な仕事を経て、営業の世界へ。成績は良かったが、心の中ではいつも葛藤があった。それでもここで、押し売りではなく「本当にこの人に合うもの」を考える習慣が育まれた。写真・文章・広報——今の自分の原点もここにある。' },
   { year: '転機', title: 'タンスとの別れ、ペンの始まり', desc: '母の嫁入り道具を解体する場面に立ち会う。「形を変えて残せないか」という問いが生まれる。記念の時計を売り、機材を買い、独学でペン作りを開始。' },
-  { year: '創業', title: '金杢犀、誕生', desc: '千葉市の小さな部屋から、家族と共に始動。1月1日の初回販売でスタートダッシュを切る。約1年で会社員時代と変わらない水準へ。' },
+  { year: '創業', title: '木軸ペン工房 金杢犀、誕生', desc: '千葉市の小さな部屋から、家族と共に始動。1月1日の初回販売でスタートダッシュを切る。約1年で会社員時代と変わらない水準へ。' },
   { year: '2023', title: 'Creema SPRINGS — 目標の727%達成', desc: '木象嵌の魅力を伝えたいという想いでスタート。200,000円の目標に対し、1,454,460円が集まった。同年、母の思い出の場所・日本橋三越本店で催事。' },
   { year: '2025', title: '株式会社化、新しいフェーズへ', desc: 'ずっと一人でやるつもりだったが、法人化。スタッフを迎えることで、一人では生み出せなかった新しい価値が生まれ始めている。' },
   { year: 'これから', title: '伝統を踏まえて、新しいものを作る。', desc: '木象嵌、漆、沈金—— 先人たちが磨き上げてきた技術を、ただ守るのではなく、自分なりの解釈で新しい形に生かしていきたい。伝統は出発点であり、制約ではない。' },
@@ -119,22 +118,24 @@ export default function TsubaPage() {
           <div style={{ fontSize: 10, color: '#7a6a58', letterSpacing: '0.3em', marginTop: 6 }}>Where it all began</div>
         </div>
 
-        {episodes.map((ep) => (
-          <div key={ep.ch} className={`ep ${ep.delay}`} style={{ marginBottom: 64, display: 'flex', flexDirection: 'column' }}>
-            <div className="ep-photo" style={{ position: 'relative', width: '100%', aspectRatio: '4/3', maxHeight: 300, overflow: 'hidden' }}>
-              <Image src={ep.img} alt={ep.ch} fill style={{ objectFit: 'cover' }} />
-              <div style={{
-                position: 'absolute', inset: 0,
-                background: 'linear-gradient(to top, rgba(42,31,20,0.6) 0%, transparent 50%)',
-              }} />
+        <div>
+          {episodes.map((ep) => (
+            <div key={ep.ch} className={`ep ${ep.delay}`}>
+              <div className="ep-photo">
+                <Image src={ep.img} alt={ep.ch} width={800} height={480} style={{ objectFit: 'cover', objectPosition: 'center top', width: '100%', height: '100%' }} />
+                <div style={{
+                  position: 'absolute', inset: 0,
+                  background: 'linear-gradient(to top, rgba(42,31,20,0.6) 0%, transparent 50%)',
+                }} />
+              </div>
+              <div className="ep-text">
+                <span style={{ fontSize: 10, letterSpacing: '0.3em', color: '#b8860b', fontStyle: 'italic', fontFamily: 'serif' }}>{ep.ch}</span>
+                <h2 style={{ fontSize: 20, fontWeight: 700, lineHeight: 1.6, margin: '10px 0 16px', letterSpacing: '0.05em' }}>{ep.title}</h2>
+                <p style={{ fontSize: 13, lineHeight: 2.1, color: '#3d2b1a', letterSpacing: '0.05em' }}>{ep.body}</p>
+              </div>
             </div>
-            <div style={{ padding: '28px 24px' }}>
-              <span style={{ fontSize: 10, letterSpacing: '0.3em', color: '#b8860b', fontStyle: 'italic', fontFamily: 'serif' }}>{ep.ch}</span>
-              <h2 style={{ fontSize: 20, fontWeight: 700, lineHeight: 1.6, margin: '10px 0 16px', letterSpacing: '0.05em' }}>{ep.title}</h2>
-              <p style={{ fontSize: 13, lineHeight: 2.1, color: '#3d2b1a', letterSpacing: '0.05em' }}>{ep.body}</p>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </section>
 
       {/* ── タイムライン ── */}
@@ -166,17 +167,26 @@ export default function TsubaPage() {
         </div>
 
         {/* 万年筆画像 */}
-        <div className="tl-future-img" style={{ marginTop: 32, position: 'relative', width: '100%', aspectRatio: '4/3' }}>
-          <Image src="/liff/craftsman/tsuba/future.jpg" alt="これからの一本" fill style={{ objectFit: 'cover', borderRadius: 4 }} />
+        <div className="tl-future-img" style={{ marginTop: 48, padding: '0 32px' }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/liff/craftsman/tsuba/future.jpg"
+            alt="これからの一本"
+            style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 4 }}
+          />
         </div>
       </section>
 
       {/* ── 締めの一文 ── */}
-      <section style={{ padding: '72px 24px', background: '#2a1f14', textAlign: 'center' }}>
-        <p style={{ fontSize: 24, lineHeight: 1.8, color: '#e8d49a', letterSpacing: '0.1em', marginBottom: 24 }}>
+      <section style={{ padding: '80px 24px', background: '#2a1f14', textAlign: 'center' }}>
+        <p style={{
+          writingMode: 'vertical-rl', textOrientation: 'mixed',
+          fontSize: 24, lineHeight: 2.2, color: '#e8d49a', letterSpacing: '0.15em',
+          display: 'inline-block', marginBottom: 32, height: '8em',
+        }}>
           大切なものは、<br />形を変えて<br />生き続ける。
         </p>
-        <p style={{ fontSize: 12, color: 'rgba(232,212,154,0.6)', lineHeight: 2, letterSpacing: '0.1em' }}>
+        <p style={{ fontSize: 12, color: 'rgba(232,212,154,0.6)', lineHeight: 2.2, letterSpacing: '0.1em' }}>
           千葉の小さな部屋で始まった物語は、<br />今も続いています。
         </p>
       </section>

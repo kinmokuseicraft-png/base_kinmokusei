@@ -7,13 +7,18 @@ export default function TsubaAnimations() {
     function animateCount(el: HTMLElement) {
       const target = parseInt(el.dataset.target ?? '0')
       const suffix = el.dataset.suffix ?? ''
-      const duration = 1800
+      const duration = 3600
       const start = performance.now()
+      el.style.opacity = '0.25'
       function update(now: number) {
         const p = Math.min((now - start) / duration, 1)
-        const ease = p === 1 ? 1 : 1 - Math.pow(2, -10 * p)
-        el.textContent = Math.floor(ease * target).toLocaleString() + suffix
+        // easeOutQuint: 最後に向かって非常にゆっくり減速
+        const ease = 1 - Math.pow(1 - p, 5)
+        el.textContent = (p === 1 ? target : Math.floor(ease * target)).toLocaleString() + suffix
+        // opacity: 薄い状態から数字が増えるにつれフェードイン
+        el.style.opacity = String(0.25 + ease * 0.75)
         if (p < 1) requestAnimationFrame(update)
+        else el.style.opacity = '1'
       }
       requestAnimationFrame(update)
     }
