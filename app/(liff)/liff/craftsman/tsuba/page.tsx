@@ -44,6 +44,12 @@ const timeline = [
 
 const marqueeItems = ['大切なものは、形を変えて生き続ける', '失敗した時にどうやったらうまくいくか', '小さな行動が、面白い結果を生む', '木象嵌の魅力を、次の世代へ']
 
+const counts = [
+  { num: 727,  suffix: '%', unit: '達成率',   desc: 'Creema SPRINGS\nクラウドファンディング' },
+  { num: 3000, suffix: '+', unit: '作品以上',  desc: 'これまでに手がけた\n作品数' },
+  { num: 100,  suffix: '+', unit: '種類以上',  desc: '取り扱う\n世界の銘木' },
+]
+
 export default function TsubaPage() {
   return (
     <main style={{ fontFamily: "'Noto Serif JP', serif", background: '#faf8f4', color: '#2a2018', overflowX: 'hidden' }}>
@@ -70,12 +76,17 @@ export default function TsubaPage() {
           priority
         />
         <div style={{
-          position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column',
-          justifyContent: 'flex-end', padding: '0 28px 40px',
+          position: 'absolute', inset: 0,
+          display: 'flex', flexDirection: 'column', justifyContent: 'flex-end',
+          padding: '0 28px 40px',
         }}>
-          <span className="hero-eyebrow" style={{ fontSize: 10, letterSpacing: '0.25em', color: '#b8860b', marginBottom: 20, fontStyle: 'italic', fontFamily: 'serif' }}>The Craftsman</span>
+          <span className="hero-eyebrow" style={{
+            fontSize: 10, letterSpacing: '0.25em', color: '#b8860b',
+            marginBottom: 20, fontStyle: 'italic', fontFamily: 'serif',
+          }}>The Craftsman</span>
+
           <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', gap: '0.7em' }}>
-            {/* タイトル3列 */}
+            {/* タイトル3列（右から読む：木と、→家族と、→ペンと。） */}
             {['ペンと。', '家族と、', '木と、'].map((col, i) => (
               <span key={col} className="hero-title" style={{
                 writingMode: 'vertical-rl', textOrientation: 'mixed',
@@ -84,9 +95,11 @@ export default function TsubaPage() {
                 animationDelay: `${0.6 + i * 0.12}s`,
               }}>{col}</span>
             ))}
-            {/* 区切り線 */}
+
+            {/* 縦区切り線 */}
             <span className="hero-vline" style={{ margin: '0 10px' }} />
-            {/* サブ3列 */}
+
+            {/* サブタイトル3列（右から読む） */}
             {['その先にある夢。', '歩んできた道と、', '代表・齋藤翼が'].map((col, i) => (
               <span key={col} className="hero-sub" style={{
                 writingMode: 'vertical-rl', textOrientation: 'mixed',
@@ -100,23 +113,48 @@ export default function TsubaPage() {
       </section>
 
       {/* ── カウントアップ ── */}
-      <section id="count-section" style={{ background: '#f2ede5', padding: '64px 24px 56px', borderBottom: '0.5px solid rgba(61,43,26,0.1)' }}>
-        <span style={{ fontFamily: 'serif', fontStyle: 'italic', fontSize: 10, letterSpacing: '0.24em', color: '#b8860b', display: 'block', marginBottom: 40, textAlign: 'center' }}>Numbers</span>
-        <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'flex-start', gap: 0 }}>
-          {[
-            { num: 727, suffix: '%', unit: '達成率', desc: 'Creema SPRINGS\nクラウドファンディング' },
-            { num: 3000, suffix: '+', unit: '作品以上', desc: 'これまでに手がけた\n作品数' },
-            { num: 100, suffix: '+', unit: '種類以上', desc: '取り扱う\n世界の銘木' },
-          ].map((c, i) => (
-            <div key={c.unit} style={{ flex: 1, textAlign: 'center', position: 'relative', padding: '0 8px' }}>
-              {i > 0 && <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '0.5px', background: 'rgba(61,43,26,0.12)' }} />}
+      <section id="count-section" style={{
+        background: '#f2ede5',
+        padding: '56px 20px 52px',
+        borderBottom: '0.5px solid rgba(61,43,26,0.1)',
+      }}>
+        <p style={{
+          fontFamily: 'serif', fontStyle: 'italic', fontSize: 10,
+          letterSpacing: '0.24em', color: '#b8860b',
+          textAlign: 'center', margin: '0 0 36px',
+        }}>Numbers</p>
+
+        {/* 3列グリッド */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)' }}>
+          {counts.map((c, i) => (
+            <div key={c.unit} style={{
+              textAlign: 'center',
+              padding: '0 10px',
+              borderLeft: i > 0 ? '0.5px solid rgba(61,43,26,0.12)' : 'none',
+            }}>
+              {/* 数字 */}
               <div
                 data-target={c.num}
                 data-suffix={c.suffix}
-                style={{ fontFamily: 'serif', fontStyle: 'italic', fontWeight: 400, fontSize: 44, lineHeight: 1, letterSpacing: '0.02em', color: '#2a2018', marginBottom: 8 }}
+                style={{
+                  fontFamily: 'serif', fontStyle: 'italic', fontWeight: 400,
+                  fontSize: 44, lineHeight: 1, letterSpacing: '0.02em',
+                  color: '#2a2018', marginBottom: 10,
+                }}
               >0</div>
-              <div style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 300, fontSize: 9, letterSpacing: '0.18em', color: '#b8860b', marginBottom: 10 }}>{c.unit}</div>
-              <div style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 200, fontSize: 10, color: '#7a6a58', lineHeight: 1.9, letterSpacing: '0.06em', whiteSpace: 'pre-line' }}>{c.desc}</div>
+              {/* 単位 */}
+              <div style={{
+                fontFamily: "'Noto Serif JP', serif", fontWeight: 300,
+                fontSize: 9, letterSpacing: '0.16em', color: '#b8860b',
+                marginBottom: 12,
+              }}>{c.unit}</div>
+              {/* 説明 */}
+              <div style={{
+                fontFamily: "'Noto Serif JP', serif", fontWeight: 200,
+                fontSize: 10, color: '#7a6a58',
+                lineHeight: 1.9, letterSpacing: '0.06em',
+                whiteSpace: 'pre-line',
+              }}>{c.desc}</div>
             </div>
           ))}
         </div>
@@ -138,11 +176,16 @@ export default function TsubaPage() {
           <div style={{ fontSize: 10, color: '#7a6a58', letterSpacing: '0.3em', marginTop: 6 }}>Where it all began</div>
         </div>
 
+        {/* ep の nth-child が正しく機能するよう div でラップ */}
         <div>
           {episodes.map((ep) => (
             <div key={ep.ch} className={`ep ${ep.delay}`}>
               <div className="ep-photo">
-                <Image src={ep.img} alt={ep.ch} width={800} height={480} style={{ objectFit: 'cover', objectPosition: 'center top', width: '100%', height: '100%' }} />
+                <Image
+                  src={ep.img} alt={ep.ch}
+                  width={800} height={480}
+                  style={{ objectFit: 'cover', objectPosition: 'center top', width: '100%', height: '100%' }}
+                />
                 <div style={{
                   position: 'absolute', inset: 0,
                   background: 'linear-gradient(to top, rgba(42,31,20,0.6) 0%, transparent 50%)',
@@ -166,10 +209,12 @@ export default function TsubaPage() {
         </div>
 
         <div style={{ position: 'relative', paddingLeft: 28 }}>
+          {/* 縦ライン */}
           <div style={{ position: 'absolute', left: 8, top: 8, bottom: 0, width: 1, background: 'rgba(184,134,11,0.3)' }} />
 
           {timeline.map((tl, i) => (
             <div key={i} className="tl-item" style={{ position: 'relative', marginBottom: 40 }}>
+              {/* ドット＋短いライン */}
               <div style={{ position: 'absolute', left: -24, top: 0, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <div className="tl-dot" style={{
                   width: 10, height: 10, borderRadius: '50%',
@@ -186,7 +231,7 @@ export default function TsubaPage() {
           ))}
         </div>
 
-        {/* 万年筆画像 */}
+        {/* これからの一本 */}
         <div className="tl-future-img" style={{ marginTop: 48, padding: '0 8px' }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -199,12 +244,13 @@ export default function TsubaPage() {
 
       {/* ── 締めの一文 ── */}
       <section style={{ padding: '80px 24px', background: '#2a1f14', textAlign: 'center' }}>
+        {/* 縦書き3列（右から読む：大切なものは、→形を変えて→生き続ける。） */}
         <div style={{ display: 'flex', flexDirection: 'row-reverse', justifyContent: 'center', alignItems: 'flex-start', gap: '2em', marginBottom: 32 }}>
           {['大切なものは、', '形を変えて', '生き続ける。'].map((col) => (
             <span key={col} style={{
               writingMode: 'vertical-rl', textOrientation: 'mixed',
-              fontSize: 18, lineHeight: 2.0, color: '#e8d49a', letterSpacing: '0.18em',
-              display: 'block',
+              fontSize: 18, lineHeight: 2.0, color: '#e8d49a',
+              letterSpacing: '0.18em', display: 'block',
             }}>{col}</span>
           ))}
         </div>
