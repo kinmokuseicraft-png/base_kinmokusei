@@ -42,8 +42,6 @@ const timeline = [
   { year: 'これから', title: '伝統を踏まえて、新しいものを作る。', desc: '木象嵌、漆、沈金—— 先人たちが磨き上げてきた技術を、ただ守るのではなく、自分なりの解釈で新しい形に生かしていきたい。伝統は出発点であり、制約ではない。' },
 ]
 
-const marqueeItems = ['大切なものは、形を変えて生き続ける', '失敗した時にどうやったらうまくいくか', '小さな行動が、面白い結果を生む', '木象嵌の魅力を、次の世代へ']
-
 const counts = [
   { num: 727,  suffix: '%', unit: '達成率',   desc: 'Creema SPRINGS\nクラウドファンディング' },
   { num: 3000, suffix: '+', unit: '作品以上',  desc: 'これまでに手がけた\n作品数' },
@@ -160,15 +158,6 @@ export default function TsubaPage() {
           ))}
         </div>
       </section>
-
-      {/* ── マーキー ── */}
-      <div style={{ background: '#2a1f14', padding: '10px 0', overflow: 'hidden' }}>
-        <div className="marquee-track" style={{ display: 'inline-block', fontSize: 11, letterSpacing: '0.2em', color: 'rgba(232,212,154,0.7)' }}>
-          {[...marqueeItems, ...marqueeItems].map((t, i) => (
-            <span key={i}>&ensp;{t}&ensp;<span style={{ fontFamily: 'serif', fontStyle: 'italic', color: 'rgba(184,134,11,0.45)' }}>—</span></span>
-          ))}
-        </div>
-      </div>
 
       {/* ── はじまりの話 ── */}
       <section style={{ padding: '64px 0' }}>
