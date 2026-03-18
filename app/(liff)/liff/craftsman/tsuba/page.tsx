@@ -250,29 +250,29 @@ export default function TsubaPage() {
       </section>
 
       {/* ── CTA ── */}
-      <section style={{ padding: '48px 24px', background: '#faf8f4', textAlign: 'center' }}>
-        <span style={{ display: 'block', fontSize: 10, letterSpacing: '0.3em', color: '#b8860b', marginBottom: 20 }}>Next</span>
+      <section style={{ padding: '32px 24px', background: '#faf8f4', textAlign: 'center' }}>
+        <span style={{ display: 'block', fontSize: 10, letterSpacing: '0.3em', color: '#b8860b', marginBottom: 14 }}>Next</span>
         <Link
           href="https://kinmokuseijp.base.shop"
           target="_blank"
           style={{
-            display: 'block', padding: '16px 0',
+            display: 'inline-block', padding: '10px 32px',
             background: '#2a1f14', color: '#e8d49a',
-            fontSize: 13, letterSpacing: '0.3em', textDecoration: 'none',
-            marginBottom: 12,
+            fontSize: 11, letterSpacing: '0.25em', textDecoration: 'none',
+            marginBottom: 10,
           }}
         >
-          作　品　を　見　る
+          作品を見る
         </Link>
         <Link
           href="/liff/craftsman/studio"
           style={{
-            display: 'block', padding: '16px 0',
+            display: 'inline-block', padding: '10px 32px',
             border: '0.5px solid #b8860b', color: '#b8860b',
-            fontSize: 13, letterSpacing: '0.3em', textDecoration: 'none',
+            fontSize: 11, letterSpacing: '0.25em', textDecoration: 'none',
           }}
         >
-          工　房　の　は　な　し　へ　→
+          工房のはなしへ →
         </Link>
       </section>
 
