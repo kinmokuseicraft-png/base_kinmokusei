@@ -129,24 +129,26 @@ export default function TsubaPage() {
           {counts.map((c, i) => (
             <div key={c.unit} style={{
               textAlign: 'center',
-              padding: '0 10px',
+              padding: '0 6px',
               borderLeft: i > 0 ? '0.5px solid rgba(61,43,26,0.12)' : 'none',
             }}>
-              {/* 数字 */}
-              <div
-                data-target={c.num}
-                data-suffix={c.suffix}
-                style={{
-                  fontFamily: 'serif', fontStyle: 'italic', fontWeight: 400,
-                  fontSize: 44, lineHeight: 1, letterSpacing: '0.02em',
-                  color: '#2a2018', marginBottom: 10,
-                }}
-              >0</div>
+              {/* 数字 — whiteSpace:nowrap で折り返し防止、高さ固定でレイアウトシフトを防ぐ */}
+              <div style={{ height: 36, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 8 }}>
+                <span
+                  data-target={c.num}
+                  data-suffix={c.suffix}
+                  style={{
+                    fontFamily: 'serif', fontStyle: 'italic', fontWeight: 400,
+                    fontSize: 30, lineHeight: 1, letterSpacing: '0.02em',
+                    color: '#2a2018', whiteSpace: 'nowrap',
+                  }}
+                >0</span>
+              </div>
               {/* 単位 */}
               <div style={{
                 fontFamily: "'Noto Serif JP', serif", fontWeight: 300,
                 fontSize: 9, letterSpacing: '0.16em', color: '#b8860b',
-                marginBottom: 12,
+                marginBottom: 10,
               }}>{c.unit}</div>
               {/* 説明 */}
               <div style={{
