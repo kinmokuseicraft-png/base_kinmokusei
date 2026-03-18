@@ -71,26 +71,30 @@ export default function TsubaPage() {
         />
         <div style={{
           position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column',
-          justifyContent: 'flex-end', padding: '0 28px 48px',
+          justifyContent: 'flex-end', padding: '0 28px 40px',
         }}>
-          <span className="hero-eyebrow" style={{ fontSize: 10, letterSpacing: '0.25em', color: '#b8860b', marginBottom: 8, fontStyle: 'italic', fontFamily: 'serif' }}>The Craftsman</span>
-          <span className="hero-vline" />
-          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-end', gap: '1.2em', marginBottom: 20 }}>
+          <span className="hero-eyebrow" style={{ fontSize: 10, letterSpacing: '0.25em', color: '#b8860b', marginBottom: 20, fontStyle: 'italic', fontFamily: 'serif' }}>The Craftsman</span>
+          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', gap: '0.7em' }}>
+            {/* タイトル3列 */}
             {['木と、', '家族と、', 'ペンと。'].map((col, i) => (
               <span key={col} className="hero-title" style={{
                 writingMode: 'vertical-rl', textOrientation: 'mixed',
                 fontSize: 32, fontWeight: 700, color: '#faf8f4',
                 lineHeight: 1.6, letterSpacing: '0.08em', display: 'block',
-                animationDelay: `${0.6 + i * 0.15}s`,
+                animationDelay: `${0.6 + i * 0.12}s`,
               }}>{col}</span>
             ))}
-            <p className="hero-sub" style={{
-              writingMode: 'vertical-rl', textOrientation: 'mixed',
-              fontSize: 9, color: 'rgba(250,248,244,0.5)', lineHeight: 1.8,
-              letterSpacing: '0.1em', margin: '0 0 4px 12px',
-            }}>
-              代表・齋藤翼が歩んできた道と、その先にある夢。
-            </p>
+            {/* 区切り線 */}
+            <span className="hero-vline" style={{ margin: '0 10px' }} />
+            {/* サブ3列 */}
+            {['代表・齋藤翼が', '歩んできた道と、', 'その先にある夢。'].map((col, i) => (
+              <span key={col} className="hero-sub" style={{
+                writingMode: 'vertical-rl', textOrientation: 'mixed',
+                fontSize: 9, color: 'rgba(250,248,244,0.5)', lineHeight: 1.8,
+                letterSpacing: '0.1em', display: 'block',
+                animationDelay: `${1.5 + i * 0.1}s`,
+              }}>{col}</span>
+            ))}
           </div>
         </div>
       </section>
