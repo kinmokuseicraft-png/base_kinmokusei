@@ -100,29 +100,32 @@ export default function TsubaPage() {
       </section>
 
       {/* ── カウントアップ ── */}
-      <section id="count-section" style={{ background: '#2a1f14', padding: '48px 20px', display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', gap: 24 }}>
-        {[
-          { num: 727, suffix: '%', unit: '達成率', desc: 'Creema SPRINGS\nクラウドファンディング' },
-          { num: 3000, suffix: '+', unit: '作品以上', desc: 'これまでに\n手がけた作品数' },
-          { num: 100, suffix: '+', unit: '種類以上', desc: '取り扱う\n世界の銘木' },
-        ].map(c => (
-          <div key={c.unit} style={{ textAlign: 'center', color: '#faf8f4' }}>
-            <div
-              data-target={c.num}
-              data-suffix={c.suffix}
-              style={{ fontSize: 36, fontWeight: 700, color: '#b8860b', letterSpacing: '-0.02em' }}
-            >0</div>
-            <div style={{ fontSize: 12, letterSpacing: '0.15em', marginTop: 4 }}>{c.unit}</div>
-            <div style={{ fontSize: 10, color: 'rgba(250,248,244,0.5)', marginTop: 6, whiteSpace: 'pre-line', lineHeight: 1.7 }}>{c.desc}</div>
-          </div>
-        ))}
+      <section id="count-section" style={{ background: '#f2ede5', padding: '64px 24px 56px', borderBottom: '0.5px solid rgba(61,43,26,0.1)' }}>
+        <span style={{ fontFamily: 'serif', fontStyle: 'italic', fontSize: 10, letterSpacing: '0.24em', color: '#b8860b', display: 'block', marginBottom: 40 }}>Numbers</span>
+        <div style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', gap: 24 }}>
+          {[
+            { num: 727, suffix: '%', unit: '達成率', desc: 'Creema SPRINGS\nクラウドファンディング' },
+            { num: 3000, suffix: '+', unit: '作品以上', desc: 'これまでに\n手がけた作品数' },
+            { num: 100, suffix: '+', unit: '種類以上', desc: '取り扱う\n世界の銘木' },
+          ].map(c => (
+            <div key={c.unit} style={{ textAlign: 'center' }}>
+              <div
+                data-target={c.num}
+                data-suffix={c.suffix}
+                style={{ fontFamily: 'serif', fontWeight: 400, fontSize: 48, lineHeight: 1, letterSpacing: '0.02em', color: '#2a2018' }}
+              >0</div>
+              <div style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 200, fontSize: 9, letterSpacing: '0.18em', color: '#b8860b', marginTop: 8 }}>{c.unit}</div>
+              <div style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 200, fontSize: 10, color: '#7a6a58', marginTop: 8, whiteSpace: 'pre-line', lineHeight: 2.4, letterSpacing: '0.1em' }}>{c.desc}</div>
+            </div>
+          ))}
+        </div>
       </section>
 
       {/* ── マーキー ── */}
-      <div style={{ background: '#b8860b', padding: '10px 0', overflow: 'hidden' }}>
-        <div className="marquee-track" style={{ display: 'inline-block', fontSize: 11, letterSpacing: '0.2em', color: '#faf8f4' }}>
+      <div style={{ background: '#2a1f14', padding: '10px 0', overflow: 'hidden' }}>
+        <div className="marquee-track" style={{ display: 'inline-block', fontSize: 11, letterSpacing: '0.2em', color: 'rgba(232,212,154,0.7)' }}>
           {[...marqueeItems, ...marqueeItems].map((t, i) => (
-            <span key={i}>&ensp;{t}&ensp;—</span>
+            <span key={i}>&ensp;{t}&ensp;<span style={{ fontFamily: 'serif', fontStyle: 'italic', color: 'rgba(184,134,11,0.45)' }}>—</span></span>
           ))}
         </div>
       </div>
