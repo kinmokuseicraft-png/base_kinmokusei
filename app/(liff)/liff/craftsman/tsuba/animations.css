@@ -2,6 +2,8 @@
    齋藤翼のものがたり — アニメーションCSS
 ======================================== */
 
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300;1,400&display=swap');
+
 /* ── EP ブロック ── */
 .ep {
   opacity: 0;

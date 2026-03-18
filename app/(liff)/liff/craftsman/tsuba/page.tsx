@@ -138,8 +138,8 @@ export default function TsubaPage() {
                   data-target={c.num}
                   data-suffix={c.suffix}
                   style={{
-                    fontFamily: 'serif', fontStyle: 'italic', fontWeight: 400,
-                    fontSize: 30, lineHeight: 1, letterSpacing: '0.02em',
+                    fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 400,
+                    fontSize: 34, lineHeight: 1, letterSpacing: '0.02em',
                     color: '#2a2018', whiteSpace: 'nowrap',
                   }}
                 >0</span>
